@@ -1,7 +1,7 @@
 /**
 	Pilot Light 4-Way NL2 Script
 	David Wolfe (Red-Thirten)
-	03/07/2024
+	11/28/2024
 	Extends Pilot Light. Handles additional lights' functionality.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -20,6 +20,10 @@ public class PilotLight4Way extends PilotLight{
 	// All Pilot Light 4-Way Functions:
 	private static final int F_STATIC = 0;
 	private static final int F_BLOCK_IND_4WAY = 1;
+	private static final int F_SPECIAL_TRACK_4WAY = 2;
+	private static final int F_SPECIAL_TRACK_INV_4WAY = 3;
+
+	private bool inverse = false;
 	
 	private IndicatorLight light2;
 	private IndicatorLight light3;
@@ -59,11 +63,8 @@ public class PilotLight4Way extends PilotLight{
 						new IndicatorLight[]{light, light2, light3, light4},
 						new String[]{"light1", "light2", "light3", "light4"}
 					);
-				case F_BLOCK_IND: // Block Indicator (4-Way)
-					if (coaster.isScriptedOperationMode()){
-						System.err.println(SCRIPT_NAME + ": Sorry! The Block Status (4-Way) Function does not support Scripted Operation Mode rides at this time.");
-						return false;
-					}
+				//case F_BLOCK_IND: // Block Indicator (4-Way) already checked entirely by super init
+				//case F_SPECIAL_TRACK: // Special Track + Inverse already checked entirely by super init
 			}
 			
 			return true; // Everything's just dandy
@@ -80,9 +81,13 @@ public class PilotLight4Way extends PilotLight{
 		int funcVal = sco.getIntegerParameter("function").intValue();
 		switch (funcVal){
 			case F_STATIC:
-				return F_STATIC_BLINK; // Set to F_STATIC_BLINK to let init return true
+				return F_STATIC_BLINK; // Set to F_STATIC_BLINK to let super init return true
 			case F_BLOCK_IND_4WAY:
-				return F_BLOCK_IND; // Set to F_BLOCK_IND to let init return true
+				return F_BLOCK_IND; // Set to F_BLOCK_IND to let super init perform relative checks
+			case F_SPECIAL_TRACK_INV_4WAY:
+				inverse = true;
+			case F_SPECIAL_TRACK_4WAY:
+				return F_SPECIAL_TRACK; // Set to F_SPECIAL_TRACK to let super init perform relative checks
 		}
 		return funcVal; // Default
 	}
@@ -110,7 +115,7 @@ public class PilotLight4Way extends PilotLight{
 		return anyLightBlink;
 	}
 	
-	private final void handleBlockIndicator4WayFunc(){
+	private void handleBlockIndicator4WayFunc(){
 		if (coaster.isEmergencyStop()){
 			light.lightOff();
 			light2.lightOn();
@@ -147,15 +152,66 @@ public class PilotLight4Way extends PilotLight{
 			}
 		}
 	}
+
+	private void handleSpecialTrack4WayFunc(){
+		if (coaster.isEmergencyStop()){
+			light.lightOff();
+			light2.lightOff();
+			light3.lightOff();
+			light4.lightOff();
+		}
+		else{
+			switch (specialTrack.getSwitchDirection()){
+				case 0: // First track
+					light.lightOff();
+					light3.lightOff();
+					if (inverse){
+						light2.lightOn();
+						light4.lightOff();
+					}
+					else{
+						light2.lightOff();
+						light4.lightOn();
+					}
+					break;
+				case 1: // Second track
+					light.lightOff();
+					light3.lightOff();
+					if (inverse){
+						light2.lightOff();
+						light4.lightOn();
+					}
+					else{
+						light2.lightOn();
+						light4.lightOff();
+					}
+					break;
+				case -1: // Moving
+					light.lightBlink();
+					light2.lightOff();
+					light3.lightBlink();
+					light4.lightOff();
+					break;
+				default:
+					light.lightOff();
+					light2.lightBlink();
+					light3.lightOff();
+					light4.lightBlink();
+			}
+		}
+	}
 	
 	public void onNextFrame(float tick){
 		switch (func){
 			case F_BLOCK_IND: // Block Indicator (4-Way)
 				handleBlockIndicator4WayFunc();
 				break;
+			case F_SPECIAL_TRACK: // Special Track + Inverse
+				handleSpecialTrack4WayFunc();
+				break;
 		}
 
-		// Run IndicatorLight object's onNextFrame() as well to animate
+		// Run IndicatorLight objects' onNextFrame() as well to animate
 		light.onNextFrame(tick);
 		light2.onNextFrame(tick);
 		light3.onNextFrame(tick);
