@@ -59,7 +59,7 @@ public class PilotLightStack extends PilotLight{
 				StaticSound.FLAG_MIXDOWN_MONO
 			);
 			if (soundEmergency != null){
-				Vector3f speakerLocation = sco.getTranslation(); // Get SCO origin posision
+				Vector3f speakerLocation = sco.getTranslation(); // Get SCO origin position
 				speakerLocation.add(SPEAKER_LOCATION); // Add the speaker location translation
 				soundEmergency.setPosition(speakerLocation); // Set the sound position to this new location
 				soundEmergency.setDopplerMode(false);

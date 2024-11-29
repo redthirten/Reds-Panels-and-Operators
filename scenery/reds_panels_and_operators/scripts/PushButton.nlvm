@@ -1,7 +1,7 @@
 /**
 	Push Button NL2 Script
 	David Wolfe (Red-Thirten)
-	06/20/2024
+	11/28/2024
 	Animates the pilot light and button during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -376,6 +376,7 @@ public class PushButton extends Script implements InteractionActionListener{
 	
 	private void handleDispatchFunc(bool action){
 		if (action){
+			button.buttonIn();
 			section.doStationManualDispatch();
 			if (block.canSemiManualMoveForward())
 				block.doSemiManualMoveForward();
@@ -395,6 +396,7 @@ public class PushButton extends Script implements InteractionActionListener{
 		if (section.canStationManualDispatch()){
 			enableActionIf(section.isStationManualDispatchMode());
 			button.setLightState(Block.LAMP_FLASHING);
+			button.buttonOut();
 		}
 		// Dispatching & approaching
 		else if (section.isTrainOnSection() && (section.getTrainOnSection().getSpeed() != 0.0 || frameCounter < 5)){
