@@ -1,7 +1,7 @@
 /**
 	PLC Controller NL2 Script
 	David Wolfe (Red-Thirten)
-	03/11/2024
+	11/28/2024
 	Handles configured coaster's E-Stop state by checking the state of local lights.
 	External E-Stop buttons claim a local indicator light and turn it on when pressed in.
 	E-Stop Reset buttons reference light [1] for when the coaster is ready to be reset.
@@ -20,6 +20,7 @@ import com.nolimitscoaster.ResourcePath;
 
 import obj.OperatorSwitch;
 import obj.IndicatorLight;
+import util.Logger;
 import util.SceneObjectTools;
 
 public class PLCController extends Script implements InteractionActionListener{
@@ -48,6 +49,14 @@ public class PLCController extends Script implements InteractionActionListener{
 			SCRIPT_NAME
 		);
 		
+		// Check instance name wasn't changed
+		String scoName = sco.getName();
+		if (!scoName.equals(SCRIPT_NAME)){
+			new Logger(SCRIPT_NAME, scoName).err("This PLC Controller instance must be named \"" + SCRIPT_NAME + "\" for it to work properly.");
+			return false;
+		}
+		
+		// Make invisible if specified
 		bool invisibleMode = sco.getBooleanParameter("invisible_mode").boolValue();
 
 		/* Prep for possible passive mode */
