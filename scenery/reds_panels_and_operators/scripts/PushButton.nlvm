@@ -69,7 +69,7 @@ public class PushButton extends Script implements InteractionActionListener{
 	// E-Stop Specific Functions at End
 	protected static final int F_ESTOP_SIMPLE = 26;
 	protected static final int F_ESTOP_ADVANCED = 27;
-	private static final int[] NON_INTERACT_MODES = {
+	private static final int[] NON_INTERACT_FUNCS = {
 		F_LIFT_JOG_NO_INT,
 		F_BRAKE_RELEASE_NO_INT
 	};
@@ -311,8 +311,8 @@ public class PushButton extends Script implements InteractionActionListener{
 	}
 
 	private bool isInteractableFunc(int func){
-		for (int i = 0; i < NON_INTERACT_MODES.length; i++){
-			if (func == NON_INTERACT_MODES[i])
+		for (int i = 0; i < NON_INTERACT_FUNCS.length; i++){
+			if (func == NON_INTERACT_FUNCS[i])
 				return false;
 		}
 		return true;

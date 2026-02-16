@@ -1,13 +1,14 @@
 /**
 	Switch NL2 Script
 	David Wolfe (Red-Thirten)
-	06/13/2024
+	02/15/2026
 	Animates the switch during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
 
 import com.nolimitscoaster.Script;
 import com.nolimitscoaster.SceneObject;
+import com.nolimitscoaster.SceneObjectElement;
 import com.nolimitscoaster.Coaster;
 import com.nolimitscoaster.Train;
 import com.nolimitscoaster.Block;
@@ -16,6 +17,7 @@ import com.nolimitscoaster.SpecialTrack;
 import com.nolimitscoaster.InteractionObject;
 import com.nolimitscoaster.InteractionActionListener;
 import com.nolimitscoaster.ResourcePath;
+import com.nolimitscoaster.Button;
 
 import obj.OperatorSwitch;
 import util.Logger;
@@ -24,12 +26,13 @@ import util.CoasterTools;
 import util.SpecialTrackModule;
 
 public class SwitchOperator extends Script implements InteractionActionListener{
-	protected String SCRIPT_NAME = "SwitchOperator";		// Script name for debugging
-	protected String SWITCH_ELEMENT_NAME = "switch";		// Name of the switch element in the SCO/model
-	protected String PLACARD_ELEMENT_NAME = "placard";		// Name of the placard element in the SCO/model
-	protected float SWITCH_TRAVEL_TIME = 0.4f;				// Time, in seconds, for the switch to travel ("speed")
-	protected float SWITCH_INTERACTION_RADIUS = 0.04f;		// Radius, in meters, of the InteractionObject detection sphere
-	private static final float SUN_ELEVATION_LIMIT = 0.4f;	// 0.4 radians is the default sun angle limit for lights to turn on and off
+	protected String SCRIPT_NAME = "SwitchOperator";				// Script name for debugging
+	protected String SWITCH_ELEMENT_NAME = "switch";				// Name of the switch element in the SCO/model
+	protected String PLACARD_ELEMENT_NAME = "placard";				// Name of the placard element in the SCO/model
+	protected String KEYBIND_HINT_ELEMENT_NAME = "keybind_hint";	// Name of the keybind hint element in the SCO/model
+	protected float SWITCH_TRAVEL_TIME = 0.4f;						// Time, in seconds, for the switch to travel ("speed")
+	protected float SWITCH_INTERACTION_RADIUS = 0.04f;				// Radius, in meters, of the InteractionObject detection sphere
+	private static final float SUN_ELEVATION_LIMIT = 0.4f;			// 0.4 radians is the default sun angle limit for lights to turn on and off
 	
 	// All Switch Functions:
 	protected static final int F_STATIC = 0;
@@ -42,14 +45,13 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	protected static final int F_NUM_TRAINS_NO_INT = 7;
 	protected static final int F_LIFT_JOG_NO_INT = 8;
 	protected static final int F_TRANSPORTS_NO_INT = 9;
-	protected static final int F_SPECIAL_TRACK_NO_INT = 10;
+	protected static final int F_SPECIAL_TRACK_MOMENT = 10;
 	protected static final int F_COASTER_LIGHTS_NO_INT = 11;
 	protected static final int F_RESET_COASTER = 12;
-	private static final int[] NON_INTERACT_MODES = {
+	private static final int[] NON_INTERACT_FUNCS = {
 		F_NUM_TRAINS_NO_INT,
 		F_LIFT_JOG_NO_INT,
 		F_TRANSPORTS_NO_INT,
-		F_SPECIAL_TRACK_NO_INT,
 		F_COASTER_LIGHTS_NO_INT
 	};
 	
@@ -58,11 +60,12 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	private Section section;
 	protected SpecialTrack specialTrack;
 	private InteractionObject iObj;
+	private SceneObjectElement keybindHintElement;
 	
 	protected OperatorSwitch operatorSwitch;
 	private SpecialTrackModule specialTrackModule;
 	
-	private int func = F_STATIC;
+	private int func;
 	protected int trainCount;
 	private int trainsLashedToTrack;
 	private float binaryState = 0.f; // Helps determine if a "binary" state starts to change to the other value (ie. gates start to close, vice-versa, etc)
@@ -78,6 +81,10 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		// Setup Logger
 		Logger log = new Logger(SCRIPT_NAME, sco.getName());
 
+		// Get keybind hint element and hide it
+		keybindHintElement = SceneObjectTools.getElementForName(sco, KEYBIND_HINT_ELEMENT_NAME, SCRIPT_NAME);
+		keybindHintElement.setVisible(false);
+
 		// Hide placard if configured
 		if ( sco.getBooleanParameter("hide_placard").boolValue() ){
 			SceneObjectTools.getElementForName(sco, PLACARD_ELEMENT_NAME, SCRIPT_NAME).setVisible(false);
@@ -92,7 +99,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		func = getFuncFromScoParams(sco);
 		if (func > F_STATIC){ // If not static function
 			block = sco.getBlockParameter("block");
-			if (block == null){ // Check for unconfigured block
+			if (block == null){ // Check for un-configured block
 				log.err("Block parameter required for any non-static functions.");
 				return false;
 			}
@@ -117,7 +124,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 				break;
 			// Functions that require Special Track
 			case F_SPECIAL_TRACK:
-			case F_SPECIAL_TRACK_NO_INT:
+			case F_SPECIAL_TRACK_MOMENT:
 				specialTrack = sco.getSpecialTrackParameter("special_track");
 				if (specialTrack == null){
 					log.err("The configured function requires the Special Track parameter to be specified.");
@@ -191,7 +198,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 			case F_OP_MODE:
 			case F_LIFT_JOG_NO_INT:
 			case F_TRANSPORTS_NO_INT:
-			case F_SPECIAL_TRACK_NO_INT:
+			case F_SPECIAL_TRACK_MOMENT:
 			case F_COASTER_LIGHTS_NO_INT:
 				totalStates = 3;
 				break;
@@ -221,8 +228,8 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	private bool isInteractableFunc(int func){
 		if (func == F_STATIC && operatorSwitch.isStatic()) // None function w/o rotation
 			return false;
-		for (int i = 0; i < NON_INTERACT_MODES.length; i++){
-			if (func == NON_INTERACT_MODES[i])
+		for (int i = 0; i < NON_INTERACT_FUNCS.length; i++){
+			if (func == NON_INTERACT_FUNCS[i])
 				return false;
 		}
 		return true;
@@ -315,31 +322,46 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	
 	private void handleSpecialTrackFunc(bool action){
 		if (action){
-			if (specialTrack.getSetSwitchDirection() == 0){
-				specialTrack.setManualSwitchDirection(1);
+			int specialTrackSetDir = specialTrack.getSetSwitchDirection();
+			// Twist left (CTRL + Click)
+			if (Button.isPressed(Button.FLY_SLOWER)){
+				if (specialTrackSetDir > 0){
+					specialTrack.setManualSwitchDirection(specialTrackSetDir - 1);
+				}
 			}
+			// Twist right (Click)
 			else{
-				specialTrack.setManualSwitchDirection(0);
+				if (specialTrackSetDir < specialTrack.getNumberOfSwitchDirections() - 1){
+					specialTrack.setManualSwitchDirection(specialTrackSetDir + 1);
+				}
 			}
 			return;
 		}
 		
-		// Interaction func
+		// Set Track Position
 		if (func == F_SPECIAL_TRACK){
 			operatorSwitch.setSwitchState(specialTrack.getSetSwitchDirection());
-			iObj.setEnabled(specialTrack.canChangeManualSwitchDirection());
 		}
-		// No interation func
+		// Momentary Left/Right
 		else{
-			if (specialTrack.getVisibleSwitchState() < binaryState){
-				binaryState = specialTrack.getVisibleSwitchState();
+			float visibleSwitchState = specialTrack.getVisibleSwitchState();
+			if (visibleSwitchState < binaryState){
+				binaryState = visibleSwitchState;
 				operatorSwitch.setSwitchState(0);
 			}
-			else if (specialTrack.getVisibleSwitchState() > binaryState){
-				binaryState = specialTrack.getVisibleSwitchState();
+			else if (visibleSwitchState > binaryState){
+				binaryState = visibleSwitchState;
 				operatorSwitch.setSwitchState(2);
 			}
 			else operatorSwitch.setSwitchState(1);
+		}
+		
+		iObj.setEnabled(specialTrack.canChangeManualSwitchDirection());
+		if (specialTrack.getSetSwitchDirection() > 0){
+			keybindHintElement.setVisible(true);
+		}
+		else{
+			keybindHintElement.setVisible(false);
 		}
 	}
 	
@@ -361,17 +383,27 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	
 	private void handleBlockSystemModeFunc(bool action){
 		if (action){
-			if ( coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC
-					&& coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL) ){
-				coaster.setBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL);
+			// Twist left (CTRL + Click)
+			if (Button.isPressed(Button.FLY_SLOWER)){
+				if ( coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL
+						&& coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL) ){
+					coaster.setBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL);
+				}
+				else if ( coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL
+						&& coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC) ){
+					coaster.setBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC);
+				}
 			}
-			else if ( coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL
-					&& coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC) ){
-				coaster.setBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC);
-			}
-			else if ( coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL
-					&& coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL) ){
-				coaster.setBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL);
+			// Twist right (Click)
+			else{
+				if ( coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC
+						&& coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL) ){
+					coaster.setBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL);
+				}
+				else if ( coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL
+						&& coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL) ){
+					coaster.setBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL);
+				}
 			}
 			return;
 		}
@@ -379,20 +411,22 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		switch (coaster.getBlockSystemMode()){
 			case Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC:
 				operatorSwitch.setSwitchState(0);
+				iObj.setEnabled(coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL));
+				keybindHintElement.setVisible(false);
 				break;
 			case Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL:
 				operatorSwitch.setSwitchState(1);
+				iObj.setEnabled(
+					coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC)
+					|| coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL)
+				);
+				keybindHintElement.setVisible(true);
 				break;
 			default:
 				operatorSwitch.setSwitchState(2);
+				iObj.setEnabled(coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL));
+				keybindHintElement.setVisible(true);
 		}
-		
-		iObj.setEnabled(
-			( coaster.getBlockSystemMode() != Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC
-				&& coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC) )
-			|| ( coaster.getBlockSystemMode() != Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL
-				&& coaster.canSetBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL) )
-		);
 	}
 
 	private void handleResetCoasterFunc(bool action){
@@ -470,7 +504,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 				handlePlatformFunc(action);
 				break;
 			case F_SPECIAL_TRACK:
-			case F_SPECIAL_TRACK_NO_INT:
+			case F_SPECIAL_TRACK_MOMENT:
 				handleSpecialTrackFunc(action);
 				break;
 			case F_DISPATCH_MODE:
