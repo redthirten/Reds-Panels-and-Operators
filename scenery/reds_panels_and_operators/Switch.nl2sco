@@ -5,6 +5,7 @@
       <clip distance="30"/>
       <clip mesh="housing_nut" distance="5"/>
       <clip mesh="switch" distance="15"/>
+      <clip mesh="keybind_hint" distance="1"/>
     </model>
     <description>A scripted 30mm plastic switch, with customizable placard.</description>
     <preview>materials/previews/switch.png</preview>
@@ -42,7 +43,7 @@
     <scriptparameter>
       <type>int</type>
       <defaultvalue>0</defaultvalue>
-      <enums>None,Restraints,Gates,Platform,Special Track (Toggle Only),Dispatch Mode,Operation Mode,Trains In Service (No Interaction),Lift Jog (No Interaction),Transports (No Interaction),Special Track (No Interaction),Coaster Lights (No Interaction),Reset Coaster</enums>
+      <enums>None,Restraints,Gates,Platform,Special Track (Position),Dispatch Mode,Operation Mode,Trains In Service (No Interaction),Lift Jog (No Interaction),Transports (No Interaction),Special Track (Momentary),Coaster Lights (No Interaction),Reset Coaster</enums>
       <id>function</id>
       <description>How this switch will behave during Play Mode.</description>
       <label>Function:</label>
@@ -89,6 +90,7 @@
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="black_plastic">materials/plastic_black_textured.nl2mat</materialpath>
     <materialpath name="ivory">materials/plastic_user2.nl2mat</materialpath>
+    <materialpath name="keybind_hint">materials/switch_keybind_hint.nl2mat</materialpath>
     <materialpath name="metal">materials/metal.nl2mat</materialpath>
     <materialpath name="metal_0">materials/metal.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>

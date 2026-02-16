@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <material>
+    <description>Keybind hint graphic for bidirectional switch functions.</description>
+    <preview>textures/switch/switch_keybind_hint.png</preview>
+    <renderpass>
+      <transparency mode="cutout"/>
+      <alphatest function="ge128"/>
+      <linearshading/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
+      <texunit>
+        <map>textures/switch/switch_keybind_hint.png</map>
+        <tcgen mode="base"/>
+      </texunit>
+    </renderpass>
+    <option noeditorrender="true"/>
+    <option nonsolid="true"/>
+    <option noshadowcast="true"/>
+    <option noshadowreceive="true"/>
+  </material>
+</root>
