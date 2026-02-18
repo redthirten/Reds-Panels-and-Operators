@@ -46,6 +46,7 @@ jobs:
           gh release create "$TAG" \
             --target dev \
             --title "Development Build (Unpackaged)" \
-            --prerelease
+            --prerelease \
+            --draft=false
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
