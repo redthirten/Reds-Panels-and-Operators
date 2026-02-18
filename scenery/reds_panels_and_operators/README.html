@@ -17,7 +17,7 @@
         Red's Panels &amp; Operators<br>
         ©2026 David W. (Red-Thirten)<br>
         <a href="mailto:red_thirten@yahoo.com">red_thirten@yahoo.com</a><br>
-        Version 2.2.4, 15 February 2026<br>
+        Version 2.2.5, 18 February 2026<br>
         NL2 Scenery Custom Object (SCO) Package<br>
       </h4></i>
       <hr>
@@ -109,65 +109,77 @@
         <u>Change Log:</u>
       </h3>
       <ul>
-        <li>[v2.2.4] Add Bidirectional Support to Switches
+        <li>[v2.2.5] Fix Special Track Attachment
           <ul>
-            <li>Renamed "Special Track" function to "Special Track (Position)" for switches.</li>
-            <li>Replaced "Special Track (No Interaction)" function with "Special Track (Momentary)", which now acts like an interactable momentary switch (intended to be used with "Transfer Table (Left-N-Right)" placard).</li>
-            <li>Added the ability to press <code>CTRL + Click</code> to twist the Binary & Key Switches left (in addition to <code>Click</code> for right) for the following functions: Special Track (Position), Special Track (Momentary), and Operation Mode. This allows all states of these functions to be accessed via interaction. (Thanks to kuba1904zap for suggesting it)</li>
-          </ul>
-        </li>
-        <li>[v2.2.3] New Pilot Light (4-Way) Function & Bug Fixes
-          <ul>
-            <li>Added "Special Track" and "Special Track (Inverse)" Functions to the Pilot Light (4-Way).</li>
-            <li>Fixed an issue where Push Buttons using the "Station Dispatch" Function with a station before or after an automatic switch track (eg. a dual station setup) would not press to first move the track(s) into position. (Thanks to Gamearoo for reporting it)</li>
-            <li>Other small QoL fixes.</li>
-          </ul>
-        </li>
-        <li>[v2.2.2] Fix Button "Special Track Left/Right" Function Bug
-          <ul>
-            <li>Hotfix for the Push Button "Special Track Left/Right" functions not being enabled/disabled when they should be. (Thanks to Ki(c)k for reporting it)</li>
-            <li>Added "Transfer Table Left" & "Transfer Table Right" Placard textures.</li>
-            <li>Added Photoshop and GIMP templates for making custom Placards.</li>
-            <li>Added Transfer Table Left & Right buttons to the swinging coaster in the demo park to showcase them.</li>
-            <li>Removed a bunch of trees/bushes in the demo park to hopefully improve performance.</li>
-          </ul>
-        </li>
-        <li>[v2.2.1] Fix Button "Restraints" Function Bug
-          <ul>
-            <li>Hotfix for the Push Button "Restraints" function lighting the button up when it should be disabled. (Thanks to Waldo Lahr for reporting it)</li>
-          </ul>
-        </li>
-        <li>[v2.2] New Functions & Bug Fix
-          <ul>
-            <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v2.2">Change List</a></li>
-          </ul>
-        </li>
-        <li>[v2.1] Add Play Sound Button Function
-          <ul>
-            <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v2.1">Change List</a></li>
-          </ul>
-        </li>
-        <li>[v2.0] Operator Interactions, Lights, & Sounds Update
-          <ul>
-            <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v2.0">Change List</a></li>
-          </ul>
-        </li>
-        <li>[v1.3] General QoL Improvements & Fixes
-          <ul>
-            <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v1.3">Change List</a></li>
-          </ul>
-        </li>
-        <li>[v1.2] Small Extras Added
-          <ul>
-            <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v1.2">Change List</a></li>
-          </ul>
-        </li>
-        <li>[v1.1] Texture Hotfix
-          <ul>
-            <li>Fixed a small texture issue on the audio panel of all the medium Main Panels. (Thanks to Luco for reporting it)</li>
+            <li>Fixed Special Track attachment not rotating properly for all scenery objects that can attach. (Thanks to Caos for reporting it)</li>
           </ul>
         </li>
       </ul>
+      <details>
+        <summary>
+          <u><i>Click here to expand log history</i></u>
+        </summary>
+        <ul>
+          <li>[v2.2.4] Add Bidirectional Support to Switches
+            <ul>
+              <li>Renamed "Special Track" function to "Special Track (Position)" for switches.</li>
+              <li>Replaced "Special Track (No Interaction)" function with "Special Track (Momentary)", which now acts like an interactable momentary switch (intended to be used with "Transfer Table (Left-N-Right)" placard).</li>
+              <li>Added the ability to press <code>CTRL + Click</code> to twist the Binary & Key Switches left (in addition to <code>Click</code> for right) for the following functions: Special Track (Position), Special Track (Momentary), and Operation Mode. This allows all states of these functions to be accessed via interaction. (Thanks to kuba1904zap for suggesting it)</li>
+            </ul>
+          </li>
+          <li>[v2.2.3] New Pilot Light (4-Way) Function & Bug Fixes
+            <ul>
+              <li>Added "Special Track" and "Special Track (Inverse)" Functions to the Pilot Light (4-Way).</li>
+              <li>Fixed an issue where Push Buttons using the "Station Dispatch" Function with a station before or after an automatic switch track (eg. a dual station setup) would not press to first move the track(s) into position. (Thanks to Gamearoo for reporting it)</li>
+              <li>Other small QoL fixes.</li>
+            </ul>
+          </li>
+          <li>[v2.2.2] Fix Button "Special Track Left/Right" Function Bug
+            <ul>
+              <li>Hotfix for the Push Button "Special Track Left/Right" functions not being enabled/disabled when they should be. (Thanks to Ki(c)k for reporting it)</li>
+              <li>Added "Transfer Table Left" & "Transfer Table Right" Placard textures.</li>
+              <li>Added Photoshop and GIMP templates for making custom Placards.</li>
+              <li>Added Transfer Table Left & Right buttons to the swinging coaster in the demo park to showcase them.</li>
+              <li>Removed a bunch of trees/bushes in the demo park to hopefully improve performance.</li>
+            </ul>
+          </li>
+          <li>[v2.2.1] Fix Button "Restraints" Function Bug
+            <ul>
+              <li>Hotfix for the Push Button "Restraints" function lighting the button up when it should be disabled. (Thanks to Waldo Lahr for reporting it)</li>
+            </ul>
+          </li>
+          <li>[v2.2] New Functions & Bug Fix
+            <ul>
+              <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v2.2">Change List</a></li>
+            </ul>
+          </li>
+          <li>[v2.1] Add Play Sound Button Function
+            <ul>
+              <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v2.1">Change List</a></li>
+            </ul>
+          </li>
+          <li>[v2.0] Operator Interactions, Lights, & Sounds Update
+            <ul>
+              <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v2.0">Change List</a></li>
+            </ul>
+          </li>
+          <li>[v1.3] General QoL Improvements & Fixes
+            <ul>
+              <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v1.3">Change List</a></li>
+            </ul>
+          </li>
+          <li>[v1.2] Small Extras Added
+            <ul>
+              <li><a href="https://github.com/lilkingjr1/Reds-Panels-and-Operators/releases/tag/v1.2">Change List</a></li>
+            </ul>
+          </li>
+          <li>[v1.1] Texture Hotfix
+            <ul>
+              <li>Fixed a small texture issue on the audio panel of all the medium Main Panels. (Thanks to Luco for reporting it)</li>
+            </ul>
+          </li>
+        </ul>
+      </details>
       <hr>
       <h3>
         <u>Credits / Acknowledgment:</u>
