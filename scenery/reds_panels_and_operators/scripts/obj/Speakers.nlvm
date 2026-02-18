@@ -1,7 +1,7 @@
 /**
 	Speakers Object NL2 Script
 	David Wolfe (Red-Thirten)
-	06/06/2024
+	02/17/2026
 	A Java object representing one or more speakers that can be easily initialized given
 		a list of SCOs and a sound resource path to play on all speakers when called.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
@@ -69,7 +69,7 @@ public class Speakers{
 	private Vector3f getElementTransOrScoTrans(SceneObject sco, String elementName){
 		SceneObjectElement element = sco.getElementForName(elementName);
 		if (element != null){
-			return element.getAbsoluteMatrix().getTrans();
+			return element.getAbsoluteTranslation();
 		}
 		else{
 			return sco.getTranslation();
