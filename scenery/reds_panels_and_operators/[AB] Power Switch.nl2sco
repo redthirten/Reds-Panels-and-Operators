@@ -23,7 +23,7 @@
     <usertexture>
       <label>Placard:</label>
       <description>Placard text image to use. Can be custom, but must be black text with white background.</description>
-      <defaultpath>[ Placards ]/Control Lockout (Large).png</defaultpath>
+      <defaultpath>[ Placards ]/[Power Switch] Control Lockout.png</defaultpath>
     </usertexture>
     <script>
       <classpath>scripts</classpath>

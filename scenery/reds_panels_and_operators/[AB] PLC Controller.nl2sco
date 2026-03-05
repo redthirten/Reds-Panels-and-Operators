@@ -55,7 +55,7 @@
     <usertexture>
       <label>E-Stop Placard (Optional):</label>
       <description></description>
-      <defaultpath>[ Placards ]/Emergency Stop.png</defaultpath>
+      <defaultpath>[ Placards ]/[Button] Emergency Stop.png</defaultpath>
     </usertexture>
     <script>
       <classpath>scripts</classpath>

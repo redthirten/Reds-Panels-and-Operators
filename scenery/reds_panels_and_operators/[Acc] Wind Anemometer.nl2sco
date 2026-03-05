@@ -5,7 +5,7 @@
       <clip mesh="wire" distance="25"/>
       <clip distance="100"/>
     </model>
-    <description>An animated wind anemometer that will spin based on the current wind speed of the simulator.</description>
+    <description>An animated anemometer that will spin based on the current wind speed of the simulator.</description>
     <preview>materials/previews/anemometer.png</preview>
     <usercolor>
       <label>Mount</label>
