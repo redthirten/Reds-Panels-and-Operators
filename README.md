@@ -11,4 +11,4 @@ ___
 
 - This repository is mainly to help with versioning. Easier places to download this pack are either the [Steam Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=2325974526) or the [NoLimits Central page](https://nolimitscentral.com/exchange/park/1476).
 - A more complete README with instructions on how to use the pack can be found here:
-  - `\scenery\reds_panels_and_operators\README.html`
+  - `\scenery\reds_panels_and_operators\!README.html`

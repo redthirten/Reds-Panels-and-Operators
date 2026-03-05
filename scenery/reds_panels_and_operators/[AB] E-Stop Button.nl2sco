@@ -30,7 +30,7 @@
     <usertexture>
       <label>Placard:</label>
       <description>Placard text image to use. Can be custom, but must be black text with white background.</description>
-      <defaultpath>[ Placards ]/Emergency Stop.png</defaultpath>
+      <defaultpath>[ Placards ]/[Button] Emergency Stop.png</defaultpath>
     </usertexture>
     <script>
       <classpath>scripts</classpath>
