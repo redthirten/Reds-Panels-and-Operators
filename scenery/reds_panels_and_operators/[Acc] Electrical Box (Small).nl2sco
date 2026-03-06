@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/electrical_box_small.dae">
+    <model path="models/acc/electrical_box_small.dae">
       <clip distance="125"/>
       <clip mesh="panel_door_lock" distance="30"/>
       <clip mesh="mount" distance="30"/>
       <clip mesh="wires" distance="40"/>
     </model>
     <description>A smaller electrical panel, with optional mounting bracket and wire conduits.</description>
-    <preview>materials/previews/electrical_box_small.png</preview>
+    <preview>materials/previews/acc/electrical_box_small.png</preview>
     <usercolor>
       <label>Panel Color</label>
       <index>0</index>

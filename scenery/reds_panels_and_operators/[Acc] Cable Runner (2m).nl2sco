@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/cable_runner_2m.dae">
+    <model path="models/acc/cable_runner_2m.dae">
       <clip mesh="wires" distance="20"/>
       <clip distance="70"/>
     </model>
     <description>A 2 meter, recolorable cable runner. Best used in tandem with the Electrical Box; set coords. equal to Elec. Box to auto-align.</description>
-    <preview>materials/previews/cable_runner.png</preview>
+    <preview>materials/previews/acc/cable_runner.png</preview>
     <usercolor>
       <label>Runner</label>
       <index>0</index>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/key_switch.dae">
+    <model path="models/ab/key_switch.dae">
       <clip distance="30"/>
       <clip mesh="housing_nut" distance="5"/>
       <clip mesh="key" distance="15"/>
       <clip mesh="keybind_hint" distance="1"/>
     </model>
     <description>A scripted, animated key switch, with customizable placard.</description>
-    <preview>materials/previews/key_switch.png</preview>
+    <preview>materials/previews/ab/key_switch.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

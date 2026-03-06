@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/switch.dae">
+    <model path="models/ab/switch.dae">
       <clip distance="30"/>
       <clip mesh="housing_nut" distance="5"/>
       <clip mesh="switch" distance="15"/>
       <clip mesh="keybind_hint" distance="1"/>
     </model>
     <description>A scripted 30mm plastic switch, with customizable placard.</description>
-    <preview>materials/previews/switch.png</preview>
+    <preview>materials/previews/ab/switch.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

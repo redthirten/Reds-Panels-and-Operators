@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/pilot_light_stack.dae">
+    <model path="models/ab/pilot_light_stack.dae">
       <clip distance="30"/>
       <clip mesh="base" distance="20"/>
     </model>
     <description>A recolorable 3-stack tower of pilot lights.</description>
-    <preview>materials/previews/pilot_light_stack.png</preview>
+    <preview>materials/previews/ab/pilot_light_stack.png</preview>
     <param basescalex="0.6"/>
     <param basescaley="0.6"/>
     <param basescalez="0.6"/>

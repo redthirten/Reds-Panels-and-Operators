@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/panel_stand.dae">
+    <model path="models/panel/panel_stand.dae">
       <clip distance="60"/>
     </model>
     <description>A decorative stand/podium to put an operator panel on top of. Good for stations; hide the panel&apos;s mounts and pipe.</description>
-    <preview>materials/previews/panel_stand.png</preview>
+    <preview>materials/previews/panel/panel_stand.png</preview>
     <param basescalex="1.5"/>
     <param basescaley="1.5"/>
     <param basescalez="1.5"/>

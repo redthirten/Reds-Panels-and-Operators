@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/anemometer.dae">
+    <model path="models/acc/anemometer.dae">
       <clip mesh="wire" distance="25"/>
       <clip distance="100"/>
     </model>
     <description>An animated anemometer that will spin based on the current wind speed of the simulator.</description>
-    <preview>materials/previews/anemometer.png</preview>
+    <preview>materials/previews/acc/anemometer.png</preview>
     <usercolor>
       <label>Mount</label>
       <index>0</index>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/power_switch.dae">
+    <model path="models/ab/power_switch.dae">
       <clip distance="35"/>
       <clip mesh="placard" distance="20"/>
     </model>
     <description>A static large power cut off switch. Commonly seen on the side of main panels.</description>
-    <preview>materials/previews/power_switch.png</preview>
+    <preview>materials/previews/ab/power_switch.png</preview>
     <param basescalex="1.75"/>
     <param basescaley="1.75"/>
     <param basescalez="1.75"/>

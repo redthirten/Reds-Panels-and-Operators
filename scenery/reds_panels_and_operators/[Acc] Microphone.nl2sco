@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/microphone.dae">
+    <model path="models/acc/microphone.dae">
       <clip distance="35"/>
     </model>
     <description>A standalone microphone.</description>
-    <preview>materials/previews/microphone.png</preview>
+    <preview>materials/previews/acc/microphone.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

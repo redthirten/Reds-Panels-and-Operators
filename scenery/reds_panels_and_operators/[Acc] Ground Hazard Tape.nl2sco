@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/ground_hazard_tape.dae">
+    <model path="models/acc/ground_hazard_tape.dae">
       <clip distance="50"/>
     </model>
     <description>Good for indicating where station crew should stand during dispatches.</description>
-    <preview>materials/previews/ground_hazard_tape.png</preview>
+    <preview>materials/previews/acc/ground_hazard_tape.png</preview>
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="caution_stripe">materials/hazard_stripes.nl2mat</materialpath>
   </sceneobject>

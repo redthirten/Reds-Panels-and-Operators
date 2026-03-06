@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/telephone.dae">
+    <model path="models/acc/telephone.dae">
       <clip distance="40"/>
     </model>
     <description>Recolorable, decorative/static telephone.</description>
-    <preview>materials/previews/telephone.png</preview>
+    <preview>materials/previews/acc/telephone.png</preview>
     <param basescalex="1.2"/>
     <param basescaley="1.2"/>
     <param basescalez="1.2"/>
