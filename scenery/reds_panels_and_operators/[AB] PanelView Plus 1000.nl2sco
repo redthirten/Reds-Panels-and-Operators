@@ -157,8 +157,8 @@
     </scriptparameter>
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="glass">materials/glass_dirty_transparent.nl2mat</materialpath>
-    <materialpath name="indicator">materials/panelview_indicator.nl2mat</materialpath>
-    <materialpath name="panel_screen">materials/panelview_screen.nl2mat</materialpath>
-    <materialpath name="panelview_sticker">materials/panelview_sticker.nl2mat</materialpath>
+    <materialpath name="indicator">materials/ab_panelview_indicator.nl2mat</materialpath>
+    <materialpath name="panel_screen">materials/ab_panelview_screen.nl2mat</materialpath>
+    <materialpath name="panelview_sticker">materials/ab_panelview_sticker.nl2mat</materialpath>
   </sceneobject>
 </root>

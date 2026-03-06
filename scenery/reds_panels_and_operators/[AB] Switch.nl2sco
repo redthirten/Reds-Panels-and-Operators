@@ -94,6 +94,6 @@
     <materialpath name="metal">materials/metal.nl2mat</materialpath>
     <materialpath name="metal_0">materials/metal.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
-    <materialpath name="switch_grip_height">materials/switch_grip.nl2mat</materialpath>
+    <materialpath name="switch_grip_height">materials/ab_switch_grip.nl2mat</materialpath>
   </sceneobject>
 </root>

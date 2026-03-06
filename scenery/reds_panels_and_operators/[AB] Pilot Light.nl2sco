@@ -80,8 +80,8 @@
     </scriptparameter>
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="metal">materials/metal.nl2mat</materialpath>
-    <materialpath name="pilot_color">materials/button_user2.nl2mat</materialpath>
-    <materialpath name="pilot_side_color">materials/pilot_side_user2.nl2mat</materialpath>
+    <materialpath name="pilot_color">materials/ab_button_user2.nl2mat</materialpath>
+    <materialpath name="pilot_side_color">materials/ab_pilot_side_user2.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
     <materialpath name="ribbed_height">materials/plastic_ribbed_user2.nl2mat</materialpath>
     <lightsource range="0.5" intensity="1" type="point">

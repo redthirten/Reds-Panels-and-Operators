@@ -95,9 +95,9 @@
       <label>Hide Placard</label>
     </scriptparameter>
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
-    <materialpath name="button_color">materials/button_user2.nl2mat</materialpath>
-    <materialpath name="button_color_0">materials/button_user2.nl2mat</materialpath>
-    <materialpath name="button_side_color">materials/button_side_user2.nl2mat</materialpath>
+    <materialpath name="button_color">materials/ab_button_user2.nl2mat</materialpath>
+    <materialpath name="button_color_0">materials/ab_button_user2.nl2mat</materialpath>
+    <materialpath name="button_side_color">materials/ab_button_side_user2.nl2mat</materialpath>
     <materialpath name="metal">materials/metal.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
     <materialpath name="ribbed_height">materials/metal_ribbed.nl2mat</materialpath>
