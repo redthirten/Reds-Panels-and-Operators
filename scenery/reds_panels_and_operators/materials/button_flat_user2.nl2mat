@@ -2,7 +2,7 @@
 <root>
   <material>
     <description>Flat button&apos;s front, recolorable (User 2), plastic texture, with Allen-Bradley logo normal map.</description>
-    <preview>textures/button/flat_button_texture_height.png</preview>
+    <preview>textures/ab_button/flat_button_texture_height.png</preview>
     <renderpass>
       <shadercore>Result = Mul(Entity2, 0.7);
 Specular = 0;
@@ -11,7 +11,7 @@ Roughness = 1;</shadercore>
       <linearshading/>
       <rgbgen mode="bumplighting"/>
       <texunit>
-        <map>textures/button/flat_button_texture_height.png</map>
+        <map>textures/ab_button/flat_button_texture_height.png</map>
         <bump mode="heightgloss" heightscale="20"/>
         <tcgen mode="base"/>
       </texunit>

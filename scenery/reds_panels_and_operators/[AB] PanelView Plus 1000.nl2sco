@@ -27,7 +27,7 @@
     <usertexture>
       <label>Panel Screen:</label>
       <description>Panel screen image to use. Can be custom, but the position of the dynamic elements (like the block display) unfortunately cannot be moved.</description>
-      <defaultpath>materials/textures/panelview/panel_screen.png</defaultpath>
+      <defaultpath>materials/textures/ab_panelview/panel_screen.png</defaultpath>
     </usertexture>
     <script>
       <classpath>scripts</classpath>

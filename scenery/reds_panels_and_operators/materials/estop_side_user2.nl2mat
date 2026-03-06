@@ -2,7 +2,7 @@
 <root>
   <material>
     <description>E-Stop button side that is recolorable using the User 0 custom defined color.</description>
-    <preview>textures/button/estop_side_on_color.png</preview>
+    <preview>textures/ab_button/estop_side_on_color.png</preview>
     <renderpass>
       <shadercore>tmp0 = Mul(2, entity2); // Get the user set color and multiply it by 2
 tmp0 = saturate(tmp0); // Clamp resulting value between 0 and 1
@@ -20,13 +20,13 @@ Result = Mul(tex0, entity2); // Set color output to texture/custom color combina
       <reflection affectedbyspecular="true" fresnelconst="0.05" fresnelvar="0.4"/>
       <rgbgen mode="lighting"/>
       <texunit>
-        <map>textures/button/estop_side_off_color.png</map>
+        <map>textures/ab_button/estop_side_off_color.png</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
         <animmap frequency="2">
           <map>intern:data/textures/fx/black.png</map>
-          <map>textures/button/estop_side_on_color.png</map>
+          <map>textures/ab_button/estop_side_on_color.png</map>
         </animmap>
         <tcgen mode="base"/>
       </texunit>

@@ -2,7 +2,7 @@
 <root>
   <material>
     <description>Screen for the PanelView, with LCD overlay texture and illumination.</description>
-    <preview>textures/panelview/panel_screen.png</preview>
+    <preview>textures/ab_panelview/panel_screen.png</preview>
     <renderpass>
       <shadercore>tmp0 = Mul(tex0, tex1);
 Emission = tmp0;
@@ -15,7 +15,7 @@ Result = tmp0;</shadercore>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/panelview/lcd_pixel.png</map>
+        <map>textures/ab_panelview/lcd_pixel.png</map>
         <bump mode="normalgloss"/>
         <tcgen mode="base"/>
         <tcmod mode="scale" scales="300" scalet="150"/>
