@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/panel_2x2_35deg.dae">
+    <model path="models/panel/panel_2x2_35deg.dae">
       <clip mesh="pipe" distance="25"/>
       <clip distance="60"/>
       <clip mesh="mount" distance="30"/>
     </model>
     <description>A 2 operator wide, by 2 operator high, empty operator panel, with a 35 deg. angled face, and optional mounting bracket and wire conduit.</description>
-    <preview>materials/previews/panel_2x2_35deg.png</preview>
+    <preview>materials/previews/panel/panel_2x2_35deg.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

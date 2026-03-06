@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/audio_panel_left.dae">
+    <model path="models/panel/audio_panel_left.dae">
       <clip mesh="mic" distance="35"/>
       <clip distance="75"/>
       <clip mesh="mount" distance="35"/>
     </model>
     <description>A standalone audio panel, with texture and mounting options. -70 deg. X angle for button face.</description>
-    <preview>materials/previews/audio_panel_left.png</preview>
+    <preview>materials/previews/panel/audio_panel_left.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

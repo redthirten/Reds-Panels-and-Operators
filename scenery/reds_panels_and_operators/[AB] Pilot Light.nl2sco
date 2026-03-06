@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/pilot_light.dae">
+    <model path="models/ab/pilot_light.dae">
       <clip distance="30"/>
       <clip mesh="housing_nut" distance="5"/>
       <clip mesh="pilot" distance="15"/>
     </model>
     <description>A recolorable, scripted pilot light, with customizable light and placard.</description>
-    <preview>materials/previews/pilot_light.png</preview>
+    <preview>materials/previews/ab/pilot_light.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

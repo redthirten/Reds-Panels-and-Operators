@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/estop_button.dae">
+    <model path="models/ab/estop_button.dae">
       <clip distance="30"/>
       <clip mesh="housing_nut" distance="5"/>
       <clip mesh="estop_button" distance="15"/>
     </model>
     <description>A recolorable E-Stop button, with animations &amp; customizable placard.</description>
-    <preview>materials/previews/estop_button.png</preview>
+    <preview>materials/previews/ab/estop_button.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

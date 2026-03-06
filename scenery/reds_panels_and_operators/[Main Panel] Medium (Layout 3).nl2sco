@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/main_panel_medium_layout3.dae">
+    <model path="models/main_panel/main_panel_medium_layout3.dae">
       <clip mesh="panel_door_lock" distance="30"/>
       <clip mesh="audio_panel" distance="75"/>
       <clip distance="175"/>
     </model>
     <description>A medium main control panel with layout 3, and optional audio panel attachement. -70 deg. X angle for button face.</description>
-    <preview>materials/previews/main_panel_medium_layout3.png</preview>
+    <preview>materials/previews/main_panel/main_panel_medium_layout3.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/main_panel_short_layout2.dae">
+    <model path="models/main_panel/main_panel_short_layout2.dae">
       <clip distance="175"/>
     </model>
     <description>A medium main control panel with no height, and with layout 2. -70 deg. X angle for button face.</description>
-    <preview>materials/previews/main_panel_short_layout2.png</preview>
+    <preview>materials/previews/main_panel/main_panel_short_layout2.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

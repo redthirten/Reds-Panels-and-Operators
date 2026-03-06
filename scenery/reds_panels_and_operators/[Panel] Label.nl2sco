@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/label.dae">
+    <model path="models/panel/label.dae">
       <clip distance="15"/>
     </model>
     <description>A small label to add detail to an existing operator or electrical panel.</description>
-    <preview>materials/previews/label.png</preview>
+    <preview>materials/previews/panel/label.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

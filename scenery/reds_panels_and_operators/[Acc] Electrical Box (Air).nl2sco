@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/electrical_box_air.dae">
+    <model path="models/acc/electrical_box_air.dae">
       <clip distance="125"/>
       <clip mesh="panel_door_lock" distance="30"/>
       <clip mesh="wires" distance="40"/>
@@ -9,7 +9,7 @@
       <clip mesh="air_tank" distance="75"/>
     </model>
     <description>An electrical panel, with air brake compressor reservoir, optional mounting bracket, and wire conduits.</description>
-    <preview>materials/previews/electrical_box_air.png</preview>
+    <preview>materials/previews/acc/electrical_box_air.png</preview>
     <usercolor>
       <label>Panel Color</label>
       <index>0</index>

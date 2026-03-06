@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/panelview_plus_1000.dae">
+    <model path="models/ab/panelview_plus_1000.dae">
       <clip distance="40"/>
     </model>
     <description>A scripted &quot;Allen-Bradley PanelView Plus 1000&quot;. This object is neither endorsed nor licensed by Rockwell Automation, Inc.</description>
-    <preview>materials/previews/panelview_plus_1000.png</preview>
+    <preview>materials/previews/ab/panelview_plus_1000.png</preview>
     <param basescalex="1.25"/>
     <param basescaley="1.25"/>
     <param basescalez="1.25"/>

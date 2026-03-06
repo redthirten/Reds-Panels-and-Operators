@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/panel_1x2.dae">
+    <model path="models/panel/panel_1x2.dae">
       <clip mesh="wire" distance="10"/>
       <clip distance="50"/>
       <clip mesh="mount" distance="30"/>
     </model>
     <description>A 1 operator wide, by 2 operator high, empty operator panel, with optional mounting bracket and wire conduit.</description>
-    <preview>materials/previews/panel_1x2.png</preview>
+    <preview>materials/previews/panel/panel_1x2.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

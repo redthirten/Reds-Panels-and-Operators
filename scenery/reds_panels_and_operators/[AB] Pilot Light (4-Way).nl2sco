@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/pilot_light_4way.dae">
+    <model path="models/ab/pilot_light_4way.dae">
       <clip distance="30"/>
       <clip mesh="housing_nut" distance="5"/>
       <clip mesh="light1" distance="15"/>
@@ -10,7 +10,7 @@
       <clip mesh="light4" distance="15"/>
     </model>
     <description>A recolorable, scripted 4-way pilot light, with customizable lights and placard.</description>
-    <preview>materials/previews/pilot_light_4way.png</preview>
+    <preview>materials/previews/ab/pilot_light_4way.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

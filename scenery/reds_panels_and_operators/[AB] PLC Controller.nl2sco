@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/plc_controller.dae">
+    <model path="models/ab/plc_controller.dae">
       <clip mesh="estop_pilot" distance="50"/>
       <clip mesh="indicator1" distance="40"/>
       <clip mesh="indicator2" distance="40"/>
@@ -28,7 +28,7 @@
     </model>
     <description>A Programmable Logic Controller tower. Required for E-Stop Advanced &amp; Reset functions for buttons.</description>
     <defaultinstancename>PLC Controller</defaultinstancename>
-    <preview>materials/previews/plc_controller.png</preview>
+    <preview>materials/previews/ab/plc_controller.png</preview>
     <param lockonterrain="true"/>
     <usercolor>
       <label>Placard Background</label>
