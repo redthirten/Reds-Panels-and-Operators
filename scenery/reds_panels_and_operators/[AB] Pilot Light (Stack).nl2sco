@@ -101,13 +101,13 @@
     <materialpath name="black_plastic">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="black_plastic_ribbed">materials/plastic_black_ribbed.nl2mat</materialpath>
     <materialpath name="bottom_light_ribbed">materials/plastic_ribbed_user2.nl2mat</materialpath>
-    <materialpath name="bottom_light_side">materials/button_side_user2.nl2mat</materialpath>
+    <materialpath name="bottom_light_side">materials/ab_button_side_user2.nl2mat</materialpath>
     <materialpath name="metal">intern:data/materials/Chrome.nl2mat</materialpath>
     <materialpath name="middle_light_ribbed">materials/plastic_ribbed_user3.nl2mat</materialpath>
-    <materialpath name="middle_light_side">materials/button_side_user3.nl2mat</materialpath>
+    <materialpath name="middle_light_side">materials/ab_button_side_user3.nl2mat</materialpath>
     <materialpath name="screw_normal">materials/screw.nl2mat</materialpath>
     <materialpath name="top_light_ribbed">materials/plastic_ribbed_user4.nl2mat</materialpath>
-    <materialpath name="top_light_side">materials/button_side_user4.nl2mat</materialpath>
+    <materialpath name="top_light_side">materials/ab_button_side_user4.nl2mat</materialpath>
     <lightsource range="0.75" intensity="1" type="point">
       <name>light1</name>
       <parent>light1</parent>

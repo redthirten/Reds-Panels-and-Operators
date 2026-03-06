@@ -88,7 +88,7 @@
     </scriptparameter>
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="button">materials/plastic_user2.nl2mat</materialpath>
-    <materialpath name="flat_button_texture_normal">materials/button_flat_user2.nl2mat</materialpath>
+    <materialpath name="flat_button_texture_normal">materials/ab_button_flat_user2.nl2mat</materialpath>
     <materialpath name="metal">materials/metal.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
   </sceneobject>

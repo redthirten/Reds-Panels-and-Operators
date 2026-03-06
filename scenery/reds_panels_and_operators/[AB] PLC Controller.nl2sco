@@ -86,11 +86,11 @@
     </scriptparameter>
     <materialpath name="black_plastic">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="brushed_metal">materials/metal.nl2mat</materialpath>
-    <materialpath name="estop_pilot_color">materials/button_user2.nl2mat</materialpath>
-    <materialpath name="estop_pilot_side_color">materials/pilot_side_user2.nl2mat</materialpath>
+    <materialpath name="estop_pilot_color">materials/ab_button_user2.nl2mat</materialpath>
+    <materialpath name="estop_pilot_side_color">materials/ab_pilot_side_user2.nl2mat</materialpath>
     <materialpath name="estop_ribbed_height">materials/plastic_ribbed_user2.nl2mat</materialpath>
-    <materialpath name="indicator_pilot_color">materials/button_user3.nl2mat</materialpath>
-    <materialpath name="indicator_pilot_side_color">materials/pilot_side_user3.nl2mat</materialpath>
+    <materialpath name="indicator_pilot_color">materials/ab_button_user3.nl2mat</materialpath>
+    <materialpath name="indicator_pilot_side_color">materials/ab_pilot_side_user3.nl2mat</materialpath>
     <materialpath name="indicator_ribbed_height">materials/plastic_ribbed_user3.nl2mat</materialpath>
     <materialpath name="key_norm">materials/door_key_hole.nl2mat</materialpath>
     <materialpath name="lsr13">materials/lsr13.nl2mat</materialpath>

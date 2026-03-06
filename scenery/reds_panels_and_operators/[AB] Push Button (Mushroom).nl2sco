@@ -96,8 +96,8 @@
     </scriptparameter>
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="button">materials/plastic_darker_user2.nl2mat</materialpath>
-    <materialpath name="button_color">materials/button_user2.nl2mat</materialpath>
-    <materialpath name="button_side_on_color">materials/estop_side_user2.nl2mat</materialpath>
+    <materialpath name="button_color">materials/ab_button_user2.nl2mat</materialpath>
+    <materialpath name="button_side_on_color">materials/ab_estop_side_user2.nl2mat</materialpath>
     <materialpath name="metal">materials/metal.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
     <lightsource range="0.5" intensity="1" type="point">

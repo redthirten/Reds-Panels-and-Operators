@@ -93,7 +93,7 @@
     </scriptparameter>
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="key">intern:data/materials/Chrome.nl2mat</materialpath>
-    <materialpath name="key_arrow">materials/key_hole.nl2mat</materialpath>
+    <materialpath name="key_arrow">materials/ab_key_hole.nl2mat</materialpath>
     <materialpath name="keybind_hint">materials/switch_keybind_hint.nl2mat</materialpath>
     <materialpath name="metal">materials/metal.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
