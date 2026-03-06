@@ -2,7 +2,7 @@
 <root>
   <material>
     <description>A galvanized metal texture, with normal map, metalness, and roughness.</description>
-    <preview>textures/Metal_Galvanized_001_basecolor.jpg</preview>
+    <preview>textures/Metal_Galvanized_001/Metal_Galvanized_001_basecolor.jpg</preview>
     <renderpass>
       <shadercore>Result = Add(tex0, 0.1);
 Roughness = Mul(tex2, 3);
@@ -16,16 +16,16 @@ Metallic = 0.03;</shadercore>
       <reflection fresnelconst="0.1" fresnelvar="0.3"/>
       <rgbgen mode="bumplighting"/>
       <texunit>
-        <map>textures/Metal_Galvanized_001_basecolor.jpg</map>
+        <map>textures/Metal_Galvanized_001/Metal_Galvanized_001_basecolor.jpg</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/Metal_Galvanized_001_normal.jpg</map>
+        <map>textures/Metal_Galvanized_001/Metal_Galvanized_001_normal.jpg</map>
         <bump mode="normalgloss"/>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/Metal_Galvanized_001_roughness.jpg</map>
+        <map>textures/Metal_Galvanized_001/Metal_Galvanized_001_roughness.jpg</map>
         <tcgen mode="base"/>
       </texunit>
     </renderpass>

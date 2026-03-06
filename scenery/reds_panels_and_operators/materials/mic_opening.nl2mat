@@ -2,7 +2,7 @@
 <root>
   <material>
     <description>Mic opening texture (black plastic + custom normal map).</description>
-    <preview>textures/factory_wall_nor_1k.jpg</preview>
+    <preview>textures/factory_wall/factory_wall_nor_1k.jpg</preview>
     <renderpass>
       <shadercore>Roughness = 1;
 Specular = 0;
@@ -11,11 +11,11 @@ Result = tex0;</shadercore>
       <linearshading/>
       <rgbgen mode="bumplighting"/>
       <texunit>
-        <map>textures/Metal_Galvanized_001_roughness.jpg</map>
+        <map>textures/Metal_Galvanized_001/Metal_Galvanized_001_roughness.jpg</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/factory_wall_nor_1k.jpg</map>
+        <map>textures/factory_wall/factory_wall_nor_1k.jpg</map>
         <bump mode="normalgloss"/>
         <tcgen mode="base"/>
       </texunit>

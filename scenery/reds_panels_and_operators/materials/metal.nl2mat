@@ -2,7 +2,7 @@
 <root>
   <material>
     <description>A brushed metal texture, with normal map, metalness, and roughness.</description>
-    <preview>textures/Metal011_2K_Color.jpg</preview>
+    <preview>textures/metal_11/Metal011_2K_Color.jpg</preview>
     <renderpass>
       <shadercore>Result = tex0;
 Roughness = tex2;</shadercore>
@@ -15,16 +15,16 @@ Roughness = tex2;</shadercore>
       <reflection bump="true" fresnelconst="0.4" fresnelvar="0.7"/>
       <rgbgen mode="bumplighting"/>
       <texunit>
-        <map>textures/Metal011_2K_Color.jpg</map>
+        <map>textures/metal_11/Metal011_2K_Color.jpg</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/Metal011_2K_Normal.jpg</map>
+        <map>textures/metal_11/Metal011_2K_Normal.jpg</map>
         <bump mode="normalgloss"/>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/Metal011_2K_Roughness.jpg</map>
+        <map>textures/metal_11/Metal011_2K_Roughness.jpg</map>
         <tcgen mode="base"/>
       </texunit>
     </renderpass>

@@ -18,13 +18,13 @@ Result = tmp0;</shadercore>
       <rgbgen mode="lighting"/>
       <texunit>
         <animmap frequency="4">
-          <map>textures/panelview/gray.png</map>
+          <map>textures/ab_panelview/gray.png</map>
           <map>intern:data/textures/fx/white.png</map>
         </animmap>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/panelview/lcd_pixel.png</map>
+        <map>textures/ab_panelview/lcd_pixel.png</map>
         <tcgen mode="base"/>
         <tcmod mode="scale" scales="300" scalet="150"/>
       </texunit>
