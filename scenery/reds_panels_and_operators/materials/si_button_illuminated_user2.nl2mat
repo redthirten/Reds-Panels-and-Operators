@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Button top that is recolorable using the User 2 custom defined color.</description>
-    <preview>textures/si_button/button_on_color.png</preview>
+    <description>Siemens illuminated button top that is recolorable using the User 2 custom defined color.</description>
+    <preview>textures/si_button/button_on_color.jpg</preview>
     <renderpass>
       <shadercore>tmp0 = Mul(2, entity2); // Get the user set color and multiply it by 2
 tmp0 = saturate(tmp0); // Clamp resulting value between 0 and 1

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/si/push_button_iIlluminated_normal.dae">
+    <model path="models/si/push_button_normal_iIlluminated.dae">
       <clip distance="30"/>
       <clip mesh="housing" distance="5"/>
       <clip mesh="button" distance="15"/>
@@ -93,7 +93,8 @@
       <description>Hides the placard during Play Mode.</description>
       <label>Hide Placard</label>
     </scriptparameter>
-    <materialpath name="button_color">materials/si_button_user2.nl2mat</materialpath>
+    <materialpath name="button_color">materials/si_button_illuminated_user2.nl2mat</materialpath>
+    <materialpath name="housing">materials/metal.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
     <materialpath name="plastic_black_textured">materials/plastic_black_textured.nl2mat</materialpath>
     <materialpath name="plastic_glass">materials/glass_dirty_transparent.nl2mat</materialpath>
