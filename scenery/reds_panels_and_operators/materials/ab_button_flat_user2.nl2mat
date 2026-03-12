@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Flat button&apos;s front, recolorable (User 2), plastic texture, with Allen-Bradley logo normal map.</description>
+    <description>Allen-Bradley flat button front, recolorable (User 2), plastic texture, with logo normal map.</description>
     <preview>textures/ab_button/flat_button_texture_height.png</preview>
     <renderpass>
       <shadercore>Result = Mul(Entity2, 0.7);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Black scratched plastic with the switch&apos;s height map.</description>
+    <description>Black scratched plastic with the Allen-Bradley switch&apos;s height map.</description>
     <preview>textures/ab_switch/switch_grip_height.png</preview>
     <renderpass>
       <shadercore>Result = Mul(1.5, tex0);</shadercore>

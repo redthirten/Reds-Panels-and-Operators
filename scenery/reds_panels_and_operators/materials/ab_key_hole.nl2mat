@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>A brushed metal texture, with key height map, metalness, and roughness.</description>
+    <description>Brushed metal texture, with Allen-Bradley key height map, metalness, and roughness.</description>
     <preview>textures/ab_switch/key_height.png</preview>
     <renderpass>
       <shadercore>Result = tex0;

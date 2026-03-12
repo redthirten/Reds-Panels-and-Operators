@@ -2,6 +2,7 @@
 <root>
   <material>
     <description>Matte, black colored, plastic</description>
+    <preview>intern:data/textures/fx/black.png</preview>
     <renderpass>
       <shadercore>Roughness = 1;
 Specular = 0;</shadercore>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Screen for the PanelView, with LCD overlay texture and illumination.</description>
+    <description>Screen for the Allen-Bradley PanelView, with LCD overlay texture and illumination.</description>
     <preview>textures/ab_panelview/panel_screen.png</preview>
     <renderpass>
       <shadercore>tmp0 = Mul(tex0, tex1);

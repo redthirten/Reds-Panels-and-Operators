@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Indicator texture for the PanelView SCO. To be used with scripting to illuminate differently.</description>
+    <description>Indicator texture for the Allen-Bradley PanelView. To be used with scripting to illuminate differently.</description>
     <renderpass>
       <shadercore>Metallic = 0;
 tmp0 = Mul(entity7, tex0);
