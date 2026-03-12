@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Button top that is recolorable using the User 2 custom defined color.</description>
+    <description>Allen-Bradley button top that is recolorable using the User 2 custom defined color.</description>
     <preview>textures/ab_button/button_on_color.png</preview>
     <renderpass>
       <shadercore>tmp0 = Mul(2, entity2); // Get the user set color and multiply it by 2
