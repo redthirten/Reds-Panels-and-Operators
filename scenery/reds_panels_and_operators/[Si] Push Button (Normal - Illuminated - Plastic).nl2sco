@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/si/push_button_normal_iIlluminated.dae">
+    <model path="models/si/push_button_normal_illuminated.dae">
       <clip distance="30"/>
       <clip mesh="housing" distance="5"/>
       <clip mesh="button" distance="15"/>
@@ -33,7 +33,7 @@
     </usertexture>
     <script>
       <classpath>scripts</classpath>
-      <class>PushButton</class>
+      <class>PushButtonSiemens</class>
       <sharedvm>true</sharedvm>
       <resource id="LICENSE">LICENSE</resource>
       <resource id="sound_off">sounds/button_out.ogg</resource>
@@ -94,8 +94,10 @@
       <label>Hide Placard</label>
     </scriptparameter>
     <materialpath name="button_color">materials/si_button_illuminated_user2.nl2mat</materialpath>
+    <materialpath name="button_side_color">materials/si_button_side_illuminated_user2.nl2mat</materialpath>
     <materialpath name="housing">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
+    <materialpath name="plastic_black">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="plastic_black_textured">materials/plastic_black_textured.nl2mat</materialpath>
     <materialpath name="plastic_glass">materials/glass_dirty_transparent.nl2mat</materialpath>
     <lightsource range="0.5" intensity="1" type="point">

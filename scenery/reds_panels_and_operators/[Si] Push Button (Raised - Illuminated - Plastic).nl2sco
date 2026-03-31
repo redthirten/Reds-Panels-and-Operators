@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/si/push_button_normal_illuminated.dae">
+    <model path="models/si/push_button_raised_illuminated.dae">
       <clip distance="30"/>
       <clip mesh="housing" distance="5"/>
       <clip mesh="button" distance="15"/>
@@ -95,7 +95,7 @@
     </scriptparameter>
     <materialpath name="button_color">materials/si_button_illuminated_user2.nl2mat</materialpath>
     <materialpath name="button_side_color">materials/si_button_side_illuminated_user2.nl2mat</materialpath>
-    <materialpath name="housing">materials/metal.nl2mat</materialpath>
+    <materialpath name="housing">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
     <materialpath name="plastic_black">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="plastic_black_textured">materials/plastic_black_textured.nl2mat</materialpath>
@@ -103,7 +103,7 @@
     <lightsource range="0.5" intensity="1" type="point">
       <name>light</name>
       <parent>button</parent>
-      <position x="0.015" y="0.0147" z="0.0141"/>
+      <position x="0.015" y="0.0147" z="0.0192"/>
       <color r="1" g="1" b="1"/>
       <halo zoffset="0" intensity="0.4" size="0.075"/>
     </lightsource>
