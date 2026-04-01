@@ -4,20 +4,19 @@
     <description>Siemens illuminated button top that is recolorable using the User 2 custom defined color.</description>
     <preview>textures/si_button/button_on_color.jpg</preview>
     <renderpass>
-      <shadercore>tmp0 = Mul(2, entity2); // Get the user set color and multiply it by 2
-tmp0 = saturate(tmp0); // Clamp resulting value between 0 and 1
-tmp0 = lerp(0.3, 1, tmp0); // Interpolate
-Specular = Mul(tex3, tmp0); // Set specular to resulting value * spec map
+      <shadercore>Roughness = Tex3;
 
-Emission = Mul(tex1, entity2); // Set emission to texture/custom color combination
+Emission = Mul(Tex1, entity2); // Set emission to texture/custom color combination
 
-Result = Mul(tex0, entity2); // Set color output to texture/custom color combination</shadercore>
+Result = Mul(Tex0, entity2); // Set color output to texture/custom color combination</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
-      <custommaterial>
-        <shininess exponent="128"/>
-      </custommaterial>
-      <reflection affectedbyspecular="true" fresnelconst="0.05" fresnelvar="0.4"/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
+      <reflection fresnelconst="0" fresnelvar="0"/>
       <rgbgen mode="bumplighting"/>
       <texunit>
         <map>textures/si_button/button_off_color.jpg</map>
@@ -31,12 +30,12 @@ Result = Mul(tex0, entity2); // Set color output to texture/custom color combina
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/Plastic003/Plastic003_2K_Normal.jpg</map>
+        <map>textures/Plastic003/Plastic003_Normal.jpg</map>
         <bump mode="normalgloss"/>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/si_button/button_specular.jpg</map>
+        <map>textures/Plastic003/Plastic003_Roughness.jpg</map>
         <tcgen mode="base"/>
       </texunit>
     </renderpass>
