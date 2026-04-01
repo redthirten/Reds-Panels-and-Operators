@@ -4,12 +4,23 @@
     <description>Black scratched plastic with the Allen-Bradley switch&apos;s height map.</description>
     <preview>textures/ab_switch/switch_grip_height.png</preview>
     <renderpass>
-      <shadercore>Result = Mul(1.5, tex0);</shadercore>
+      <shadercore>Metallic = 0.118; // #1e1c1d (red ch. only used)
+Roughness = Tex1;
+Result = Mul(1.5, Tex0);</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
       <rgbgen mode="bumplighting"/>
       <texunit>
-        <map>textures/Plastic003/Plastic003_2K_Color.jpg</map>
+        <map>textures/Plastic003/Plastic003_Color.jpg</map>
+        <tcgen mode="base"/>
+      </texunit>
+      <texunit>
+        <map>textures/Plastic003/Plastic003_Roughness.jpg</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>

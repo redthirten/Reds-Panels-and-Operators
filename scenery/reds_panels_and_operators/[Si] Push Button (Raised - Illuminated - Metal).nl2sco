@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/si/push_button_raised_illuminated.dae">
+    <model path="models/si/push_button_raised.dae">
       <clip distance="30"/>
       <clip mesh="housing" distance="5"/>
       <clip mesh="button" distance="15"/>

@@ -2,19 +2,29 @@
 <root>
   <material>
     <description>A textured black scratched plastic with normal map.</description>
-    <preview>textures/Plastic003/Plastic003_2K_Color.jpg</preview>
+    <preview>textures/Plastic003/Plastic003_Color.jpg</preview>
     <renderpass>
-      <shadercore>Result = Mul(1.5, tex0);</shadercore>
+      <shadercore>Metallic = 0.118; // #1e1c1d (red ch. only used)
+Roughness = Tex1;
+Result = Mul(1.5, Tex0);</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
-      <reflection bump="true" affectedbyspecular="true" fresnelconst="0" fresnelvar="0.4"/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
       <rgbgen mode="bumplighting"/>
       <texunit>
-        <map>textures/Plastic003/Plastic003_2K_Color.jpg</map>
+        <map>textures/Plastic003/Plastic003_Color.jpg</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/Plastic003/Plastic003_2K_Normal.jpg</map>
+        <map>textures/Plastic003/Plastic003_Roughness.jpg</map>
+        <tcgen mode="base"/>
+      </texunit>
+      <texunit>
+        <map>textures/Plastic003/Plastic003_Normal.jpg</map>
         <bump mode="normalgloss"/>
         <tcgen mode="base"/>
       </texunit>
