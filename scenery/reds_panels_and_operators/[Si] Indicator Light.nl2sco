@@ -12,7 +12,7 @@
     <usercolor>
       <label>Placard Background</label>
       <index>0</index>
-      <defaultcolor r="1" g="0.870588" b="0"/>
+      <defaultcolor r="1" g="1" b="0.94902"/>
     </usercolor>
     <usercolor>
       <label>Placard Text</label>
