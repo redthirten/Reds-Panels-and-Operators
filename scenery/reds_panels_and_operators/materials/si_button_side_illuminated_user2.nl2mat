@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Siemens illuminated button top that is recolorable using the User 2 custom defined color.</description>
+    <description>Siemens illuminated button side that is recolorable using the User 2 custom defined color.</description>
     <preview>textures/si_button/button_side_on_color.jpg</preview>
     <renderpass>
       <shadercore>Roughness = Tex3;
