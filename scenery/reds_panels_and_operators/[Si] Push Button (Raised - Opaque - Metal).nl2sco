@@ -82,13 +82,6 @@
     <scriptparameter>
       <type>bool</type>
       <defaultvalue>false</defaultvalue>
-      <id>disable_light</id>
-      <description>Disables the &quot;real&quot; light during simulation, possibly leading to better performance. Pilot light will still have a basic &quot;glow&quot;.</description>
-      <label>Disable Volumetric Light</label>
-    </scriptparameter>
-    <scriptparameter>
-      <type>bool</type>
-      <defaultvalue>false</defaultvalue>
       <id>hide_placard</id>
       <description>Hides the placard during Play Mode.</description>
       <label>Hide Placard</label>
