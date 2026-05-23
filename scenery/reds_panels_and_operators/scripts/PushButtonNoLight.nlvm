@@ -1,16 +1,16 @@
 /**
-	Push Button (Flat) NL2 Script
+	Push Button (No Light) NL2 Script
 	David Wolfe (Red-Thirten)
-	03/12/2024
+	05/22/2026
 	Extends Push Button.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
 
 import com.nolimitscoaster.SceneObject;
 
-public class PushButtonFlat extends PushButton{
+public class PushButtonNoLight extends PushButton{
 	public final bool onInit(){
-		super.SCRIPT_NAME = "PushButtonFlat";		// Script name for debugging
+		super.SCRIPT_NAME = "PushButtonNoLight";	// Script name for debugging
 		super.BUTTON_TRAVEL_DIST = 0.005f;			// Distance, in meters, the button will travel to be fully "pressed"
 		super.BUTTON_HAS_LIGHT = false;				// True if the button has a pilot light
 		
