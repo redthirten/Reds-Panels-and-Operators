@@ -1,0 +1,37 @@
+/**
+	Emergency Stop Button [Siemens] NL2 Script
+	David Wolfe (Red-Thirten)
+	05/22/2026
+	Extends Push Button.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+import com.nolimitscoaster.SceneObject;
+
+public class EStopButtonSiemens extends PushButton{
+	public final bool onInit(){
+		super.SCRIPT_NAME = "EStopButtonSiemens";	// Script name for debugging
+		super.BUTTON_ELEMENT_NAME = "estop_button";	// Name of the button element in the SCO/model
+		super.BUTTON_TRAVEL_TIME = 0.2f;			// Time, in seconds, for the button to travel in and out ("speed")
+		super.BUTTON_TRAVEL_DIST = 0.0038f;		    // Distance, in meters, the button will travel to be fully "pressed"
+		super.BUTTON_HAS_LIGHT = false;				// True if the button has a pilot light
+		
+		return super.onInit();						// Run the rest of the init code in EStopButton
+	}
+
+	protected int getFuncFromScoParams(SceneObject sco){
+		/* Get Function from SCO Parameters
+			Returns the proper function number based on the "function" parameter enumeration.
+		*/
+		if (sco.getIntegerParameter("function") == null) return 0;
+
+		int funcVal = sco.getIntegerParameter("function").intValue();
+		switch (funcVal){
+			case 3: // E-Stop (Simple)
+				return F_ESTOP_SIMPLE;
+			case 4: // E-Stop (Advanced)
+				return F_ESTOP_ADVANCED;
+		}
+		return funcVal;
+	}
+}
