@@ -23,7 +23,7 @@
       <label>Light</label>
       <index>2</index>
       <lightsources>light</lightsources>
-      <defaultcolor r="1" g="0" b="0"/>
+      <defaultcolor r="0.894118" g="0.141176" b="0.113725"/>
     </usercolor>
     <usertexture>
       <label>Placard:</label>
