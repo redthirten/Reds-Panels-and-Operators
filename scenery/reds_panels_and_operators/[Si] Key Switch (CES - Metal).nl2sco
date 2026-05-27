@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/ab/key_switch.dae">
+    <model path="models/si/key_switch_ces.dae">
       <clip distance="30"/>
-      <clip mesh="housing_nut" distance="5"/>
-      <clip mesh="key" distance="15"/>
+      <clip mesh="key_core" distance="10"/>
+      <clip mesh="key" distance="7"/>
       <clip mesh="keybind_hint" distance="1"/>
     </model>
     <description>A scripted, animated key switch, with customizable placard.</description>
-    <preview>materials/previews/ab/key_switch.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>
@@ -91,11 +90,13 @@
       <description>Hides the placard during Play Mode.</description>
       <label>Hide Placard</label>
     </scriptparameter>
-    <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
+    <materialpath name="housing">materials/metal.nl2mat</materialpath>
     <materialpath name="key">intern:data/materials/Chrome.nl2mat</materialpath>
-    <materialpath name="key_arrow">materials/ab_key_hole.nl2mat</materialpath>
+    <materialpath name="key_hole">materials/door_key_hole.nl2mat</materialpath>
     <materialpath name="keybind_hint">materials/switch_keybind_hint.nl2mat</materialpath>
-    <materialpath name="metal">materials/metal.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
+    <materialpath name="plastic_black">materials/plastic_black.nl2mat</materialpath>
+    <materialpath name="plastic_black_textured">materials/plastic_black_textured.nl2mat</materialpath>
+    <materialpath name="plastic_glass">materials/glass_dirty_transparent.nl2mat</materialpath>
   </sceneobject>
 </root>

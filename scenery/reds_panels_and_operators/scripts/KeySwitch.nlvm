@@ -69,6 +69,10 @@ public class KeySwitch extends SwitchOperator{
 		// Determine totalStates and keyDefaultOutPos based on Function
 		int totalStates, keyDefaultOutPos;
 		switch (func){
+			case F_STATIC:
+				totalStates = 2;
+				keyDefaultOutPos = (sco.getBooleanParameter("none_func_keep_key_inserted").boolValue()) ? totalStates : -1;
+				break;
 			case F_NUM_TRAINS_NO_INT:
 				totalStates = trainCount;
 				keyDefaultOutPos = -1;
@@ -111,7 +115,5 @@ public class KeySwitch extends SwitchOperator{
 			KEY_TRAVEL_DIST,
 			keyDefaultOutPos
 		);
-		if (func == F_STATIC && !sco.getBooleanParameter("hide_key").boolValue())
-			operatorSwitch.setKeyVisible();
 	}
 }
