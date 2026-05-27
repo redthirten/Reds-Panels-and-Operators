@@ -1,7 +1,7 @@
 /**
 	Operator Switch Object NL2 Script
 	David Wolfe (Red-Thirten)
-	06/13/2024
+	05/26/2026
 	A Java object representing a switch, with optional key component, that can animate to any given state position.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 
@@ -69,7 +69,6 @@ public class OperatorSwitch{
 		this.keyElement = keyElement;
 		keyOutState = keyDefaultOutPos;
 		KEY_DIST = keyTravelDistance;
-		this.keyElement.setRotation(0.f, 0.f, -START_ANGLE);
 		this.keyElement.setVisible(totalStates == keyDefaultOutPos);
 		soundKeyIn = getInitSoundForPath(soundPaths[2]);
 		soundKeyOut = getInitSoundForPath(soundPaths[3]);
@@ -164,7 +163,6 @@ public class OperatorSwitch{
 				}
 				theta = thetaCurrent + (float)Tools.switchRampC1(DELTA_T, thetaTarget, DELTA_Ta, t);
 				switchElement.setRotation(0.f, 0.f, -theta);
-				if (hasKey) keyElement.setRotation(0.f, 0.f, -theta);
 				
 				if (t >= DELTA_T){
 					animate = false;
