@@ -4,8 +4,8 @@
         <contributor>
             <authoring_tool>SketchUp 17.2.2555</authoring_tool>
         </contributor>
-        <created>2026-05-23T06:51:16Z</created>
-        <modified>2026-05-23T06:51:16Z</modified>
+        <created>2026-05-29T15:56:07Z</created>
+        <modified>2026-05-29T15:56:07Z</modified>
         <unit meter="0.0254" name="inch" />
         <up_axis>Z_UP</up_axis>
     </asset>
@@ -27,7 +27,7 @@
         <visual_scene id="ID2">
             <node name="SketchUp">
                 <node name="skp_camera_Last_Saved_SketchUp_View">
-                    <matrix>0.8184007 0.1779697 -0.5463945 -4.674234 -0.5746479 0.2534605 -0.7781629 -7.952476 0 0.9508336 0.3097022 2.865201 0 0 0 1</matrix>
+                    <matrix>0.8594072 0.134604 -0.4932556 -2.941029 -0.5112918 0.2262498 -0.8290909 -6.064616 4.163336e-17 0.9647242 0.2632626 2.321726 0 0 0 1</matrix>
                     <instance_camera url="#ID1" />
                 </node>
                 <node id="ID3" name="instance_0">
@@ -35,7 +35,7 @@
                     <instance_node url="#ID4" />
                 </node>
                 <node id="ID50" name="instance_1">
-                    <matrix>1 0 0 0.5905512 0 1 0 -1.160819 0 0 1 0.5804409 0 0 0 1</matrix>
+                    <matrix>1 0 0 0.5905512 0 1 0 -1.167118 0 0 1 0.5804409 0 0 0 1</matrix>
                     <instance_node url="#ID51" />
                 </node>
                 <node id="ID107" name="instance_2">
@@ -787,19 +787,19 @@
     </library_effects>
     <library_images>
         <image id="ID16">
-            <init_from>estop_button/housing.jpg</init_from>
+            <init_from>estop_button_illuminated/housing.jpg</init_from>
         </image>
         <image id="ID55">
-            <init_from>estop_button/button.jpg</init_from>
+            <init_from>estop_button_illuminated/button.jpg</init_from>
         </image>
         <image id="ID68">
-            <init_from>estop_button/button_top.jpg</init_from>
+            <init_from>estop_button_illuminated/button_top.jpg</init_from>
         </image>
         <image id="ID81">
-            <init_from>estop_button/indicator.jpg</init_from>
+            <init_from>estop_button_illuminated/indicator.jpg</init_from>
         </image>
         <image id="ID112">
-            <init_from>estop_button/placard_circle_estop.png</init_from>
+            <init_from>estop_button_illuminated/placard_circle_estop.png</init_from>
         </image>
     </library_images>
     <scene>
