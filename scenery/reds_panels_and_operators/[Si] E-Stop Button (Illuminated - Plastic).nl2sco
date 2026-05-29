@@ -28,7 +28,7 @@
     </usercolor>
     <script>
       <classpath>scripts</classpath>
-      <class>EStopButtonSiemens</class>
+      <class>EStopButtonSi</class>
       <sharedvm>true</sharedvm>
       <resource id="LICENSE">LICENSE</resource>
       <resource id="sound_off">sounds/estop_out.ogg</resource>
@@ -56,6 +56,13 @@
     </scriptparameter>
     <scriptparameter>
       <type>bool</type>
+      <defaultvalue>true</defaultvalue>
+      <id>disable_light</id>
+      <description>Disables the &quot;real&quot; light during simulation, possibly leading to better performance. Pilot light will still have a basic &quot;glow&quot;.</description>
+      <label>Disable Volumetric Light</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>bool</type>
       <defaultvalue>false</defaultvalue>
       <id>hide_placard</id>
       <description>Hides the placard during Play Mode.</description>
@@ -67,5 +74,11 @@
     <materialpath name="indicator">materials/si_ind_light_lens_user2.nl2mat</materialpath>
     <materialpath name="placard_circle_estop">[ Placards ]/placard_circle_estop.nl2mat</materialpath>
     <materialpath name="plastic_black">materials/plastic_black.nl2mat</materialpath>
+    <lightsource range="0.5" intensity="1" type="point">
+      <name>light</name>
+      <parent>estop_button</parent>
+      <position x="0.015" y="0.0147" z="0.05"/>
+      <color r="1" g="1" b="1"/>
+    </lightsource>
   </sceneobject>
 </root>

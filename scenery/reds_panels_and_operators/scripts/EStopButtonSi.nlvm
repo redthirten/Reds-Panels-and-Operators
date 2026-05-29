@@ -1,0 +1,20 @@
+/**
+	Emergency Stop Button [Siemens] NL2 Script
+	David Wolfe (Red-Thirten)
+	05/29/2026
+	Extends EStopButton to define parameters specific to Siemens E-Stop Buttons.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+import com.nolimitscoaster.SceneObject;
+
+public class EStopButtonSi extends EStopButton{
+	public final bool onInit(){
+		super.SCRIPT_NAME = "EStopButtonSi";		// Script name for debugging
+		super.BUTTON_ELEMENT_NAME = "estop_button";	// Name of the button element in the SCO/model
+		super.BUTTON_TRAVEL_TIME = 0.2f;			// Time, in seconds, for the button to travel in and out ("speed")
+		super.BUTTON_TRAVEL_DIST = 0.00396f;	    // Distance, in meters, the button will travel to be fully "pressed"
+		
+		return super.onInit();						// Run the rest of the init code in EStopButton
+	}
+}

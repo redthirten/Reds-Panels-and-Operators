@@ -1,7 +1,7 @@
 /**
 	Push Button NL2 Script
 	David Wolfe (Red-Thirten)
-	11/28/2024
+	05/29/2026
 	Animates the pilot light and button during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -310,7 +310,7 @@ public class PushButton extends Script implements InteractionActionListener{
 		return sco.getIntegerParameter("function").intValue();
 	}
 
-	private bool isInteractableFunc(int func){
+	private static bool isInteractableFunc(int func){
 		for (int i = 0; i < NON_INTERACT_FUNCS.length; i++){
 			if (func == NON_INTERACT_FUNCS[i])
 				return false;

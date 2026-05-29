@@ -23,7 +23,6 @@
     <usercolor>
       <label>Button</label>
       <index>2</index>
-      <lightsources>light</lightsources>
       <defaultcolor r="0.133333" g="0.533333" b="0"/>
     </usercolor>
     <usertexture>

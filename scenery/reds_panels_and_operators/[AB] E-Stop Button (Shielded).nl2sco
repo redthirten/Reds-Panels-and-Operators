@@ -35,7 +35,7 @@
     </usertexture>
     <script>
       <classpath>scripts</classpath>
-      <class>EStopButton</class>
+      <class>EStopButtonAB</class>
       <sharedvm>true</sharedvm>
       <resource id="LICENSE">LICENSE</resource>
       <resource id="sound_off">sounds/estop_out.ogg</resource>
