@@ -34,13 +34,27 @@
       <sharedvm>true</sharedvm>
       <resource id="LICENSE">LICENSE</resource>
     </script>
+    <script>
+      <classpath>scripts</classpath>
+      <class>Speaker</class>
+      <sharedvm>true</sharedvm>
+      <resource id="LICENSE">LICENSE</resource>
+    </script>
     <scriptparameter>
       <type>int</type>
       <defaultvalue>0</defaultvalue>
-      <enums>None (See Options Below),Station Status,Block Indicator (Only Non-Scripted Coasters),Special Track Manual Status</enums>
+      <enums>None,Station Status,Block Indicator (Only Non-Scripted Coasters),Special Track Manual Status</enums>
       <id>function</id>
       <description>How this light stack will behave during Play Mode.</description>
-      <label>Function:</label>
+      <label>Light Function:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>int</type>
+      <defaultvalue>0</defaultvalue>
+      <enums>None,E-Stop,Special Track (Moving)</enums>
+      <id>speaker_function</id>
+      <description>How the top speaker will behave during Play Mode.</description>
+      <label>Speaker Function:</label>
     </scriptparameter>
     <scriptparameter>
       <type>int</type>
@@ -48,7 +62,7 @@
       <enums>Light Off,Light On,Light Blinking</enums>
       <id>light1</id>
       <description>This setting is ONLY used if Function is set to &quot;None&quot;.</description>
-      <label>Bottom Pilot Light:</label>
+      <label>Bottom Pilot Light (None Func. Only):</label>
     </scriptparameter>
     <scriptparameter>
       <type>int</type>
@@ -56,7 +70,7 @@
       <enums>Light Off,Light On,Light Blinking</enums>
       <id>light2</id>
       <description>This setting is ONLY used if Function is set to &quot;None&quot;.</description>
-      <label>Middle Pilot Light:</label>
+      <label>Middle Pilot Light (None Func. Only):</label>
     </scriptparameter>
     <scriptparameter>
       <type>int</type>
@@ -64,7 +78,7 @@
       <enums>Light Off,Light On,Light Blinking</enums>
       <id>light3</id>
       <description>This setting is ONLY used if Function is set to &quot;None&quot;.</description>
-      <label>Top Pilot Light:</label>
+      <label>Top Pilot Light (None Func. Only):</label>
     </scriptparameter>
     <scriptparameter>
       <type>blocksection</type>
@@ -87,9 +101,23 @@
     <scriptparameter>
       <type filetype="audio">resourcepath</type>
       <defaultvalue>sounds/alarm.ogg</defaultvalue>
-      <id>estop_sound</id>
-      <description>Sound that plays out the speaker when the ride is emergency stoped. Will only play for Non-Static Functions. Leave empty to play no sound.</description>
-      <label>E-Stop Sound:</label>
+      <id>sound</id>
+      <description>Sound that plays under the condition of the Speaker Function.</description>
+      <label>Speaker Sound:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>double</type>
+      <defaultvalue>1</defaultvalue>
+      <id>gain</id>
+      <description>The &quot;volume multiplier&quot; for the Speaker Sound (eg. 0.5 = 50% loud).</description>
+      <label>Sound Gain:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>bool</type>
+      <defaultvalue>false</defaultvalue>
+      <id>loop_sound</id>
+      <description>If enabled, Speaker Function will play sound repeatedly when active.</description>
+      <label>Loop Sound</label>
     </scriptparameter>
     <scriptparameter>
       <type>bool</type>

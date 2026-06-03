@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Matte, black colored, plastic</description>
-    <preview>intern:data/textures/fx/black.png</preview>
+    <description>Reflective, black colored, plastic</description>
+    <preview>intern:data/textures/terrain/SpecularMap.png</preview>
     <renderpass>
       <transparency mode="opaque"/>
       <linearshading/>
       <pbrmetallicworkflow>
         <basecolor r="0.117647" g="0.109804" b="0.113725"/>
         <metallic>0</metallic>
-        <roughness>1</roughness>
+        <roughness>0.495652</roughness>
       </pbrmetallicworkflow>
+      <reflection fresnelconst="0" fresnelvar="0"/>
       <rgbgen mode="lighting"/>
     </renderpass>
   </material>
