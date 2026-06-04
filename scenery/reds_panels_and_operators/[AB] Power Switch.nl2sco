@@ -5,7 +5,7 @@
       <clip distance="35"/>
       <clip mesh="placard" distance="20"/>
     </model>
-    <description>A static large power cut off switch. Commonly seen on the side of main panels.</description>
+    <description>A large, static, power cut off switch. Commonly seen on the side of main panels.</description>
     <preview>materials/previews/ab/power_switch.png</preview>
     <param basescalex="1.75"/>
     <param basescaley="1.75"/>

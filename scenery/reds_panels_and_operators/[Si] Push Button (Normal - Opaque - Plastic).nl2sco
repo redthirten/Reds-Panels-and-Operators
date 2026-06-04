@@ -6,7 +6,7 @@
       <clip mesh="housing" distance="10"/>
       <clip mesh="button" distance="15"/>
     </model>
-    <description>A recolorable, scripted, simple 30mm push button, with customizable placard.</description>
+    <description>Siemens® 3SU1 standard opaque push button w/ plastic housing. Recolorable - Scripted - Customizable Placard</description>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

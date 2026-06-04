@@ -6,7 +6,7 @@
       <clip mesh="housing_nut" distance="5"/>
       <clip mesh="pilot" distance="15"/>
     </model>
-    <description>A recolorable, scripted pilot light, with customizable light and placard.</description>
+    <description>Allen-Bradley® 800T pilot light. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/ab/pilot_light.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>

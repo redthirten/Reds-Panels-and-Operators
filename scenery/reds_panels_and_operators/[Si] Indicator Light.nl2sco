@@ -5,7 +5,7 @@
       <clip distance="30"/>
       <clip mesh="pilot" distance="15"/>
     </model>
-    <description>A recolorable, scripted indicator light, with customizable light and placard.</description>
+    <description>Siemens® 3SU1 indicator light. Recolorable - Scripted - Customizable Placard</description>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

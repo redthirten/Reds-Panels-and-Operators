@@ -7,7 +7,7 @@
       <clip mesh="shield" distance="10"/>
       <clip mesh="estop_button" distance="15"/>
     </model>
-    <description>A recolorable E-Stop button, with shield, animations, &amp; customizable placard.</description>
+    <description>Allen-Bradley® 800T shielded E-Stop button. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/ab/estop_button_shielded.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>

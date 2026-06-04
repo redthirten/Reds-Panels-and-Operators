@@ -7,7 +7,7 @@
       <clip mesh="switch" distance="15"/>
       <clip mesh="keybind_hint" distance="1"/>
     </model>
-    <description>A scripted 30mm plastic switch, with customizable placard.</description>
+    <description>Allen-Bradley® 800T plastic switch. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/ab/switch.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>

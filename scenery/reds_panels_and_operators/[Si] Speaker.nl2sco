@@ -5,7 +5,7 @@
       <clip distance="30"/>
       <clip mesh="speaker" distance="15"/>
     </model>
-    <description>A scripted speaker, with customizable placard.</description>
+    <description>Siemens® 3SU1 acoustic signaling device. Scripted - Customizable Placard</description>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

@@ -4,7 +4,7 @@
     <model path="models/ab/panelview_plus_1000.dae">
       <clip distance="40"/>
     </model>
-    <description>A scripted &quot;Allen-Bradley PanelView Plus 1000&quot;. This object is neither endorsed nor licensed by Rockwell Automation, Inc.</description>
+    <description>Allen-Bradley® PanelView Plus 1000 block status display. Recolorable - Scripted - Customizable Screen</description>
     <preview>materials/previews/ab/panelview_plus_1000.png</preview>
     <param basescalex="1.25"/>
     <param basescaley="1.25"/>

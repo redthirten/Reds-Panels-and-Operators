@@ -8,7 +8,7 @@
       <clip mesh="switch" distance="15"/>
       <clip mesh="keybind_hint" distance="1"/>
     </model>
-    <description>A scripted short plastic switch, with customizable placard.</description>
+    <description>Siemens® 3SU1 switch w/ long handle &amp; metal housing. Recolorable - Scripted - Customizable Placard</description>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

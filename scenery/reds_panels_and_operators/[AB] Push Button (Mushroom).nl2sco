@@ -6,7 +6,7 @@
       <clip mesh="button_housing" distance="5"/>
       <clip mesh="button" distance="25"/>
     </model>
-    <description>A recolorable &amp; animated mushroom (dispatch) button.</description>
+    <description>Allen-Bradley® 800T mushroom push button. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/ab/push_button_mushroom.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
