@@ -19,6 +19,8 @@ Emission = Mul(Tmp0, Entity0); // Backlight</shadercore>
       <texunit>
         <entity/>
         <wrap mode="repeat"/>
+        <forcelineargray/>
+        <nearestfilter/>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
