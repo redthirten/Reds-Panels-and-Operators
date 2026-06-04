@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <material>
+    <preview>textures/si_text_panel/panel_screen.png</preview>
+    <renderpass>
+      <shadercore>Tmp0 = Sub(1, Tex0); // Invert black text to white
+Tmp0 = Mul(Tmp0, Tex1); // Apply pixel mask
+Tmp0 = Sub(1, Tmp0); // Invert back to black
+Result = Mul(Tmp0, Color); // Apply black LCD pixels to background
+Emission = Mul(Tmp0, Entity0); // Backlight</shadercore>
+      <transparency mode="opaque"/>
+      <linearshading/>
+      <pbrmetallicworkflow>
+        <basecolor r="0.760784" g="0.85098" b="0.721569"/>
+        <metallic>0</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
+      <rgbgen mode="lighting"/>
+      <texunit>
+        <entity/>
+        <wrap mode="repeat"/>
+        <tcgen mode="base"/>
+      </texunit>
+      <texunit>
+        <map>textures/si_text_panel/pixel_mask.png</map>
+        <tcgen mode="base"/>
+        <tcmod mode="scale" scales="150" scalet="100"/>
+      </texunit>
+    </renderpass>
+  </material>
+</root>
