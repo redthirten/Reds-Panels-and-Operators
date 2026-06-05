@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Siemens LOGO! TDI text panel face plate w/ sparkly specular map.</description>
-    <preview>textures/si_text_panel/panel_face.jpg</preview>
+    <description>Siemens LOGO! text display face plate w/ sparkly specular map.</description>
+    <preview>textures/si_text_display/display_face.jpg</preview>
     <renderpass>
       <shadercore>Result = Mul(Tex0, Color);
 Specular = Tex1;</shadercore>
@@ -14,7 +14,7 @@ Specular = Tex1;</shadercore>
       </custommaterial>
       <rgbgen mode="lighting"/>
       <texunit>
-        <map>textures/si_text_panel/panel_face.jpg</map>
+        <map>textures/si_text_display/display_face.jpg</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>

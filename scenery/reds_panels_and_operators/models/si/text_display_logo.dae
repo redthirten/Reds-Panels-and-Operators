@@ -4,8 +4,8 @@
         <contributor>
             <authoring_tool>SketchUp 17.2.2555</authoring_tool>
         </contributor>
-        <created>2026-06-05T02:34:22Z</created>
-        <modified>2026-06-05T02:34:22Z</modified>
+        <created>2026-06-05T17:43:37Z</created>
+        <modified>2026-06-05T17:43:37Z</modified>
         <unit meter="0.0254" name="inch" />
         <up_axis>Z_UP</up_axis>
     </asset>
@@ -315,10 +315,10 @@
         <material id="ID4" name="housing">
             <instance_effect url="#ID5" />
         </material>
-        <material id="ID12" name="panel_face">
+        <material id="ID12" name="display_face">
             <instance_effect url="#ID13" />
         </material>
-        <material id="ID31" name="panel_screen">
+        <material id="ID31" name="display_screen">
             <instance_effect url="#ID32" />
         </material>
         <material id="ID44" name="plastic_black">
@@ -423,13 +423,13 @@
     </library_effects>
     <library_images>
         <image id="ID14">
-            <init_from>text_panel_logo_tdi/panel_face.jpg</init_from>
+            <init_from>text_display_logo/display_face.jpg</init_from>
         </image>
         <image id="ID33">
-            <init_from>text_panel_logo_tdi/panel_screen.png</init_from>
+            <init_from>text_display_logo/display_screen.png</init_from>
         </image>
         <image id="ID54">
-            <init_from>text_panel_logo_tdi/glass.jpg</init_from>
+            <init_from>text_display_logo/glass.jpg</init_from>
         </image>
     </library_images>
     <scene>

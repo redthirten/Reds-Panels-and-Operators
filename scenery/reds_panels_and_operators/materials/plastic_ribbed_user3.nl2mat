@@ -2,6 +2,7 @@
 <root>
   <material>
     <description>Matte plastic w/ ribbed height map that is recolorable using the User 3 custom defined color.</description>
+    <preview>textures/ribbed_height.png</preview>
     <renderpass>
       <shadercore>Result = Mul(Entity3, 0.12);
 Specular = 0;

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/si/text_panel_logo_tdi.dae"/>
-    <description>Siemens® LOGO! TDI monochrome LCD text panel w/ backlight. Recolorable - Customizable Screen - Functionallity will be added in a future update.</description>
-    <preview>materials/previews/si/Text Panel (LOGO TDI).png</preview>
+    <model path="models/si/text_display_logo.dae"/>
+    <description>Siemens® LOGO! monochrome LCD text display (TDE) w/ backlight. Recolorable - Customizable Screen - Functionallity will be added in a future update.</description>
+    <preview>materials/previews/si/Text Display (LOGO).png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>
@@ -19,8 +19,8 @@
     </usercolor>
     <usertexture>
       <label>Screen (black text on white background):</label>
-      <description>Panel screen image to use.</description>
-      <defaultpath>materials/textures/si_text_panel/panel_screen.png</defaultpath>
+      <description>Image that will appear on display screen.</description>
+      <defaultpath>materials/textures/si_text_display/display_screen.png</defaultpath>
     </usertexture>
     <scriptparameter>
       <type>int</type>
@@ -31,8 +31,8 @@
     </scriptparameter>
     <materialpath name="glass">materials/glass_dirty_transparent.nl2mat</materialpath>
     <materialpath name="housing">materials/plastic_user1.nl2mat</materialpath>
-    <materialpath name="panel_face">materials/si_text_panel_face.nl2mat</materialpath>
-    <materialpath name="panel_screen">materials/si_text_panel_screen.nl2mat</materialpath>
+    <materialpath name="display_face">materials/si_text_display_face.nl2mat</materialpath>
+    <materialpath name="display_screen">materials/si_text_display_screen.nl2mat</materialpath>
     <materialpath name="plastic_black">materials/plastic_black.nl2mat</materialpath>
   </sceneobject>
 </root>

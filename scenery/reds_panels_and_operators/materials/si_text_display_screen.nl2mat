@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Siemens LOGO! TDI text panel screen. Emulates monochrome LCD display, w/ User 0 custom texture for text &amp; User 0 custom color for backlight (emission).</description>
-    <preview>textures/si_text_panel/panel_screen.png</preview>
+    <description>Siemens LOGO! text display screen. Emulates monochrome LCD display, w/ User 0 custom texture for text &amp; User 0 custom color for backlight (emission).</description>
+    <preview>textures/si_text_display/display_screen.png</preview>
     <renderpass>
       <shadercore>Tmp0 = Sub(1, Tex0); // Invert black text to white
 Tmp0 = Mul(Tmp0, Tex1); // Apply pixel mask
@@ -25,7 +25,7 @@ Emission = Mul(Tmp0, Entity0); // Backlight</shadercore>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/si_text_panel/pixel_mask.png</map>
+        <map>textures/si_text_display/pixel_mask.png</map>
         <tcgen mode="base"/>
         <tcmod mode="scale" scales="150" scalet="100"/>
       </texunit>
