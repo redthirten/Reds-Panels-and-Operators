@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <sceneobject>
-    <model path="models/si/text_panel_tdi.dae"/>
+    <model path="models/si/text_panel_logo_tdi.dae"/>
     <description>Siemens® LOGO! TDI monochrome LCD text panel w/ backlight. Recolorable - Customizable Screen - Functionallity will be added in a future update.</description>
     <param basescalex="2"/>
     <param basescaley="2"/>
@@ -32,5 +32,6 @@
     <materialpath name="housing">materials/plastic_user1.nl2mat</materialpath>
     <materialpath name="panel_face">materials/si_text_panel_face.nl2mat</materialpath>
     <materialpath name="panel_screen">materials/si_text_panel_screen.nl2mat</materialpath>
+    <materialpath name="plastic_black">materials/plastic_black.nl2mat</materialpath>
   </sceneobject>
 </root>
