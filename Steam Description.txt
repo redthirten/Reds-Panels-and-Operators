@@ -57,12 +57,19 @@ A !README.html (that you can open in your browser) with details on how to use th
 [hr][/hr]
 [h1]Credits:[/h1]
 [list]
-    [*]Allen-Bradley™ by Rockwell Automation, Inc. -- Operators & Indicators were modeled/textured with love by referencing the iconic products this company manufactures in real life (*This pack and it's contents are in no way associated with, endorsed by, or represent Rockwell Automation, Inc. in any way).
-    [*][url=https://steamcommunity.com/profiles/76561197967797620/myworkshopfiles/?appid=301320]bestdani[/url] -- Some code and a lot of scripting support
-    [*][url=https://steamcommunity.com/profiles/76561198332583014/myworkshopfiles/?appid=301320]Mayor 2018[/url] -- Provided the basis of the demo park; Beta testing and feedback
-    [*]Dustin Sloane -- Weld Bead Height Map Texture
-    [*][url=https://steamcommunity.com/profiles/76561198278741960/myworkshopfiles/?appid=301320]Square Boi[/url] -- Support with 3D Modeling/Scripting
-    [*]LostSoul -- Support with 3D Modeling/Scripting
-    [*]Freddie Ross -- Beta testing and feedback
-    [*]Kevin L. -- Development testing and feedback
+    [*]Rockwell Automation & Siemens — Operators & Indicators were modeled/textured with love by referencing the iconic products these companies manufacture in real life.
+[list]
+    [*]Allen-Bradley, 800T, 856T, and PanelView are registered trademarks of Rockwell Automation, Inc.
+    [*]Siemens, 3SU1, and LOGO! are registered trademarks of Siemens AG.
+    [*]CES is a registered trademark of C. Ed. Schulte GmbH.
+    [*]RONIS is a registered trademark of DOM Ronis SAS.
+    [*]The assets included in this pack are unofficial fan-made recreations and are not affiliated with, endorsed by, or sponsored by these companies.
+[/list]
+    [*][url=https://steamcommunity.com/profiles/76561197967797620/myworkshopfiles/?appid=301320]bestdani[/url] — Some code and a lot of scripting support
+    [*][url=https://steamcommunity.com/profiles/76561198332583014/myworkshopfiles/?appid=301320]Mayor 2018[/url] — Provided the basis of the demo park; Beta testing and feedback
+    [*]Dustin Sloane — Weld Bead Height Map Texture
+    [*][url=https://steamcommunity.com/profiles/76561198278741960/myworkshopfiles/?appid=301320]Square Boi[/url] — Support with 3D Modeling/Scripting
+    [*]LostSoul — Support with 3D Modeling/Scripting
+    [*]Freddie Ross — Beta testing and feedback
+    [*]Kevin L. — Development testing and feedback
 [/list]
