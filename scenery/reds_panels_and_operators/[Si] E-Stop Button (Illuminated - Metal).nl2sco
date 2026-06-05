@@ -7,6 +7,7 @@
       <clip mesh="estop_button" distance="20"/>
     </model>
     <description>Siemens® 3SU1 illuminated E-Stop button w/ metal housing. Recolorable - Scripted - Customizable Placard</description>
+    <preview>materials/previews/si/E-Stop Button (Illuminated - Metal).png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

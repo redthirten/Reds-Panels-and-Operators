@@ -6,6 +6,7 @@
       <clip mesh="pilot" distance="15"/>
     </model>
     <description>Siemens® 3SU1 indicator light. Recolorable - Scripted - Customizable Placard</description>
+    <preview>materials/previews/si/Indicator Light.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

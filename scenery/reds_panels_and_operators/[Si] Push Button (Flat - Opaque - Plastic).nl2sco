@@ -7,6 +7,7 @@
       <clip mesh="button" distance="15"/>
     </model>
     <description>Siemens® 3SU1 flat opaque push button w/ plastic housing. Recolorable - Scripted - Customizable Placard</description>
+    <preview>materials/previews/si/Push Button (Flat - Opaque - Plastic).png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

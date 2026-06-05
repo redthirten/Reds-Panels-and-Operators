@@ -8,6 +8,7 @@
       <clip mesh="keybind_hint" distance="1"/>
     </model>
     <description>Siemens® 3SU1 key switch w/ CES® core &amp; plastic housing. Scripted - Customizable Placard</description>
+    <preview>materials/previews/si/Key Switch (CES - Plastic).png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

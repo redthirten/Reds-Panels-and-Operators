@@ -6,6 +6,7 @@
       <clip mesh="speaker" distance="15"/>
     </model>
     <description>Siemens® 3SU1 acoustic signaling device. Scripted - Customizable Placard</description>
+    <preview>materials/previews/si/Speaker.png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

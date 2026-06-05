@@ -3,6 +3,7 @@
   <sceneobject>
     <model path="models/si/text_panel_logo_tdi.dae"/>
     <description>Siemens® LOGO! TDI monochrome LCD text panel w/ backlight. Recolorable - Customizable Screen - Functionallity will be added in a future update.</description>
+    <preview>materials/previews/si/Text Panel (LOGO TDI).png</preview>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>
