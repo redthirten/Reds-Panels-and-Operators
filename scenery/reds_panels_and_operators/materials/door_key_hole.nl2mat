@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>A brushed metal key hole, with normal map and roughness.</description>
+    <description>A brushed metal key hole, with height map and roughness.</description>
     <preview>textures/key_hole_height.png</preview>
     <renderpass>
       <shadercore>Result = tex0;

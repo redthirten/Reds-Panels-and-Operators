@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>A brushed metal, rusty, or painted bumpy metal texture, with normal map, roughness, and User 2 custom defined color.</description>
+    <description>A brushed metal, orange peel, or rusty metal texture, with normal map, roughness, and User 0 custom defined color.</description>
     <preview>textures/metal_11/Metal011_2K_Color.jpg</preview>
     <renderpass>
       <shadercore>//Specular = Mul(0.4, entity0);

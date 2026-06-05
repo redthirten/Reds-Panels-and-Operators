@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Custom vent texture for the PLC Controller model.</description>
+    <description>Custom vent material for the PLC Controller model.</description>
     <preview>textures/ab_plc_controller/vent_large.jpg</preview>
     <renderpass>
       <transparency mode="opaque"/>

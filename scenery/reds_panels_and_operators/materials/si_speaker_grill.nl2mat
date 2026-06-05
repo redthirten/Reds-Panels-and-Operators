@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Reflective, black colored, plastic with Siemens speaker grill normal map</description>
+    <description>Reflective, black colored, plastic with Siemens speaker grill normal map.</description>
     <preview>textures/si_speaker/speaker_normal.png</preview>
     <renderpass>
       <shadercore>Result = Color;</shadercore>

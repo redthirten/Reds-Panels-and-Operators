@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Siemens opaque button material that is recolorable using the User 2 custom defined color.</description>
+    <description>Siemens E-Stop button top w/ arrows normal map that is recolorable using the User 2 custom defined color.</description>
     <preview>textures/si_button/estop_normal.jpg</preview>
     <renderpass>
       <shadercore>Roughness = Tex0;

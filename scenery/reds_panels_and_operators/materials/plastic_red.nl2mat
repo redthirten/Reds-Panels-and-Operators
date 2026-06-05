@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Matte, red colored, plastic</description>
+    <description>Matte, red colored plastic.</description>
     <renderpass>
       <shadercore>Roughness = 1;</shadercore>
       <transparency mode="opaque"/>

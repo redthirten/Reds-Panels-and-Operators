@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Reflective, black colored, plastic</description>
+    <description>Reflective, black colored plastic</description>
     <preview>intern:data/textures/terrain/SpecularMap.png</preview>
     <renderpass>
       <transparency mode="opaque"/>

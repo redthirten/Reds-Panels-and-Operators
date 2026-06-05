@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
+    <description>Siemens LOGO! TDI text panel face plate w/ sparkly specular map.</description>
     <preview>textures/si_text_panel/panel_face.jpg</preview>
     <renderpass>
       <shadercore>Result = Mul(Tex0, Color);

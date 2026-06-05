@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Matte, black colored, plastic</description>
+    <description>Matte, black colored plastic.</description>
     <preview>intern:data/textures/fx/black.png</preview>
     <renderpass>
       <transparency mode="opaque"/>

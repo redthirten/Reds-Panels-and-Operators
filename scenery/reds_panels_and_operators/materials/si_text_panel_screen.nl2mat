@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
+    <description>Siemens LOGO! TDI text panel screen. Emulates monochrome LCD display, w/ User 0 custom texture for text &amp; User 0 custom color for backlight (emission).</description>
     <preview>textures/si_text_panel/panel_screen.png</preview>
     <renderpass>
       <shadercore>Tmp0 = Sub(1, Tex0); // Invert black text to white

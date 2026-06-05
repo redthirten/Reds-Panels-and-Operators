@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>A brushed metal texture, with normal map, metalness, and roughness.</description>
+    <description>A brushed metal texture, with ribbed height map, metalness, and roughness.</description>
     <preview>textures/metal_11/Metal011_2K_Color.jpg</preview>
     <renderpass>
       <shadercore>Result = tex0;

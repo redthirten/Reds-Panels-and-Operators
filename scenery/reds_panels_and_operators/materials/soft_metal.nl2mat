@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
+    <description>Simple, soft aluminium metal with faked reflections.</description>
     <renderpass>
       <shadercore>Specular = tex0;</shadercore>
       <transparency mode="opaque"/>
