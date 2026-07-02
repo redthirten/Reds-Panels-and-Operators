@@ -65,12 +65,20 @@
     <scriptparameter>
       <type>bool</type>
       <defaultvalue>false</defaultvalue>
+      <id>show_collar</id>
+      <description>In Play Mode, a protective collar around the button will be visible instead of the placard. Its color will be the Placard Background color.</description>
+      <label>Show Protective Collar instead of Placard</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>bool</type>
+      <defaultvalue>false</defaultvalue>
       <id>hide_placard</id>
       <description>Hides the placard during Play Mode.</description>
       <label>Hide Placard</label>
     </scriptparameter>
     <materialpath name="button">materials/si_button_opaque_user2.nl2mat</materialpath>
     <materialpath name="button_top">materials/si_estop_top_user2.nl2mat</materialpath>
+    <materialpath name="collar">materials/plastic_user0_play_only.nl2mat</materialpath>
     <materialpath name="housing">materials/plastic_black.nl2mat</materialpath>
     <materialpath name="indicator">materials/si_ind_light_lens_user2.nl2mat</materialpath>
     <materialpath name="placard_circle_estop">[ Placards ]/placard_circle_estop.nl2mat</materialpath>

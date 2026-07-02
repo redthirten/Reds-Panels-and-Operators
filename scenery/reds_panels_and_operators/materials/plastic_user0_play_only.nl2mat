@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <material>
+    <description>Matte plastic that is recolorable using the User 0 custom defined color and is only visible in Play mode.</description>
+    <renderpass>
+      <shadercore>Result = Mul(Entity0, 0.7);</shadercore>
+      <transparency mode="opaque"/>
+      <linearshading/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
+      <rgbgen mode="lighting"/>
+    </renderpass>
+    <option noeditorrender="true"/>
+  </material>
+</root>

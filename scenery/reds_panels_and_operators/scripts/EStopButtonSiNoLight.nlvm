@@ -1,15 +1,20 @@
 /**
 	Emergency Stop Button [Siemens] (No Light) NL2 Script
 	David Wolfe (Red-Thirten)
-	05/29/2026
+	07/02/2026
 	Extends EStopButton to define custom function list & parameters
 		specific to Siemens E-Stop Buttons with no light.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
 
 import com.nolimitscoaster.SceneObject;
+import com.nolimitscoaster.SceneObjectElement;
+
+import util.SceneObjectTools;
 
 public class EStopButtonSiNoLight extends EStopButton{
+	private String COLLAR_ELEMENT_NAME = "collar";	// Name of the protective collar element in the SCO/model
+	
 	public final bool onInit(){
 		super.SCRIPT_NAME = "EStopButtonSiNoLight";	// Script name for debugging
 		super.BUTTON_ELEMENT_NAME = "estop_button";	// Name of the button element in the SCO/model
@@ -17,7 +22,26 @@ public class EStopButtonSiNoLight extends EStopButton{
 		super.BUTTON_TRAVEL_DIST = 0.00396f;	    // Distance, in meters, the button will travel to be fully "pressed"
 		super.BUTTON_HAS_LIGHT = false;				// True if the button has a pilot light
 		
-		return super.onInit();						// Run the rest of the init code in EStopButton
+		// Run the rest of the init code in EStopButton
+		if (!super.onInit()) return false;
+
+		// Handle protective collar
+		SceneObject sco = SceneObjectTools.getSceneObjectForEntityId(
+			sim,
+			getParentEntityId(),
+			SCRIPT_NAME
+		);
+		SceneObjectElement collar = SceneObjectTools.getElementForName(sco, COLLAR_ELEMENT_NAME, SCRIPT_NAME);
+		SceneObjectElement placard = SceneObjectTools.getElementForName(sco, PLACARD_ELEMENT_NAME, SCRIPT_NAME);
+		if (sco.getBooleanParameter("show_collar").boolValue()){
+			collar.setVisible(true);
+			placard.setVisible(false);
+		}
+		else{
+			collar.setVisible(false);
+		}
+
+		return true;
 	}
 
 	protected int getFuncFromScoParams(SceneObject sco){
