@@ -34,7 +34,7 @@
     </usertexture>
     <script>
       <classpath>scripts</classpath>
-      <class>PushButtonMushroom</class>
+      <class>PushButtonABMushroom</class>
       <sharedvm>true</sharedvm>
       <resource id="LICENSE">LICENSE</resource>
       <resource id="sound_off">sounds/button_out.ogg</resource>

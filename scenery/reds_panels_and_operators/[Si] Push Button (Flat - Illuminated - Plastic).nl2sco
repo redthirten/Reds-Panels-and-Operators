@@ -39,7 +39,7 @@
     </usertexture>
     <script>
       <classpath>scripts</classpath>
-      <class>PushButtonSiemens</class>
+      <class>PushButtonSiFlat</class>
       <sharedvm>true</sharedvm>
       <resource id="LICENSE">LICENSE</resource>
       <resource id="sound_off">sounds/button_out.ogg</resource>

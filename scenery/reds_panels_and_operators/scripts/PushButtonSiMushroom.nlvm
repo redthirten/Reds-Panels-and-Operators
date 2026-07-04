@@ -1,0 +1,14 @@
+/**
+	Push Button [Siemens] (Mushroom) NL2 Script
+	David Wolfe (Red-Thirten)
+	07/04/2026
+	Extends PushButtonSi to define parameters specific to Mushroom Push Buttons.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+public class PushButtonSiMushroom extends PushButtonSi{
+	public PushButtonSiMushroom(){
+		SCRIPT_NAME = "PushButtonSiMushroom";	// Script name for debugging
+		BUTTON_INTERACTION_RADIUS = 0.05f;		// Radius, in meters, of the InteractionObject detection sphere
+	}
+}
