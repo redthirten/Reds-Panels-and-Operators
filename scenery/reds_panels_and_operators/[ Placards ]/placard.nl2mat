@@ -12,6 +12,7 @@ Specular = 0;</shadercore>
       <rgbgen mode="lighting"/>
       <texunit>
         <entity/>
+        <wrap mode="repeat"/>
         <tcgen mode="base"/>
       </texunit>
     </renderpass>
