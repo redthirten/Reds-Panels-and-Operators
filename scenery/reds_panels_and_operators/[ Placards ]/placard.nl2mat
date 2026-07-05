@@ -13,6 +13,7 @@ Specular = 0;</shadercore>
       <texunit>
         <entity/>
         <wrap mode="repeat"/>
+        <forcelineargray/>
         <tcgen mode="base"/>
       </texunit>
     </renderpass>
