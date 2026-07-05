@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <sceneobject>
+    <model path="models/si/text_display_logo.dae"/>
+    <description>Siemens® LOGO! monochrome LCD text display (TDE) w/ backlight. Recolorable - Customizable Screen - Functionallity will be added in a future update.</description>
+    <preview>materials/previews/si/Text Display (LOGO).png</preview>
+    <param basescalex="2"/>
+    <param basescaley="2"/>
+    <param basescalez="2"/>
+    <usercolor>
+      <label>Backlight (Black = Off)</label>
+      <index>0</index>
+      <defaultcolor r="0.431373" g="0.843137" b="0.996078"/>
+    </usercolor>
+    <usercolor>
+      <label>Housing</label>
+      <index>1</index>
+      <defaultcolor r="0.533333" g="0.556863" b="0.627451"/>
+    </usercolor>
+    <usertexture>
+      <label>Screen (black text on white background):</label>
+      <description>Image that will appear on display screen.</description>
+      <defaultpath>materials/textures/si_text_display/display_screen.png</defaultpath>
+    </usertexture>
+    <scriptparameter>
+      <type>int</type>
+      <defaultvalue>0</defaultvalue>
+      <enums>Coming Soon!</enums>
+      <id>function</id>
+      <label>Function:</label>
+    </scriptparameter>
+    <materialpath name="glass">materials/glass_dirty_transparent.nl2mat</materialpath>
+    <materialpath name="housing">materials/plastic_user1.nl2mat</materialpath>
+    <materialpath name="display_face">materials/si_text_display_face.nl2mat</materialpath>
+    <materialpath name="display_screen">materials/si_text_display_screen.nl2mat</materialpath>
+    <materialpath name="plastic_black">materials/plastic_black.nl2mat</materialpath>
+  </sceneobject>
+</root>

@@ -1,0 +1,146 @@
+/**
+	Speaker NL2 Script
+	David Wolfe (Red-Thirten)
+	06/01/2026
+	Handles speaker audio during run time, based on user settings.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+import com.nolimitscoaster.Script;
+import com.nolimitscoaster.SceneObject;
+import com.nolimitscoaster.Block;
+import com.nolimitscoaster.Coaster;
+import com.nolimitscoaster.SpecialTrack;
+
+import obj.Speakers;
+import util.Logger;
+import util.SceneObjectTools;
+import util.SpecialTrackModule;
+
+public class Speaker extends Script{
+	protected String SCRIPT_NAME = "Speaker";	    	// Script name for debugging
+	protected String PLACARD_ELEMENT_NAME = "placard";	// Name of the placard element in the SCO/model
+	
+	// All Speaker Functions:
+	private static final int F_NONE = 0;
+	private static final int F_ESTOP = 1;
+	private static final int F_SPECIAL_TRACK_MOVING = 2;
+	
+	protected Coaster coaster;
+	protected SpecialTrack specialTrack;
+	
+	protected Speakers sound;
+	protected SpecialTrackModule specialTrackModule;
+	
+	protected int func = F_NONE;
+	private bool soundPlayed = false;
+	
+	public bool onInit(){ // On initialization of Play simulation
+		// Get and assign local sco
+		SceneObject sco = SceneObjectTools.getSceneObjectForEntityId(
+			sim,
+			getParentEntityId(),
+			SCRIPT_NAME
+		);
+
+		// Setup Logger
+		Logger log = new Logger(SCRIPT_NAME, sco.getName());
+
+		// Hide placard if configured
+		if ( sco.getBooleanParameter("hide_placard") != null
+				&& sco.getBooleanParameter("hide_placard").boolValue() ){
+			SceneObjectTools.getElementForName(sco, PLACARD_ELEMENT_NAME, SCRIPT_NAME).setVisible(false);
+		}
+		
+		// If set to attach to special track, set up the module object for it
+		// Hacky workaround: This script is also used by light stack, so don't
+		//   create second module if light-stack-only "light1" param found.
+		if ( sco.getSpecialTrackParameter("special_track_attach") != null
+				&& sco.getIntegerParameter("light1") == null ){
+			specialTrackModule = new SpecialTrackModule(sco);
+		}
+		
+		// Get configured function and required parameters
+		func = getFuncFromScoParams(sco);
+		if (func > F_NONE){ // If not None function
+			Block block = sco.getBlockParameter("block");
+			if (block == null){ // Check for un-configured block
+				log.err("Block parameter required for any non-static functions.");
+				return false;
+			}
+			
+			// Get ride details based on block parameter
+			coaster = block.getCoaster();
+		}
+
+		// Function-specific checks and setup
+		switch (func){
+			// Static functions
+			case F_NONE:
+				return false;
+			// Functions that require special track parameter
+			case F_SPECIAL_TRACK_MOVING:
+				specialTrack = sco.getSpecialTrackParameter("special_track");
+				if (specialTrack == null){
+					log.err("The configured function requires the Special Track parameter to be specified.");
+					return false;
+				}
+				break;
+		}
+
+		// Create Speakers (sound) object
+		sound = new Speakers(
+			new SceneObject[] {sco},
+			sco.getResourcePathParameter("sound"),
+			sco.getBooleanParameter("loop_sound").boolValue()
+		);
+		
+		return true; // Everything's just dandy
+	}
+	
+	protected int getFuncFromScoParams(SceneObject sco){
+		/* Get Function from SCO Parameters
+			Returns the proper speaker function number based on the "speaker_function" parameter enumeration.
+		*/
+		if (sco.getIntegerParameter("speaker_function") == null) return 0;
+		
+		return sco.getIntegerParameter("speaker_function").intValue();
+	}
+
+	private void mirrorSoundToState(bool state){
+		/* Mirror Sound to State
+			Plays sound if state is true and stops if false.
+			Can safely be called every frame without worry of duplicate play/stop calls.
+		*/
+		if (state != soundPlayed) {
+			if (state) {
+				sound.play();
+			}
+			else {
+				sound.stop();
+			}
+			soundPlayed = state;
+		}
+	}
+
+	public void onNextFrame(float tick){
+		switch (func){
+			case F_ESTOP:
+				mirrorSoundToState(coaster.isEmergencyStop());
+				break;
+			case F_SPECIAL_TRACK_MOVING:
+				mirrorSoundToState(
+					specialTrack.getSwitchDirection() == -1
+					&& !coaster.isEmergencyStop()
+				); // getSwitchDirection() still reports -1 (moving) when E-Stop is active
+				break;
+		}
+
+		// Update sound's translation
+		sound.updateTranslation();
+		
+		// If set to attach to special track, update translation of SCO
+		if (specialTrackModule != null)
+			specialTrackModule.updateTranslation();
+	}
+}

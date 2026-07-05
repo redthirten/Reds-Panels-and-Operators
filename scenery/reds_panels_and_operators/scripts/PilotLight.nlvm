@@ -1,7 +1,7 @@
 /**
 	Pilot Light NL2 Script
 	David Wolfe (Red-Thirten)
-	06/13/2024
+	06/01/2026
 	Animates the pilot light during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -49,7 +49,6 @@ public class PilotLight extends Script{
 	protected Section section;
 	protected SpecialTrack specialTrack;
 	
-	protected Logger log;
 	protected IndicatorLight light;
 	protected SpecialTrackModule specialTrackModule;
 	
@@ -64,7 +63,7 @@ public class PilotLight extends Script{
 		);
 
 		// Setup Logger
-		log = new Logger(SCRIPT_NAME, sco.getName());
+		Logger log = new Logger(SCRIPT_NAME, sco.getName());
 
 		// Hide placard if configured
 		if ( sco.getBooleanParameter("hide_placard") != null

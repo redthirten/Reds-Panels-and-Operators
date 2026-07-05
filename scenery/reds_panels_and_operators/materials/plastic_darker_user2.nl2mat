@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Matte plastic that is recolorable using the User 2 custom defined color, and is 50% darker.</description>
+    <description>Matte plastic that is recolorable using the User 2 custom defined color, and is 75% darker.</description>
     <renderpass>
       <shadercore>Result = Mul(Entity2, 0.25);
 Specular = 0;

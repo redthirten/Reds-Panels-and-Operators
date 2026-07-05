@@ -1,0 +1,14 @@
+/**
+	Emergency Stop Button [Allen-Bradley] NL2 Script
+	David Wolfe (Red-Thirten)
+	07/04/2026
+	Extends EStopButton to define parameters specific to AB E-Stop Buttons.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+public class EStopButtonAB extends EStopButton{
+	public EStopButtonAB(){
+		SCRIPT_NAME = "EStopButtonAB";			// Script name for debugging
+		BUTTON_INTERACTION_RADIUS = 0.05f;		// Radius, in meters, of the InteractionObject detection sphere
+	}
+}

@@ -1,7 +1,7 @@
 /**
 	Switch NL2 Script
 	David Wolfe (Red-Thirten)
-	02/15/2026
+	05/26/2026
 	Animates the switch during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -220,9 +220,10 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		/* Get Function from SCO Parameters
 			Returns the proper function number based on the "function" parameter enumeration.
 		*/
-		if (sco.getIntegerParameter("function") == null) return 0;
+		Integer funcVal = sco.getIntegerParameter("function");
+		if (funcVal == null) return 0;
 		
-		return sco.getIntegerParameter("function").intValue();
+		return funcVal.intValue();
 	}
 
 	private bool isInteractableFunc(int func){

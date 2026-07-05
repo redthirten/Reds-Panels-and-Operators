@@ -1,7 +1,7 @@
 /**
 	Pilot Light (Stack) NL2 Script
 	David Wolfe (Red-Thirten)
-	03/17/2024
+	06/01/2026
 	Initializes the light stack's lights and animates the pilot lights during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -10,8 +10,6 @@ import com.nolimitscoaster.SceneObject;
 import com.nolimitscoaster.Coaster;
 import com.nolimitscoaster.Train;
 import com.nolimitscoaster.Block;
-import com.nolimitscoaster.StaticSound;
-import nlvm.math3d.Vector3f;
 
 import obj.IndicatorLight;
 import util.SceneObjectTools;
@@ -20,17 +18,12 @@ import util.CoasterTools;
 public class PilotLightStack extends PilotLight{
 	private static final String LIGHT2_ELEMENT_NAME = "light2";		// Name of the right pilot light element in the SCO/model
 	private static final String LIGHT3_ELEMENT_NAME = "light3";		// Name of the bottom pilot light element in the SCO/model
-	private static final Vector3f SPEAKER_LOCATION = new Vector3f(0.f, 0.75f, 0.f);	// Speaker position in the model/SCO, relative to the origin
 		
 	// All Light Stack specific Functions:
 	private static final int F_STATIC = 0;
-
-	private StaticSound soundEmergency;
 	
 	private IndicatorLight light2;
 	private IndicatorLight light3;
-	
-	private bool soundPlayed = false;
 	
 	public bool onInit(){
 		super.SCRIPT_NAME = "LightStack";		// Script name for debugging
@@ -52,18 +45,6 @@ public class PilotLightStack extends PilotLight{
 				BLINK_INTERVAL,
 				!sco.getBooleanParameter("disable_light").boolValue()
 			);
-
-			// Gets and setup E-Stop sound from the parameters, if it exists
-			soundEmergency = StaticSound.loadFromResource(
-				sco.getResourcePathParameter("estop_sound"),
-				StaticSound.FLAG_MIXDOWN_MONO
-			);
-			if (soundEmergency != null){
-				Vector3f speakerLocation = sco.getTranslation(); // Get SCO origin position
-				speakerLocation.add(SPEAKER_LOCATION); // Add the speaker location translation
-				soundEmergency.setPosition(speakerLocation); // Set the sound position to this new location
-				soundEmergency.setDopplerMode(false);
-			}
 			
 			// Additional Function-specific checks and setup
 			switch (func){
@@ -129,11 +110,6 @@ public class PilotLightStack extends PilotLight{
 			light.lightOff();
 			light2.lightOff();
 			light3.lightOn(); // Top light on
-			 // Play E-Stop sound once, if set
-			if (!soundPlayed && soundEmergency != null){
-				soundEmergency.play();
-				soundPlayed = true;
-			}
 		}
 		// Full manual operation mode
 		else if (coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL){
@@ -178,11 +154,6 @@ public class PilotLightStack extends PilotLight{
 					light2.lightOff();
 				}
 			}
-
-			// Reset E-Stop sound when not in E-Stop
-			if (soundPlayed){
-				soundPlayed = false;
-			}
 		}
 		// Train not on section
 		else{
@@ -199,11 +170,6 @@ public class PilotLightStack extends PilotLight{
 			light.lightOff();
 			light2.lightOff();
 			light3.lightOn(); // Top light on
-			 // Play E-Stop sound once, if set
-			if (!soundPlayed && soundEmergency != null){
-				soundEmergency.play();
-				soundPlayed = true;
-			}
 		}
 		else{
 			// Handle block states
@@ -230,11 +196,6 @@ public class PilotLightStack extends PilotLight{
 					light2.lightOff();
 					light3.lightBlink();
 			}
-			
-			// Reset E-Stop sound when not in E-Stop
-			if (soundPlayed){
-				soundPlayed = false;
-			}
 		}
 	}
 	
@@ -244,11 +205,6 @@ public class PilotLightStack extends PilotLight{
 			light.lightOff();
 			light2.lightOff();
 			light3.lightOn(); // Top light on
-			 // Play E-Stop sound once, if set
-			if (!soundPlayed && soundEmergency != null){
-				soundEmergency.play();
-				soundPlayed = true;
-			}
 		}
 		else{
 			// Bottom Light (Special Track can be manually moved)
@@ -274,11 +230,6 @@ public class PilotLightStack extends PilotLight{
 			}
 			else{
 				light3.lightOff();
-			}
-			
-			// Reset E-Stop sound when not in E-Stop
-			if (soundPlayed){
-				soundPlayed = false;
 			}
 		}
 	}

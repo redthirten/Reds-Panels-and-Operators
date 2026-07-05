@@ -1,0 +1,32 @@
+/**
+	Emergency Stop Button [Siemens] (No Light) NL2 Script
+	David Wolfe (Red-Thirten)
+	07/04/2026
+	Extends EStopButtonSi to define custom function list & parameters
+		specific to Siemens E-Stop Buttons with no light.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+import com.nolimitscoaster.SceneObject;
+
+public class EStopButtonSiNoLight extends EStopButtonSi{
+	public EStopButtonSiNoLight(){
+		BUTTON_HAS_LIGHT = false;			// True if the button has a pilot light
+	}
+
+	protected final int getFuncFromScoParams(SceneObject sco){
+		/* Get Function from SCO Parameters
+			Returns the proper function number based on the "function" parameter enumeration.
+		*/
+		if (sco.getIntegerParameter("function") == null) return 0;
+
+		int funcVal = sco.getIntegerParameter("function").intValue();
+		switch (funcVal){
+			case 1: // E-Stop (Simple)
+				return F_ESTOP_SIMPLE;
+			case 2: // E-Stop (Advanced)
+				return F_ESTOP_ADVANCED;
+		}
+		return funcVal;
+	}
+}
