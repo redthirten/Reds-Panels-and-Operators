@@ -39,9 +39,7 @@
       <label>Hide Placard</label>
     </scriptparameter>
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
-    <materialpath name="housing">materials/plastic_golden_yellow.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
     <materialpath name="rivet">materials/rivet.nl2mat</materialpath>
-    <materialpath name="switch">materials/plastic_red.nl2mat</materialpath>
   </sceneobject>
 </root>

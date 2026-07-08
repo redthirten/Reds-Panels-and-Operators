@@ -96,7 +96,6 @@
     <materialpath name="lsr13">materials/lsr13.nl2mat</materialpath>
     <materialpath name="metal">materials/soft_metal.nl2mat</materialpath>
     <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
-    <materialpath name="plastic_golden_yellow">materials/plastic_golden_yellow.nl2mat</materialpath>
     <materialpath name="rivet">materials/screw.nl2mat</materialpath>
     <materialpath name="vent_large">materials/vent_large.nl2mat</materialpath>
     <materialpath name="vented_metal">materials/vented_metal.nl2mat</materialpath>

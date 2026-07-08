@@ -4,11 +4,17 @@
     <description>Vent texture with normal, metallic, and roughness maps.</description>
     <preview>textures/Vent_002/Vent_002_basecolor.jpg</preview>
     <renderpass>
-      <shadercore>Metallic = tex3;
-Roughness = tex2;
-Result = tex0;</shadercore>
+      <shadercore>Result = tex0;
+Metallic = Mul(tex2, 0.5);
+Roughness = Mul(tex3, 2);</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
+      <reflection bump="true" fresnelconst="0" fresnelvar="0"/>
       <rgbgen mode="bumplighting"/>
       <texunit>
         <map>textures/Vent_002/Vent_002_basecolor.jpg</map>
@@ -20,11 +26,11 @@ Result = tex0;</shadercore>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/Vent_002/Vent_002_roughness.jpg</map>
+        <map>textures/Vent_002/Vent_002_metallic.jpg</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/Vent_002/Vent_002_metallic.jpg</map>
+        <map>textures/Vent_002/Vent_002_roughness.jpg</map>
         <tcgen mode="base"/>
       </texunit>
     </renderpass>

@@ -37,8 +37,8 @@
       <label>Special Track to Attach To (Optional):</label>
     </scriptparameter>
     <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
-    <materialpath name="label_op1">[ Labels ]/label.nl2mat</materialpath>
-    <materialpath name="rivet_normal">materials/rivet.nl2mat</materialpath>
-    <materialpath name="rivet_normal_0">materials/rivet.nl2mat</materialpath>
+    <materialpath name="label">[ Labels ]/label.nl2mat</materialpath>
+    <materialpath name="rivet">materials/rivet.nl2mat</materialpath>
+    <materialpath name="rivet_0">materials/rivet.nl2mat</materialpath>
   </sceneobject>
 </root>
