@@ -9,7 +9,7 @@
       <pbrmetallicworkflow>
         <basecolor r="1" g="1" b="1"/>
         <metallic>0</metallic>
-        <roughness>1</roughness>
+        <roughness>0.75</roughness>
       </pbrmetallicworkflow>
       <rgbgen mode="lighting"/>
     </renderpass>

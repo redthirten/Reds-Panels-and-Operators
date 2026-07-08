@@ -4,9 +4,9 @@
     <description>A textured (scratched) black plastic with normal map.</description>
     <preview>textures/Plastic003/Plastic003_Color.jpg</preview>
     <renderpass>
-      <shadercore>Metallic = 0.118; // #1e1c1d (red ch. only used)
-Roughness = Tex1;
-Result = Mul(1.5, Tex0);</shadercore>
+      <shadercore>Result = Mul(1.5, Tex0);
+Metallic = 0.118; // #1e1c1d (red ch. only used)
+Roughness = Tex1;</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
       <pbrmetallicworkflow>

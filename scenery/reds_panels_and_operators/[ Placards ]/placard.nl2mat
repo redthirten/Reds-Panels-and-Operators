@@ -4,14 +4,19 @@
     <description>Plastic placard that uses User Texture. Texture must have black text (will be replaced with Entity color 1) and white background (Entity 0 color).</description>
     <preview>Default.png</preview>
     <renderpass>
-      <shadercore>Result = Lerp(Tex0, Entity0, Entity1);
-Roughness = 1;
-Specular = 0;</shadercore>
+      <shadercore>Result = Lerp(Tex0, Entity0, Entity1);</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
       <rgbgen mode="lighting"/>
       <texunit>
         <entity/>
+        <wrap mode="repeat"/>
+        <forcelineargray/>
         <tcgen mode="base"/>
       </texunit>
     </renderpass>

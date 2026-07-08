@@ -7,6 +7,11 @@
       <transparency mode="cutout"/>
       <alphatest function="ge128"/>
       <linearshading/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
       <rgbgen mode="lighting"/>
       <texunit>
         <map>textures/ab_plc_controller/lsr13.png</map>

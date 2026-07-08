@@ -3,11 +3,14 @@
   <material>
     <description>Matte plastic that is recolorable using the User 1 custom defined color.</description>
     <renderpass>
-      <shadercore>Result = Mul(Entity1, 0.7);
-Specular = 0;
-Roughness = 1;</shadercore>
+      <shadercore>Result = Mul(Entity1, 0.7);</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>0.75</roughness>
+      </pbrmetallicworkflow>
       <rgbgen mode="lighting"/>
     </renderpass>
   </material>

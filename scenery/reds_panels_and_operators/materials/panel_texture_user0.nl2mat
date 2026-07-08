@@ -4,17 +4,17 @@
     <description>A brushed metal, orange peel, or extra rusty metal texture, with normal map, roughness, and User 0 custom defined color.</description>
     <preview>textures/metal_11/Metal011_2K_Color.jpg</preview>
     <renderpass>
-      <shadercore>//Specular = Mul(0.4, entity0);
+      <shadercore>Result = Mul(tex0, entity0);
 Metallic = 0.3;
-Roughness = Mul(tex2,1.5);
-Result = Mul(tex0, entity0);</shadercore>
+Roughness = Mul(tex2, 1.5);</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
-      <custommaterial>
-        <specular r="0.623529" g="0.639216" b="0.654902"/>
-        <shininess exponent="42.3385"/>
-      </custommaterial>
-      <reflection bump="true" fresnelconst="0.3" fresnelvar="0.3"/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0.3</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
+      <reflection bump="true" fresnelconst="0" fresnelvar="0"/>
       <rgbgen mode="bumplighting"/>
       <texunit>
         <animmap frequency="0">

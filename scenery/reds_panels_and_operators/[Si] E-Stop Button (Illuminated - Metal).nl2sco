@@ -27,6 +27,11 @@
       <lightsources>light</lightsources>
       <defaultcolor r="0.894118" g="0.141176" b="0.113725"/>
     </usercolor>
+    <usertexture>
+      <label>Placard:</label>
+      <description>Placard text image to use. Can be custom, but must be black text with white background.</description>
+      <defaultpath>[ Placards ]/[Button] Emergency Stop (Circle).png</defaultpath>
+    </usertexture>
     <script>
       <classpath>scripts</classpath>
       <class>EStopButtonSi</class>
@@ -81,7 +86,7 @@
     <materialpath name="collar">materials/plastic_user0_play_only.nl2mat</materialpath>
     <materialpath name="housing">materials/metal.nl2mat</materialpath>
     <materialpath name="indicator">materials/si_ind_light_lens_user2.nl2mat</materialpath>
-    <materialpath name="placard_circle_estop">[ Placards ]/placard_circle_estop.nl2mat</materialpath>
+    <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
     <materialpath name="plastic_black">materials/plastic_black.nl2mat</materialpath>
     <lightsource range="0.5" intensity="1" type="point">
       <name>light</name>
