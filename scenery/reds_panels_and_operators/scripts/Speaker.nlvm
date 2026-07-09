@@ -21,7 +21,7 @@ public class Speaker extends Script{
 	protected String SCRIPT_NAME = "Speaker";	    	// Script name for debugging
 	protected String PLACARD_ELEMENT_NAME = "placard";	// Name of the placard element in the SCO/model
 	
-	// All Speaker Functions:
+	// [Enum] Speaker Functions:
 	private static final int F_NONE = 0;
 	private static final int F_ESTOP = 1;
 	private static final int F_SPECIAL_TRACK_MOVING = 2;

@@ -1,7 +1,7 @@
 /**
 	Pilot Light NL2 Script
 	David Wolfe (Red-Thirten)
-	06/01/2026
+	07/09/2026
 	Animates the pilot light during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -27,7 +27,7 @@ public class PilotLight extends Script{
 	protected String PLACARD_ELEMENT_NAME = "placard";	// Name of the placard element in the SCO/model
 	protected float BLINK_INTERVAL = 0.5f;				// Interval, in seconds, of the pilot light changing states when blinking
 	
-	// All Pilot Light Functions:
+	// [Enum] Pilot Light Functions:
 	private static final int F_STATIC_OFF = 0;
 	private static final int F_STATIC_ON = 1;
 	protected static final int F_STATIC_BLINK = 2;
@@ -102,11 +102,13 @@ public class PilotLight extends Script{
 		switch (func){
 			// Static functions
 			case F_STATIC_OFF:
+				light.lightOff();
+				return false;
 			case F_STATIC_ON:
-				handleStaticFunc(sco);
+				light.lightOn();
 				return false;
 			case F_STATIC_BLINK:
-				handleStaticFunc(sco);
+				light.lightBlink();
 				break;
 			// Functions that require station section
 			case F_PLATFORM:
@@ -150,21 +152,7 @@ public class PilotLight extends Script{
 		return sco.getIntegerParameter("function").intValue();
 	}
 	
-	private void handleStaticFunc(SceneObject sco){
-		// Sets the light's state, based on function
-		switch (func){
-			case F_STATIC_ON:
-				light.lightOn();
-				break;
-			case F_STATIC_BLINK:
-				light.lightBlink();
-				break;
-			default:
-				light.lightOff();
-		}
-	}
-	
-	private void handleBlockIndicatorFunc(){
+	private void doBlockIndicatorFunc(){
 		if (coaster.isEmergencyStop()){
 			light.lightOff();
 		}
@@ -184,7 +172,7 @@ public class PilotLight extends Script{
 		}
 	}
 	
-	private void handleDispatchFunc(){
+	private void doDispatchFunc(){
 		Train train = section.getTrainOnSection();
 		// Train on section
 		if (!coaster.isEmergencyStop() && train != null){
@@ -210,7 +198,7 @@ public class PilotLight extends Script{
 		}
 	}
 	
-	private void handlePlatformFunc(){
+	private void doPlatformFunc(){
 		Train train = section.getTrainOnSection();
 		// Train stopped in station
 		if ( !coaster.isEmergencyStop()
@@ -235,7 +223,7 @@ public class PilotLight extends Script{
 		}
 	}
 
-	private void handleSpecialTrackFunc(){
+	private void doSpecialTrackFunc(){
 		// E-stopped
 		if (coaster.isEmergencyStop())
 			light.lightOff();
@@ -249,7 +237,7 @@ public class PilotLight extends Script{
 			light.lightOff();
 	}
 	
-	private void handleEStopFunc(){
+	private void doEStopFunc(){
 		if (coaster.isEmergencyStop()){
 			switch(func){
 				case F_ESTOP_OFF_TO_BLINK:
@@ -276,7 +264,7 @@ public class PilotLight extends Script{
 		}
 	}
 	
-	private void handleBlockSystemModeFunc(){
+	private void doBlockSystemModeFunc(){
 		int targetMode = 0;
 		switch (func){
 			case F_AUTOMATIC_OP:
@@ -301,27 +289,27 @@ public class PilotLight extends Script{
 	public void onNextFrame(float tick){
 		switch (func){
 			case F_BLOCK_IND:
-				handleBlockIndicatorFunc();
+				doBlockIndicatorFunc();
 				break;
 			case F_DISPATCH:
-				handleDispatchFunc();
+				doDispatchFunc();
 				break;
 			case F_PLATFORM:
-				handlePlatformFunc();
+				doPlatformFunc();
 				break;
 			case F_SPECIAL_TRACK:
-				handleSpecialTrackFunc();
+				doSpecialTrackFunc();
 				break;
 			case F_ESTOP_OFF_TO_BLINK:
 			case F_ESTOP_BLINK_TO_OFF:
 			case F_ESTOP_OFF_TO_ON:
 			case F_ESTOP_ON_TO_OFF:
-				handleEStopFunc();
+				doEStopFunc();
 				break;
 			case F_AUTOMATIC_OP:
 			case F_SEMI_MAN_OP:
 			case F_FULL_MAN_OP:
-				handleBlockSystemModeFunc();
+				doBlockSystemModeFunc();
 				break;
 		}
 
