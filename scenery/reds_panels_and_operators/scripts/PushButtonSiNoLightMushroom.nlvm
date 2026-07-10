@@ -1,13 +1,13 @@
 /**
 	Push Button [Siemens] (No Light - Mushroom) NL2 Script
 	David Wolfe (Red-Thirten)
-	07/04/2026
+	07/10/2026
 	Extends PushButtonSiNoLight to define parameters specific to Mushroom Push Buttons.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
 
-public class PushButtonSiNoLightMushroom extends PushButtonSiNoLight{
-	public PushButtonSiNoLightMushroom(){
+public final class PushButtonSiNoLightMushroom extends PushButtonSiNoLight{
+	PushButtonSiNoLightMushroom(){
 		SCRIPT_NAME = "PushButtonSiNoLightMushroom";	// Script name for debugging
 		BUTTON_INTERACTION_RADIUS = 0.05f;				// Radius, in meters, of the InteractionObject detection sphere
 	}

@@ -1,7 +1,7 @@
 /**
 	Emergency Stop Button NL2 Script
 	David Wolfe (Red-Thirten)
-	07/04/2026
+	07/10/2026
 	Extends PushButton to define custom parameters & function list specific to E-Stop Buttons.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -9,7 +9,7 @@
 import com.nolimitscoaster.SceneObject;
 
 public class EStopButton extends PushButton{
-	public EStopButton(){
+	EStopButton(){
 		SCRIPT_NAME = "EStopButton";			// Script name for debugging
 		BUTTON_ELEMENT_NAME = "estop_button";	// Name of the button element in the SCO/model
 		BUTTON_TRAVEL_TIME = 0.2f;				// Time, in seconds, for the button to travel in and out ("speed")

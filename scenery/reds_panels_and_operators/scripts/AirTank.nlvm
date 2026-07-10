@@ -1,0 +1,14 @@
+/**
+	Air Tank NL2 Script
+	David Wolfe (Red-Thirten)
+	07/10/2026
+	Extends Textured Scene Object.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+public final class AirTank extends TexturedSceneObject{
+	AirTank(){
+		SCRIPT_NAME = "AirTank";			// Script name for debugging
+		MAIN_ELEMENT_NAME = "air_tank";		// Name of the main element in the SCO/model
+	}
+}

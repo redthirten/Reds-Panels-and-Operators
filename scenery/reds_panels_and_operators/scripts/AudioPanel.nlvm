@@ -1,39 +1,32 @@
 /**
 	Audio Panel NL2 Script
 	David Wolfe (Red-Thirten)
-	03/05/2024
-	Extends Main Panel. Will texture the audio panel and/or hide the mounts, based on user settings.
+	07/10/2026
+	Extends Textured Scene Object. Hides the additional mount, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
 
-import com.nolimitscoaster.SceneObject;
-
 import util.SceneObjectTools;
 
-public class AudioPanel extends MainPanel{
+public final class AudioPanel extends TexturedSceneObject{
 	private static final String MOUNT_ELEMENT_NAME = "mount";	// Name of the mount element in the SCO/model
+
+	AudioPanel(){
+		SCRIPT_NAME = "AudioPanel";		// Script name for debugging
+		MAIN_ELEMENT_NAME = "panel";	// Name of the main element in the SCO/model
+	}
 	
-	public final bool onInit(){ // Custom init
-		super.SCRIPT_NAME = "AudioPanel";	// Script name for debugging
-		
-		// Get and assign local sco
-		SceneObject sco = SceneObjectTools.getSceneObjectForEntityId(
-			sim,
-			getParentEntityId(),
-			SCRIPT_NAME
-		);;
-		
+	public final bool onInit(){ // Addl init
+		// Run parent init
+		bool superInit = super.onInit();
+
 		// Hide mount if configured
-		if ( sco.getBooleanParameter("hide_mount").boolValue() ){
-			SceneObjectTools.getElementForName(sco, MOUNT_ELEMENT_NAME, SCRIPT_NAME).setVisible(false);
-		}
-		
-		// Set texture based on parameters
-		setTextureFromScoParams(
-			sco,
-			SceneObjectTools.getElementForName(sco, PANEL_ELEMENT_NAME, SCRIPT_NAME)
+		doElemHideIfTrue(
+			getSco(),
+			SceneObjectTools.getElementForName(getSco(), MOUNT_ELEMENT_NAME, SCRIPT_NAME),
+			"hide_mount"
 		);
 		
-		return false; // Prevent unused onNextFrame() from running
+		return superInit;
 	}
 }

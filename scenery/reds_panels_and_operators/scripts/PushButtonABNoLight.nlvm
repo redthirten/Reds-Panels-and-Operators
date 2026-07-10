@@ -1,7 +1,7 @@
 /**
 	Push Button [Allen-Bradley] (No Light) NL2 Script
 	David Wolfe (Red-Thirten)
-	07/04/2026
+	07/10/2026
 	Extends PushButtonAB to define custom function list & parameters
 		specific to Push Buttons without a light.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
@@ -9,8 +9,8 @@
 
 import com.nolimitscoaster.SceneObject;
 
-public class PushButtonABNoLight extends PushButtonAB{
-	public PushButtonABNoLight(){
+public final class PushButtonABNoLight extends PushButtonAB{
+	PushButtonABNoLight(){
 		SCRIPT_NAME = "PushButtonABNoLight";	// Script name for debugging
 		BUTTON_TRAVEL_DIST = 0.005f;			// Distance, in meters, the button will travel to be fully "pressed"
 		BUTTON_HAS_LIGHT = false;				// True if the button has a pilot light

@@ -72,7 +72,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	private int trainsLashedToTrack;
 	private float binaryState = 0.f; // Helps determine if a "binary" state starts to change to the other value (ie. gates start to close, vice-versa, etc)
 	
-	public bool onInit(){ // On initialization of Play simulation
+	public final bool onInit(){ // On initialization of Play simulation
 		// Get and assign local sco
 		SceneObject sco = SceneObjectTools.getSceneObjectForEntityId(
 			sim,
@@ -536,7 +536,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		}
 	}
 	
-	public void onNextFrame(float tick){
+	public final void onNextFrame(float tick){
 		/*if (Button.isPressed(Button.FLY_SLOWER)){ //DEBUGGING
 			operatorSwitch.setSwitchState(0);
 		}
@@ -560,7 +560,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 			iObj.setPosition(operatorSwitch.getAbsoluteTranslation());
 	}
 
-	public void onInteractionAction(InteractionObject obj){
+	public final void onInteractionAction(InteractionObject obj){
 		doFunc(true);
 	}
 }

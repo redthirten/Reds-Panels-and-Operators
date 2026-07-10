@@ -13,7 +13,7 @@
     </usercolor>
     <script>
       <classpath>scripts</classpath>
-      <class>ElectricalBoxAir</class>
+      <class>AirTank</class>
       <sharedvm>true</sharedvm>
       <resource id="LICENSE">LICENSE</resource>
     </script>

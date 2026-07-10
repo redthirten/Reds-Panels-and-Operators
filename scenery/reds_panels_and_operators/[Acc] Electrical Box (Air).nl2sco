@@ -32,10 +32,17 @@
     </usercolor>
     <script>
       <classpath>scripts</classpath>
-      <class>ElectricalBoxAir</class>
+      <class>ElectricalBox</class>
       <sharedvm>true</sharedvm>
       <resource id="LICENSE">LICENSE</resource>
     </script>
+    <scriptparameter>
+      <type>bool</type>
+      <defaultvalue>false</defaultvalue>
+      <id>hide_pipe</id>
+      <description>Will hide the wires attached to the panel. (Not visible in editor)</description>
+      <label>Hide Wires</label>
+    </scriptparameter>
     <scriptparameter>
       <type>specialtrack</type>
       <id>special_track_attach</id>

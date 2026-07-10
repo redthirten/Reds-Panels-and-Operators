@@ -1,7 +1,7 @@
 /**
-	Push Button NL2 Script
+	Push Button NL2 Abstract Script
 	David Wolfe (Red-Thirten)
-	07/09/2026
+	07/10/2026
 	Animates the pilot light and button during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -25,7 +25,7 @@ import util.SceneObjectTools;
 import util.CoasterTools;
 import util.SpecialTrackModule;
 
-public class PushButton extends Script implements InteractionActionListener{
+public abstract class PushButton extends Script implements InteractionActionListener{
 	protected String SCRIPT_NAME = "PushButton";						// Script name for debugging
 	protected String BUTTON_ELEMENT_NAME = "button";					// Name of the button element in the SCO/model
 	protected String PLACARD_ELEMENT_NAME = "placard";					// Name of the placard element in the SCO/model
@@ -913,7 +913,7 @@ public class PushButton extends Script implements InteractionActionListener{
 	
 	// Frame & Interaction Functions //
 
-	public void onNextFrame(float tick){
+	public final void onNextFrame(float tick){
 		/*if (Button.isPressed(Button.ACTION)){ //DEBUGGING
 			button.buttonIn();
 		}
@@ -934,7 +934,7 @@ public class PushButton extends Script implements InteractionActionListener{
 			iObj.setPosition(button.getAbsoluteTranslation());
 	}
 
-	public void onInteractionAction(InteractionObject obj){
+	public final void onInteractionAction(InteractionObject obj){
 		if (enabled){
 			doFunc(true);
 		}

@@ -1,7 +1,7 @@
 /**
 	Emergency Stop Button [Siemens] (No Light) NL2 Script
 	David Wolfe (Red-Thirten)
-	07/04/2026
+	07/10/2026
 	Extends EStopButtonSi to define custom function list & parameters
 		specific to Siemens E-Stop Buttons with no light.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
@@ -9,8 +9,8 @@
 
 import com.nolimitscoaster.SceneObject;
 
-public class EStopButtonSiNoLight extends EStopButtonSi{
-	public EStopButtonSiNoLight(){
+public final class EStopButtonSiNoLight extends EStopButtonSi{
+	EStopButtonSiNoLight(){
 		BUTTON_HAS_LIGHT = false;			// True if the button has a pilot light
 	}
 

@@ -1,60 +1,39 @@
 /**
-	Electrical Panel Initialization NL2 Script
+	Electrical Panel NL2 Script
 	David Wolfe (Red-Thirten)
-	03/12/2024
-	Initializes the electrical panel's texture, mount, and electrical conduit based on user settings.
+	07/10/2026
+	Extends Textured Scene Object. Hides the additional mount & conduit, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
 
-import com.nolimitscoaster.SceneObject;
-
 import util.SceneObjectTools;
-import util.SpecialTrackModule;
 
-public class ElectricalPanel extends MainPanel{
+public class ElectricalPanel extends TexturedSceneObject{
 	protected String MOUNT_ELEMENT_NAME = "mount";		// Name of the mount element in the SCO/model
 	protected String CONDUIT_ELEMENT_NAME = "pipe";		// Name of the conduit element in the SCO/model
-	
-	protected SpecialTrackModule specialTrackModule;
-	
-	public bool onInit(){ // Custom init
-		super.SCRIPT_NAME = "ElectricalPanel";		// Script name for debugging
 
-		// Get and assign local sco
-		SceneObject sco = SceneObjectTools.getSceneObjectForEntityId(
-			sim,
-			getParentEntityId(),
-			SCRIPT_NAME
-		);
-
-		// Set the texture chosen by the SCO parameters to the element by given name
-		setTextureFromScoParams(
-			sco,
-			SceneObjectTools.getElementForName(sco, PANEL_ELEMENT_NAME, SCRIPT_NAME)
-		);
-		
-		// Determine if the mount should be hidden
-		if (sco.getBooleanParameter("hide_mount").boolValue()){
-			SceneObjectTools.getElementForName(sco, MOUNT_ELEMENT_NAME, SCRIPT_NAME).setVisible(false);
-		}
-		// Determine if the pipe should be hidden
-		if (sco.getBooleanParameter("hide_pipe").boolValue()){
-			SceneObjectTools.getElementForName(sco, CONDUIT_ELEMENT_NAME, SCRIPT_NAME).setVisible(false);
-		}
-		
-		// If set to attach to special track, set up the module object for it
-		if (sco.getSpecialTrackParameter("special_track_attach") != null){
-			specialTrackModule = new SpecialTrackModule(sco);
-			return true;
-		}
-		else{
-			return false; // Prevent unused onNextFrame() from running
-		}
+	ElectricalPanel(){
+		SCRIPT_NAME = "ElectricalPanel";	// Script name for debugging
+		MAIN_ELEMENT_NAME = "panel";		// Name of the main element in the SCO/model
 	}
 	
-	public void onNextFrame(float tick){
-		// If set to attach to special track, update translation of SCO
-		if (specialTrackModule != null)
-			specialTrackModule.updateTranslation();
+	public final bool onInit(){ // Addl init
+		// Run parent init
+		bool superInit = super.onInit();
+		
+		// Hide mount if configured
+		doElemHideIfTrue(
+			getSco(),
+			SceneObjectTools.getElementForName(getSco(), MOUNT_ELEMENT_NAME, SCRIPT_NAME),
+			"hide_mount"
+		);
+		// Hide pipe if configured
+		doElemHideIfTrue(
+			getSco(),
+			SceneObjectTools.getElementForName(getSco(), CONDUIT_ELEMENT_NAME, SCRIPT_NAME),
+			"hide_pipe"
+		);
+		
+		return superInit;
 	}
 }

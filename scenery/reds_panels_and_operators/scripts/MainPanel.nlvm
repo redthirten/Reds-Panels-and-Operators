@@ -1,57 +1,42 @@
 /**
 	Main Panel NL2 Script
 	David Wolfe (Red-Thirten)
-	03/05/2024
-	Will texture the main panel and/or hide the audio panel, based on user settings.
+	07/10/2026
+	Extends Textured Scene Object. Hides or textures the additional audio panel (if present), based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
 
-import com.nolimitscoaster.Script;
-import com.nolimitscoaster.SceneObject;
 import com.nolimitscoaster.SceneObjectElement;
 
 import util.SceneObjectTools;
 
-public class MainPanel extends Script{
-	protected String SCRIPT_NAME = "MainPanel";					// Script name for debugging
-	protected String PANEL_ELEMENT_NAME = "panel";				// Name of the panel element in the SCO/model
+public final class MainPanel extends TexturedSceneObject{
 	private static final String AUDIO_PANEL_ELEMENT_NAME = "audio_panel";	// Name of the audio panel element in the SCO/model
-	
-	public bool onInit(){ // On initialization of Play simulation
-		// Get and assign local sco
-		SceneObject sco = SceneObjectTools.getSceneObjectForEntityId(
-			sim,
-			getParentEntityId(),
-			SCRIPT_NAME
-		);
-		
-		if ( sco.getBooleanParameter("hide_audio_panel") != null ){
-			// Hide the audio panel if requested. Otherwise, texture it based on parameters
-			if ( sco.getBooleanParameter("hide_audio_panel").boolValue() ){
-				SceneObjectTools.getElementForName(sco, AUDIO_PANEL_ELEMENT_NAME, SCRIPT_NAME).setVisible(false);
-			}
-			else{
-				setTextureFromScoParams(
-					sco,
-					SceneObjectTools.getElementForName(sco, AUDIO_PANEL_ELEMENT_NAME, SCRIPT_NAME)
-				);
-			}
-		}
-		
-		// Set the texture of the main panel based on parameters
-		setTextureFromScoParams(
-			sco,
-			SceneObjectTools.getElementForName(sco, PANEL_ELEMENT_NAME, SCRIPT_NAME)
-		);
-		
-		return false; // Prevent unused onNextFrame() from running
+
+	MainPanel(){
+		SCRIPT_NAME = "MainPanel";		// Script name for debugging
+		MAIN_ELEMENT_NAME = "panel";	// Name of the main element in the SCO/model
 	}
 	
-	protected void setTextureFromScoParams(SceneObject sco, SceneObjectElement element){
-		/* Set Texture from SCO Params
-			Sets the texture based on "texture" parameter enumeration choice.
-		*/
-		int texIndex = sco.getIntegerParameter("texture").intValue();
-		element.setTextureAnimationIndex(texIndex);
+	public final bool onInit(){ // Addl init
+		// Run parent init
+		bool superInit = super.onInit();
+		
+		// Set audio panel visibility & texture based on parameters
+		SceneObjectElement audioPanelElem = getSco().getElementForName(AUDIO_PANEL_ELEMENT_NAME);
+		if (audioPanelElem == null){
+			// Some main panels don't have audio panels, so return early if so
+			return superInit;
+		}
+		bool panelHidden = doElemHideIfTrue(
+			getSco(),
+			audioPanelElem,
+			"hide_audio_panel"
+		);
+		if (!panelHidden){
+			setTextureFromScoParam(getSco(), audioPanelElem);
+		}
+		
+		return superInit;
 	}
 }
