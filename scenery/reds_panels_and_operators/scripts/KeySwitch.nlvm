@@ -66,7 +66,7 @@ public final class KeySwitch extends SwitchOperator{
 		// Determine totalStates and keyDefaultOutPos based on Function
 		int totalStates, keyDefaultOutPos;
 		switch (func){
-			case F_STATIC:
+			case F_NONE:
 				totalStates = 2;
 				keyDefaultOutPos = (sco.getBooleanParameter("none_func_keep_key_inserted").boolValue()) ? totalStates : -1;
 				break;

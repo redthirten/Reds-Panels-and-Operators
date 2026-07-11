@@ -43,7 +43,7 @@
     <scriptparameter>
       <type>blocksection</type>
       <id>block</id>
-      <description>This is the block that this speaker will be assigned to for all Non-Static Functions.</description>
+      <description>Specifies the block that active Functions will use for this speaker.</description>
       <label>Block Location:</label>
     </scriptparameter>
     <scriptparameter>

@@ -49,7 +49,7 @@
     <scriptparameter>
       <type>blocksection</type>
       <id>block</id>
-      <description>This is the block that this operator will be assigned to for all Non-Static Functions.</description>
+      <description>Specifies the block that active Functions will use for this operator.</description>
       <label>Block Location:</label>
     </scriptparameter>
     <scriptparameter>
@@ -75,7 +75,7 @@
       <type>double</type>
       <defaultvalue>45</defaultvalue>
       <id>end_angle</id>
-      <description>Relative to straight up (0 deg). Used for all non-static Functions.</description>
+      <description>Relative to straight up (0 deg). Used for all active Functions.</description>
       <label>End Angle:</label>
     </scriptparameter>
     <scriptparameter>

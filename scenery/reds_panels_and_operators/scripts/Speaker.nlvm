@@ -62,10 +62,10 @@ public class Speaker extends Script{
 		
 		// Get configured function and required parameters
 		func = getFuncFromScoParams(sco);
-		if (func > F_NONE){ // If not None function
+		if (func > F_NONE){ // If active function
 			Block block = sco.getBlockParameter("block");
 			if (block == null){ // Check for un-configured block
-				log.err("Block parameter required for any non-static functions.");
+				log.err("Block Location must be set to use this Function.");
 				return false;
 			}
 			
@@ -75,7 +75,7 @@ public class Speaker extends Script{
 
 		// Function-specific checks and setup
 		switch (func){
-			// Static functions
+			// None function
 			case F_NONE:
 				return false;
 			// Functions that require special track parameter

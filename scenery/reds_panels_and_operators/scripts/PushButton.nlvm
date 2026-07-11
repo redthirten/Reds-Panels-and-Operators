@@ -40,9 +40,9 @@ public abstract class PushButton extends Script implements InteractionActionList
 	protected bool BUTTON_HAS_LIGHT = true;								// True if the button has a pilot light
 
 	// [Enum] Button Functions:
-	protected static final int F_STATIC_OFF = 0;
-	protected static final int F_STATIC_ON = 1;
-	protected static final int F_STATIC_BLINK = 2;
+	protected static final int F_NONE_OFF = 0;
+	protected static final int F_NONE_ON = 1;
+	protected static final int F_NONE_BLINK = 2;
 	protected static final int F_BLOCK_FWD = 3;
 	protected static final int F_BLOCK_BWD = 4;
 	protected static final int F_DISPATCH = 5;
@@ -98,7 +98,7 @@ public abstract class PushButton extends Script implements InteractionActionList
 	private IndicatorLight plcIndicatorLight;
 	private Speakers speakers;
 	
-	private int func = F_STATIC_OFF;
+	private int func = F_NONE_OFF;
 	private int frameCounter = 5; // Stupid workaround for Dispatch Function where NL2 bug can sometimes report moving train speed as 0
 	private float binaryState = 0.f; // Helps determine if a "binary" state starts to change to the other value (ie. restraints start to close, vice-versa, etc)
 	private bool enabled = false;
@@ -126,10 +126,10 @@ public abstract class PushButton extends Script implements InteractionActionList
 		
 		// Get configured function and required parameters
 		func = getFuncFromScoParams(sco);
-		if (func > F_STATIC_BLINK && func != F_PLAY_SOUND){ // If not static or Play Sound functions
+		if (func > F_NONE_BLINK && func != F_PLAY_SOUND){ // If not none or Play Sound functions
 			block = sco.getBlockParameter("block");
 			if (block == null){ // Check for un-configured block
-				log.err("Block parameter required for any non-static functions.");
+				log.err("Block Location must be set to use this Function.");
 				return false;
 			}
 			
@@ -161,14 +161,14 @@ public abstract class PushButton extends Script implements InteractionActionList
 		// Function-specific checks and setup
 		SceneObject plc = null;
 		switch (func){
-			// Static functions
-			case F_STATIC_OFF:
+			// None functions
+			case F_NONE_OFF:
 				button.lightOff();
 				break;
-			case F_STATIC_ON:
+			case F_NONE_ON:
 				button.lightOn();
 				break;
-			case F_STATIC_BLINK:
+			case F_NONE_BLINK:
 				button.lightBlink();
 				break;
 			// Functions that require station section
@@ -312,7 +312,7 @@ public abstract class PushButton extends Script implements InteractionActionList
 			iObj.setRadius(BUTTON_INTERACTION_RADIUS);
 			iObj.setProcessActionEventsWhenDisabled(true);
 			iObj.addActionListener(this);
-			if (func <= F_STATIC_BLINK) iObj.setEnabled(false);
+			if (func <= F_NONE_BLINK) iObj.setEnabled(false);
 		}
 		
 		return true; // Everything's just dandy
@@ -356,7 +356,7 @@ public abstract class PushButton extends Script implements InteractionActionList
 
 	// Interactable Functions //
 	
-	private void doStaticFunc(bool doAction){
+	private void doNoneFunc(bool doAction){
 		if (doAction){
 			button.buttonPush();
 		}
@@ -907,7 +907,7 @@ public abstract class PushButton extends Script implements InteractionActionList
 				doResetCoasterFunc(doAction);
 				break;
 			default:
-				doStaticFunc(doAction);
+				doNoneFunc(doAction);
 		}
 	}
 	

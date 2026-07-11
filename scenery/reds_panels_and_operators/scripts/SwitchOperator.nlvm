@@ -35,7 +35,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	private static final float SUN_ELEVATION_LIMIT = 0.4f;			// 0.4 radians is the default sun angle limit for lights to turn on and off
 	
 	// [Enum] Switch Functions:
-	protected static final int F_STATIC = 0;
+	protected static final int F_NONE = 0;
 	protected static final int F_RESTRAINTS = 1;
 	protected static final int F_GATES = 2;
 	protected static final int F_PLATFORM = 3;
@@ -99,10 +99,10 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		
 		// Get configured function and required parameters
 		func = getFuncFromScoParams(sco);
-		if (func > F_STATIC){ // If not static function
+		if (func > F_NONE){ // If active function
 			block = sco.getBlockParameter("block");
 			if (block == null){ // Check for un-configured block
-				log.err("Block parameter required for any non-static functions.");
+				log.err("Block Location must be set to use this Function.");
 				return false;
 			}
 			
@@ -229,7 +229,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	}
 
 	private bool isInteractableFunc(int func){
-		if (func == F_STATIC && operatorSwitch.isStatic()) // None function w/o rotation
+		if (func == F_NONE && operatorSwitch.isStatic()) // None function w/o rotation
 			return false;
 		for (int i = 0; i < NON_INTERACT_FUNCS.length; i++){
 			if (func == NON_INTERACT_FUNCS[i])
@@ -240,7 +240,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 
 	// Interactable Functions //
 
-	private void doStaticFunc(bool doAction){
+	private void doNoneFunc(bool doAction){
 		if (doAction){
 			operatorSwitch.toggleSwitch();
 		}
@@ -532,7 +532,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 				doResetCoasterFunc(doAction);
 				break;
 			default:
-				doStaticFunc(doAction);
+				doNoneFunc(doAction);
 		}
 	}
 	

@@ -53,8 +53,8 @@
     <scriptparameter>
       <type>blocksection</type>
       <id>block</id>
-      <description>This is the block that this operator will be assigned to for all Non-Static Modes.</description>
-      <label>Block Location (for all Non-Static Modes):</label>
+      <description>Specifies the block that active Functions will use for this operator.</description>
+      <label>Block Location:</label>
     </scriptparameter>
     <scriptparameter>
       <type>specialtrack</type>

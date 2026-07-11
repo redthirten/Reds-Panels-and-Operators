@@ -20,7 +20,7 @@ public class PilotLightStack extends PilotLight{
 	private static final String LIGHT3_ELEMENT_NAME = "light3";		// Name of the bottom pilot light element in the SCO/model
 		
 	// [Enum] Light Stack SPECIFIC Functions:
-	private static final int F_STATIC = 0;
+	private static final int F_NONE = 0;
 	
 	private IndicatorLight light2;
 	private IndicatorLight light3;
@@ -50,8 +50,8 @@ public class PilotLightStack extends PilotLight{
 		
 		// Additional Function-specific checks and setup
 		switch (func){
-			case F_STATIC_BLINK: // None/Static
-				return doStaticFunc(
+			case F_NONE_BLINK: // None function
+				return doNoneFunc(
 					new IndicatorLight[]{light, light2, light3},
 					new String[]{"light1", "light2", "light3"}
 				);
@@ -68,8 +68,8 @@ public class PilotLightStack extends PilotLight{
 
 		int funcVal = sco.getIntegerParameter("function").intValue();
 		switch (funcVal){
-			case F_STATIC:
-				return F_STATIC_BLINK; // Set to F_STATIC_BLINK to let init return true
+			case F_NONE:
+				return F_NONE_BLINK; // Set to F_NONE_BLINK to let init return true
 			case 1: // Dispatch
 				return F_DISPATCH;
 			case 2: // Block Indicator
@@ -80,9 +80,9 @@ public class PilotLightStack extends PilotLight{
 		return funcVal; // Default
 	}
 	
-	private bool doStaticFunc(IndicatorLight[] lights, String[] paramNames){
-		/* Handle Static Function
-			Sets the lights' states, based on given static parameter names.
+	private bool doNoneFunc(IndicatorLight[] lights, String[] paramNames){
+		/* Handle None Function
+			Sets the lights' states, based on given parameter names.
 			Returns true if any of the lights were set to blink
 			(so onNextFrame can be called).
 		*/

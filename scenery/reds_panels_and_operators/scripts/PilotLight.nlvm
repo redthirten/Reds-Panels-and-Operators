@@ -28,9 +28,9 @@ public class PilotLight extends Script{
 	protected float BLINK_INTERVAL = 0.5f;				// Interval, in seconds, of the pilot light changing states when blinking
 	
 	// [Enum] Pilot Light Functions:
-	private static final int F_STATIC_OFF = 0;
-	private static final int F_STATIC_ON = 1;
-	protected static final int F_STATIC_BLINK = 2;
+	private static final int F_NONE_OFF = 0;
+	private static final int F_NONE_ON = 1;
+	protected static final int F_NONE_BLINK = 2;
 	protected static final int F_BLOCK_IND = 3; // Non-Scripted Coasters Only
 	protected static final int F_DISPATCH = 4;
 	private static final int F_PLATFORM = 5;
@@ -52,7 +52,7 @@ public class PilotLight extends Script{
 	protected IndicatorLight light;
 	protected SpecialTrackModule specialTrackModule;
 	
-	protected int func = F_STATIC_OFF;
+	protected int func = F_NONE_OFF;
 	
 	public bool onInit(){ // On initialization of Play simulation
 		// Get and assign local sco
@@ -78,10 +78,10 @@ public class PilotLight extends Script{
 		
 		// Get configured function and required parameters
 		func = getFuncFromScoParams(sco);
-		if (func > F_STATIC_BLINK){ // If not static function
+		if (func > F_NONE_BLINK){ // If active function
 			block = sco.getBlockParameter("block");
 			if (block == null){ // Check for un-configured block
-				log.err("Block parameter required for any non-static functions.");
+				log.err("Block Location must be set to use this Function.");
 				return false;
 			}
 			
@@ -100,14 +100,14 @@ public class PilotLight extends Script{
 
 		// Function-specific checks and setup
 		switch (func){
-			// Static functions
-			case F_STATIC_OFF:
+			// None functions
+			case F_NONE_OFF:
 				light.lightOff();
 				return false;
-			case F_STATIC_ON:
+			case F_NONE_ON:
 				light.lightOn();
 				return false;
-			case F_STATIC_BLINK:
+			case F_NONE_BLINK:
 				light.lightBlink();
 				break;
 			// Functions that require station section

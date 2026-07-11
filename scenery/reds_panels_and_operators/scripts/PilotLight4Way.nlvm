@@ -18,7 +18,7 @@ public class PilotLight4Way extends PilotLight{
 	private static final String LIGHT4_ELEMENT_NAME = "light4";		// Name of the left pilot light element in the SCO/model
 		
 	// [Enum] Pilot Light 4-Way Functions:
-	private static final int F_STATIC = 0;
+	private static final int F_NONE = 0;
 	private static final int F_BLOCK_IND_4WAY = 1;
 	private static final int F_SPECIAL_TRACK_4WAY = 2;
 	private static final int F_SPECIAL_TRACK_INV_4WAY = 3;
@@ -60,8 +60,8 @@ public class PilotLight4Way extends PilotLight{
 		
 		// Function-specific checks and setup
 		switch (func){
-			case F_STATIC_BLINK: // None/Static
-				return doStaticFunc(
+			case F_NONE_BLINK: // None function
+				return doNoneFunc(
 					new IndicatorLight[]{light, light2, light3, light4},
 					new String[]{"light1", "light2", "light3", "light4"}
 				);
@@ -80,8 +80,8 @@ public class PilotLight4Way extends PilotLight{
 
 		int funcVal = sco.getIntegerParameter("function").intValue();
 		switch (funcVal){
-			case F_STATIC:
-				return F_STATIC_BLINK; // Set to F_STATIC_BLINK to let super init return true
+			case F_NONE:
+				return F_NONE_BLINK; // Set to F_NONE_BLINK to let super init return true
 			case F_BLOCK_IND_4WAY:
 				return F_BLOCK_IND; // Set to F_BLOCK_IND to let super init perform relative checks
 			case F_SPECIAL_TRACK_INV_4WAY:
@@ -92,9 +92,9 @@ public class PilotLight4Way extends PilotLight{
 		return funcVal; // Default
 	}
 	
-	private bool doStaticFunc(IndicatorLight[] lights, String[] paramNames){
-		/* Handle Static Function
-			Sets the lights' states, based on given static parameter names.
+	private bool doNoneFunc(IndicatorLight[] lights, String[] paramNames){
+		/* Handle None Function
+			Sets the lights' states, based on given parameter names.
 			Returns true if any of the lights were set to blink
 			(so onNextFrame can be called).
 		*/
