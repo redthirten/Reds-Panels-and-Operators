@@ -6,6 +6,7 @@
     </model>
     <description>Allen-Bradley® PanelView Plus 1000 block status display. Recolorable - Scripted - Customizable Screen</description>
     <preview>materials/previews/ab/panelview_plus_1000.png</preview>
+    <param baserotx="-90"/>
     <param basescalex="1.25"/>
     <param basescaley="1.25"/>
     <param basescalez="1.25"/>

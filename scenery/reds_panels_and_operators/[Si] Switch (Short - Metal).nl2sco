@@ -10,6 +10,7 @@
     </model>
     <description>Siemens® 3SU1 switch w/ short handle &amp; metal housing. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/si/Switch (Short - Metal).png</preview>
+    <param baserotx="-90"/>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

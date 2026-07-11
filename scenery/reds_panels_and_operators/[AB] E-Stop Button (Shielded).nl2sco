@@ -9,6 +9,7 @@
     </model>
     <description>Allen-Bradley® 800T shielded E-Stop button. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/ab/estop_button_shielded.png</preview>
+    <param baserotx="-90"/>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

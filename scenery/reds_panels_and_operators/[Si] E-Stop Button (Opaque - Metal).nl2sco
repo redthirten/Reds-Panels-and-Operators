@@ -8,6 +8,7 @@
     </model>
     <description>Siemens® 3SU1 opaque E-Stop button w/ metal housing. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/si/E-Stop Button (Opaque - Metal).png</preview>
+    <param baserotx="-90"/>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

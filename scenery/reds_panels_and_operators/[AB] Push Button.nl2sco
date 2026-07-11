@@ -8,6 +8,7 @@
     </model>
     <description>Allen-Bradley® 800T standard push button. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/ab/push_button.png</preview>
+    <param baserotx="-90"/>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

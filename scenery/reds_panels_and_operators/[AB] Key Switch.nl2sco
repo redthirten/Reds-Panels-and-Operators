@@ -9,6 +9,7 @@
     </model>
     <description>Allen-Bradley® 800T key switch. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/ab/key_switch.png</preview>
+    <param baserotx="-90"/>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

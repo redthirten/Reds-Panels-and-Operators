@@ -9,6 +9,7 @@
     </model>
     <description>Siemens® 3SU1 key switch w/ RONIS® core &amp; metal housing. Scripted - Customizable Placard</description>
     <preview>materials/previews/si/Key Switch (RONIS - Metal).png</preview>
+    <param baserotx="-90"/>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

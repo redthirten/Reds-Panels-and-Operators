@@ -4,6 +4,7 @@
     <model path="models/si/text_display_logo.dae"/>
     <description>Siemens® LOGO! monochrome LCD text display (TDE) w/ backlight. Recolorable - Customizable Screen - Functionallity will be added in a future update.</description>
     <preview>materials/previews/si/Text Display (LOGO).png</preview>
+    <param baserotx="-90"/>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

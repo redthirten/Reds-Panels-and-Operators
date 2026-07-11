@@ -10,6 +10,7 @@
     </model>
     <description>Siemens® 3SU1 switch w/ long handle &amp; plastic housing. Recolorable - Scripted - Customizable Placard</description>
     <preview>materials/previews/si/Switch (Long - Plastic).png</preview>
+    <param baserotx="-90"/>
     <param basescalex="2"/>
     <param basescaley="2"/>
     <param basescalez="2"/>

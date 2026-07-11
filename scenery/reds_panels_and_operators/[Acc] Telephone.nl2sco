@@ -6,6 +6,7 @@
     </model>
     <description>Decorative telephone. Recolorable - Not Scripted</description>
     <preview>materials/previews/acc/telephone.png</preview>
+    <param baserotx="-90"/>
     <param basescalex="1.2"/>
     <param basescaley="1.2"/>
     <param basescalez="1.2"/>
