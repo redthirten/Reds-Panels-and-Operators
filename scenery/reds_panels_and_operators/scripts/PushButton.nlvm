@@ -1,7 +1,7 @@
 /**
 	Push Button NL2 Abstract Script
 	David Wolfe (Red-Thirten)
-	07/10/2026
+	07/11/2026
 	Animates the pilot light and button during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -199,6 +199,10 @@ public abstract class PushButton extends Script implements InteractionActionList
 				specialTrack = sco.getSpecialTrackParameter("special_track");
 				if (specialTrack == null){
 					log.err("The configured function requires the Special Track parameter to be specified.");
+					return false;
+				}
+				if (func == F_SPECIAL_TOGGLE && specialTrack.getNumberOfSwitchDirections() != 2){
+					log.err("The Special Track Toggle function requires a Special Track with only 2 positions.");
 					return false;
 				}
 				break;
@@ -576,15 +580,16 @@ public abstract class PushButton extends Script implements InteractionActionList
 	private void doSpecialTrackFunc(bool doAction){
 		if (doAction){
 			int curSetPos = specialTrack.getSetSwitchDirection();
-			if (func == F_SPECIAL_LEFT){
-				specialTrack.setManualSwitchDirection(
-					specialTrack.getSetSwitchDirection() - 1
-				);
-			}
-			else{
-				specialTrack.setManualSwitchDirection(
-					specialTrack.getSetSwitchDirection() + 1
-				);
+			switch (func){
+				case F_SPECIAL_LEFT:
+					specialTrack.setManualSwitchDirection(curSetPos - 1);
+					break;
+				case F_SPECIAL_RIGHT:
+					specialTrack.setManualSwitchDirection(curSetPos + 1);
+					break;
+				case F_SPECIAL_TOGGLE:
+					specialTrack.setManualSwitchDirection(curSetPos ^ 1);
+					break;
 			}
 			button.buttonPush();
 			return;
@@ -602,8 +607,12 @@ public abstract class PushButton extends Script implements InteractionActionList
 		}
 		// Track ready to move to new position
 		else if ( specialTrack.canChangeManualSwitchDirection() 
-				&& ( (func == F_SPECIAL_LEFT && specialTrack.getSetSwitchDirection() > 0) 
-					|| (func == F_SPECIAL_RIGHT && specialTrack.getSetSwitchDirection() < specialTrack.getNumberOfSwitchDirections()-1) ) ){
+			&& (
+				(func == F_SPECIAL_LEFT && specialTrack.getSetSwitchDirection() > 0) 
+				|| (func == F_SPECIAL_RIGHT && specialTrack.getSetSwitchDirection() < specialTrack.getNumberOfSwitchDirections()-1)
+				|| (func == F_SPECIAL_TOGGLE)
+			)
+		){
 			enableAction();
 			button.lightBlink();
 		}
