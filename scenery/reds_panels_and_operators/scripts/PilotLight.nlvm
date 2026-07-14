@@ -1,7 +1,7 @@
 /**
 	Pilot Light NL2 Script
 	David Wolfe (Red-Thirten)
-	07/09/2026
+	07/14/2026
 	Animates the pilot light during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -33,15 +33,20 @@ public class PilotLight extends Script{
 	protected static final int F_NONE_BLINK = 2;
 	protected static final int F_BLOCK_IND = 3; // Non-Scripted Coasters Only
 	protected static final int F_DISPATCH = 4;
-	private static final int F_PLATFORM = 5;
-	protected static final int F_SPECIAL_TRACK = 6;
-	private static final int F_ESTOP_OFF_TO_BLINK = 7;
-	private static final int F_AUTOMATIC_OP = 8;
-	private static final int F_SEMI_MAN_OP = 9;
-	private static final int F_FULL_MAN_OP = 10;
-	private static final int F_ESTOP_BLINK_TO_OFF = 11;
-	private static final int F_ESTOP_OFF_TO_ON = 12;
-	private static final int F_ESTOP_ON_TO_OFF = 13;
+	private static final int F_RESTRAINTS = 5;
+	private static final int F_GATES = 6;
+	private static final int F_PLATFORM = 7;
+	private static final int F_SEATS = 8; // Manual Dispatch Mode Only
+	protected static final int F_SPECIAL_TRACK = 9;
+	private static final int F_AUTO_DISPATCH = 10;
+	private static final int F_MANUAL_DISPATCH = 11;
+	private static final int F_AUTOMATIC_OP = 12;
+	private static final int F_SEMI_MAN_OP = 13;
+	private static final int F_FULL_MAN_OP = 14;
+	private static final int F_ESTOP_OFF_TO_BLINK = 15;
+	private static final int F_ESTOP_BLINK_TO_OFF = 16;
+	private static final int F_ESTOP_OFF_TO_ON = 17;
+	private static final int F_ESTOP_ON_TO_OFF = 18;
 	
 	protected SceneObject sco;
 	protected Coaster coaster;
@@ -111,13 +116,13 @@ public class PilotLight extends Script{
 				light.lightBlink();
 				break;
 			// Functions that require station section
-			case F_PLATFORM:
-				// Also requires coaster with platform
-				if (!CoasterTools.isCoasterWithPlatform(coaster)){
-					log.err("The configured function requires that the coaster have a platform in the station.");
-					return false;
-				}
 			case F_DISPATCH:
+			case F_RESTRAINTS:
+			case F_GATES:
+			case F_PLATFORM:
+			case F_SEATS:
+			case F_AUTO_DISPATCH:
+			case F_MANUAL_DISPATCH:
 				if (!section.isStation()){
 					log.err("The configured function requires the specified block to be a station.");
 					return false;
@@ -138,6 +143,24 @@ public class PilotLight extends Script{
 					return false;
 				}
 				break;
+		}
+
+		// Check for platform (if applicable)
+		switch (func){
+			case F_PLATFORM:
+				if (!CoasterTools.isCoasterWithPlatform(coaster)){
+					log.err("The configured function requires that the coaster have a platform in the station.");
+					return false;
+				}
+		}
+
+		// Check for flyer (if applicable)
+		switch (func){
+			case F_SEATS:
+				if (!CoasterTools.isCoasterFlyer(coaster)){
+					log.err("The configured function requires that the coaster be a flyer coaster.");
+					return false;
+				}
 		}
 		
 		return true; // Everything's just dandy
@@ -198,6 +221,33 @@ public class PilotLight extends Script{
 		}
 	}
 	
+	private void doRestraintsFunc(){
+		Train train = section.getTrainOnSection();
+		// Train stopped in station & harness is locked
+		if ( !coaster.isEmergencyStop()
+				&& train != null
+				&& train.getSpeed() == 0.0
+				&& train.getHarnessState() == 0.f ){
+			light.lightOn();
+		}
+		// Train not in station or E-Stopped
+		else{
+			light.lightOff();
+		}
+	}
+
+	private void doGatesFunc(){
+		// Gates closed
+		if ( !coaster.isEmergencyStop()
+				&& section.getStationGateState() == 0.f ){
+			light.lightOn();
+		}
+		// Gates open or E-Stopped
+		else{
+			light.lightOff();
+		}
+	}
+	
 	private void doPlatformFunc(){
 		Train train = section.getTrainOnSection();
 		// Train stopped in station
@@ -206,16 +256,32 @@ public class PilotLight extends Script{
 				&& train.getSpeed() == 0.0 ){
 			// Platform is engaged
 			if (section.getStationPlatformState() == 1.f){
-				light.lightOn();
+				light.lightOff();
 			}
 			// Platform is disengaged
 			else if (section.getStationPlatformState() == 0.f){
-				light.lightOff();
+				light.lightOn();
 			}
 			// Platform is moving
 			else{
 				light.lightBlink();
 			}
+		}
+		// Train not in station or E-Stopped
+		else{
+			light.lightOff();
+		}
+	}
+	
+	private void doSeatsFunc(){
+		// Manual dispatch mode, train stopped in station, & seats locked
+		// (NL2 does not currently have a method to check seat status outside of manual dispatch mode)
+		if ( !coaster.isEmergencyStop()
+				&& isStationManualDispatchMode()
+				&& train != null
+				&& train.getSpeed() == 0.0
+				&& section.isStationManualLockedSeats() ){
+			light.lightOn();
 		}
 		// Train not in station or E-Stopped
 		else{
@@ -235,6 +301,47 @@ public class PilotLight extends Script{
 			light.lightOn();
 		else
 			light.lightOff();
+	}
+
+	private void doDispatchModeFunc(){
+		if (coaster.isEmergencyStop()){
+			light.lightOff();
+			return;
+		}
+		switch (func){
+			case F_AUTO_DISPATCH:
+				light.setLightState(
+					!section.isStationManualDispatchMode() ? Block.LAMP_ON : Block.LAMP_OFF
+				);
+				return;
+			case F_MANUAL_DISPATCH:
+				light.setLightState(
+					section.isStationManualDispatchMode() ? Block.LAMP_ON : Block.LAMP_OFF
+				);
+				return;
+		}
+	}
+	
+	private void doBlockSystemModeFunc(){
+		int targetMode = 0;
+		switch (func){
+			case F_AUTOMATIC_OP:
+				targetMode = Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC;
+				break;
+			case F_SEMI_MAN_OP:
+				targetMode = Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL;
+				break;
+			case F_FULL_MAN_OP:
+				targetMode = Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL;
+				break;
+		}
+		if ( coaster.getBlockSystemMode() == targetMode
+				&& !coaster.isEmergencyStop() ){
+			light.lightOn();
+		}
+		else{
+			light.lightOff();
+		}
 	}
 	
 	private void doEStopFunc(){
@@ -263,28 +370,6 @@ public class PilotLight extends Script{
 			}
 		}
 	}
-	
-	private void doBlockSystemModeFunc(){
-		int targetMode = 0;
-		switch (func){
-			case F_AUTOMATIC_OP:
-				targetMode = Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC;
-				break;
-			case F_SEMI_MAN_OP:
-				targetMode = Coaster.E_BLOCK_SYSTEM_MODE_SEMI_MANUAL;
-				break;
-			case F_FULL_MAN_OP:
-				targetMode = Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL;
-				break;
-		}
-		if ( coaster.getBlockSystemMode() == targetMode
-				&& !coaster.isEmergencyStop() ){
-			light.lightOn();
-		}
-		else{
-			light.lightOff();
-		}
-	}
 
 	public void onNextFrame(float tick){
 		switch (func){
@@ -294,22 +379,35 @@ public class PilotLight extends Script{
 			case F_DISPATCH:
 				doDispatchFunc();
 				break;
+			case F_RESTRAINTS:
+				doRestraintsFunc();
+				break;
+			case F_GATES:
+				doGatesFunc();
+				break;
 			case F_PLATFORM:
 				doPlatformFunc();
 				break;
+			case F_SEATS:
+				doSeatsFunc();
+				break;
 			case F_SPECIAL_TRACK:
 				doSpecialTrackFunc();
+				break;
+			case F_AUTO_DISPATCH:
+			case F_MANUAL_DISPATCH:
+				doDispatchModeFunc();
+				break;
+			case F_AUTOMATIC_OP:
+			case F_SEMI_MAN_OP:
+			case F_FULL_MAN_OP:
+				doBlockSystemModeFunc();
 				break;
 			case F_ESTOP_OFF_TO_BLINK:
 			case F_ESTOP_BLINK_TO_OFF:
 			case F_ESTOP_OFF_TO_ON:
 			case F_ESTOP_ON_TO_OFF:
 				doEStopFunc();
-				break;
-			case F_AUTOMATIC_OP:
-			case F_SEMI_MAN_OP:
-			case F_FULL_MAN_OP:
-				doBlockSystemModeFunc();
 				break;
 		}
 
