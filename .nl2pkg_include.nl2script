@@ -6,15 +6,15 @@
     <sharedvm>true</sharedvm>
     <resource id="README">scenery/reds_panels_and_operators/!README.html</resource>
     <resource id="resource1">scenery/reds_panels_and_operators/[ Placards ]/Default.png</resource>
-    <resource id="resource2">scenery/reds_panels_and_operators/[ Placards ]/Emergency Stop (Circle).png</resource>
-    <resource id="resource3">scenery/reds_panels_and_operators/[ Placards ]/[Button] Acknowledge.png</resource>
-    <resource id="resource4">scenery/reds_panels_and_operators/[ Placards ]/[Button] Advance.png</resource>
-    <resource id="resource5">scenery/reds_panels_and_operators/[ Placards ]/[Button] Automatic Dispatch.png</resource>
-    <resource id="resource6">scenery/reds_panels_and_operators/[ Placards ]/[Button] Automatic Mode.png</resource>
-    <resource id="resource7">scenery/reds_panels_and_operators/[ Placards ]/[Button] Block Reset.png</resource>
-    <resource id="resource8">scenery/reds_panels_and_operators/[ Placards ]/[Button] Clear Block.png</resource>
-    <resource id="resource9">scenery/reds_panels_and_operators/[ Placards ]/[Button] Dispatch-Advance.png</resource>
-    <resource id="resource10">scenery/reds_panels_and_operators/[ Placards ]/[Button] E-Stop Reset.png</resource>
+    <resource id="resource2">scenery/reds_panels_and_operators/[ Placards ]/[Button] Acknowledge.png</resource>
+    <resource id="resource3">scenery/reds_panels_and_operators/[ Placards ]/[Button] Advance.png</resource>
+    <resource id="resource4">scenery/reds_panels_and_operators/[ Placards ]/[Button] Automatic Dispatch.png</resource>
+    <resource id="resource5">scenery/reds_panels_and_operators/[ Placards ]/[Button] Automatic Mode.png</resource>
+    <resource id="resource6">scenery/reds_panels_and_operators/[ Placards ]/[Button] Block Reset.png</resource>
+    <resource id="resource7">scenery/reds_panels_and_operators/[ Placards ]/[Button] Clear Block.png</resource>
+    <resource id="resource8">scenery/reds_panels_and_operators/[ Placards ]/[Button] Dispatch-Advance.png</resource>
+    <resource id="resource9">scenery/reds_panels_and_operators/[ Placards ]/[Button] E-Stop Reset.png</resource>
+    <resource id="resource10">scenery/reds_panels_and_operators/[ Placards ]/[Button] Emergency Stop (Circle).png</resource>
     <resource id="resource11">scenery/reds_panels_and_operators/[ Placards ]/[Button] Emergency Stop.png</resource>
     <resource id="resource12">scenery/reds_panels_and_operators/[ Placards ]/[Button] Full Manual Mode.png</resource>
     <resource id="resource13">scenery/reds_panels_and_operators/[ Placards ]/[Button] Gates Close.png</resource>
@@ -106,5 +106,18 @@
     <resource id="resource99">scenery/reds_panels_and_operators/[ Labels ]/Transfer.png</resource>
     <resource id="resource100">scenery/reds_panels_and_operators/[ Labels ]/[ Photoshop Label Template ].psd</resource>
     <resource id="resource101">scenery/reds_panels_and_operators/[ Labels ]/[ GIMP Label Template ].xcf</resource>
+    <resource id="resource102">scenery/reds_panels_and_operators/[ Sounds ]/alarm_bell.ogg</resource>
+    <resource id="resource103">scenery/reds_panels_and_operators/[ Sounds ]/alarm_single_tone.ogg</resource>
+    <resource id="resource104">scenery/reds_panels_and_operators/[ Sounds ]/alarm_two_tone.ogg</resource>
+    <resource id="resource105">scenery/reds_panels_and_operators/[ Sounds ]/closing_gates_announcement.ogg</resource>
+    <resource id="resource106">scenery/reds_panels_and_operators/[ Sounds ]/closing_gates_announcement_dirty.ogg</resource>
+    <resource id="resource107">scenery/reds_panels_and_operators/[ Sounds ]/restraint_enter_announcement.ogg</resource>
+    <resource id="resource108">scenery/reds_panels_and_operators/[ Sounds ]/restraint_enter_announcement_dirty.ogg</resource>
+    <resource id="resource109">scenery/reds_panels_and_operators/[ Sounds ]/restraint_exit_announcement.ogg</resource>
+    <resource id="resource110">scenery/reds_panels_and_operators/[ Sounds ]/restraint_exit_announcement_dirty.ogg</resource>
+    <resource id="resource111">scenery/reds_panels_and_operators/[ Sounds ]/technical_difficulties_announcement.ogg</resource>
+    <resource id="resource112">scenery/reds_panels_and_operators/[ Sounds ]/technical_difficulties_announcement_dirty.ogg</resource>
+    <resource id="resource113">scenery/reds_panels_and_operators/[ Sounds ]/temporary_delay_announcement.ogg</resource>
+    <resource id="resource114">scenery/reds_panels_and_operators/[ Sounds ]/temporary_delay_announcement_dirty.ogg</resource>
   </script>
 </root>

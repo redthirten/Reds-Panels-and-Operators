@@ -1,9 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
-rem build_nl2pkg_include.bat "scenery\reds_panels_and_operators\[ Placards ]" "scenery\reds_panels_and_operators\[ Labels ]"
+rem build_nl2pkg_include.bat "scenery\reds_panels_and_operators\[ Placards ]" "scenery\reds_panels_and_operators\[ Labels ]" "scenery\reds_panels_and_operators\[ Sounds ]"
 
-set "EXTENSIONS=png psd xcf"
+set "EXTENSIONS=jpg png psd xcf ogg"
 set OUTPUT_FILE=%~dp0.nl2pkg_include.nl2script
 
 (

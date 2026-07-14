@@ -44,7 +44,7 @@
     <scriptparameter>
       <type>int</type>
       <defaultvalue>0</defaultvalue>
-      <enums>None (Light Off),None (Light On),None (Light Blinking),Block Advance,Block Reverse,Station Dispatch,Restraints Open,Restraints Lock,Restraints Toggle,Gates Open,Gates Close,Gates Toggle,Platform Raise,Platform Lower,Platform Toggle,Flyer Seats Unlock,Flyer Seats Lock,Flyer Seats Toggle,Special Track Left,Special Track Right,Special Track Toggle,Auto Dispatch Mode,Manual Dispatch Mode,Automatic Operation,Manual Block Operation,Full Manual Operation,E-Stop Reset,Lift Jog (No Interaction),Brake Release (No Interaction),Play Sound from Speaker(s),Reset Coaster</enums>
+      <enums>None (Light Off),None (Light On),None (Light Blinking),Block Advance,Block Reverse,Station Dispatch,Restraints Open,Restraints Lock,Restraints Toggle,Gates Open,Gates Close,Gates Toggle,Platform Raise,Platform Lower,Platform Toggle,Flyer Seats Unlock,Flyer Seats Lock,Flyer Seats Toggle,Special Track Left,Special Track Right,Special Track Toggle,Auto Dispatch Mode,Manual Dispatch Mode,Automatic Operation,Manual Block Operation,Full Manual Operation,E-Stop Reset,Lift Jog (No Interaction),Brake Release (No Interaction),Play Sound,Reset Coaster</enums>
       <id>function</id>
       <description>How this button will behave during Play Mode.</description>
       <label>Function:</label>
@@ -62,18 +62,18 @@
       <label>Special Track (for Special Track Functions):</label>
     </scriptparameter>
     <scriptparameter>
-      <type>string</type>
-      <defaultvalue></defaultvalue>
-      <id>speakers_sco_name</id>
-      <description>Name that matches the name of one or more SCO instances that will act as a speaker to play the sound. Any SCO can be used, but Red&apos;s Speakers are preferred (see README for details).</description>
-      <label>Speaker(s) SCO Name (for Play Sound Function):</label>
-    </scriptparameter>
-    <scriptparameter>
       <type filetype="audio">resourcepath</type>
       <defaultvalue></defaultvalue>
       <id>play_sound</id>
-      <description>Sound file to play on all configured speakers when the button is pushed.</description>
-      <label>Speaker Sound (for Play Sound Function):</label>
+      <description>Plays sound on SCO(s) by name (configured below) when the button is activated. Set to empty to disable.</description>
+      <label>Play Sound on Action:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>string</type>
+      <defaultvalue></defaultvalue>
+      <id>speakers_sco_name</id>
+      <description>Single name that matches one or more SCO instances that will act as a speaker to play the sound. Any SCO can be used, but Red&apos;s Speakers are preferred (see README for details).</description>
+      <label>Name of SCO(s) to Play Sound On:</label>
     </scriptparameter>
     <scriptparameter>
       <type>specialtrack</type>

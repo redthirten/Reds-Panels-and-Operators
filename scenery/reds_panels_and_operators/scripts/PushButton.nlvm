@@ -1,7 +1,7 @@
 /**
 	Push Button NL2 Abstract Script
 	David Wolfe (Red-Thirten)
-	07/11/2026
+	07/13/2026
 	Animates the pilot light and button during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -96,7 +96,7 @@ public abstract class PushButton extends Script implements InteractionActionList
 	private OperatorButton button;
 	private SpecialTrackModule specialTrackModule;
 	private IndicatorLight plcIndicatorLight;
-	private Speakers speakers;
+	private Speakers speakers = null;
 	
 	private int func = F_NONE_OFF;
 	private int frameCounter = 5; // Stupid workaround for Dispatch Function where NL2 bug can sometimes report moving train speed as 0
@@ -157,6 +157,22 @@ public abstract class PushButton extends Script implements InteractionActionList
 			sco.getLightForName(LIGHT_OBJECT_NAME),
 			!disableLight
 		);
+
+		// Create Speakers object if 'Play Sound on Action' is configured
+		ResourcePath soundResource = sco.getResourcePathParameter("play_sound");
+		if (soundResource != null){
+			String speakersScoName = sco.getStringParameter("speakers_sco_name");
+			if (speakersScoName.length() < 1){
+				log.err("'Play Sound on Action' requires 'Name of SCO(s) to Play Sound On' to be configured.");
+				return false;
+			}
+			SceneObject[] speakerSCOS = sim.getSceneObjectsWithName(speakersScoName);
+			if (speakerSCOS.length < 1){
+				log.err("No SCO(s) with the instance name of \"" + speakersScoName + "\" could be found.");
+				return false;
+			}
+			speakers = new Speakers(speakerSCOS, soundResource);
+		}
 
 		// Function-specific checks and setup
 		SceneObject plc = null;
@@ -232,24 +248,12 @@ public abstract class PushButton extends Script implements InteractionActionList
 					return false;
 				}
 				break;
-			// Functions that require a speaker
+			// Functions that require a sound
 			case F_PLAY_SOUND:
-				ResourcePath soundResource = sco.getResourcePathParameter("play_sound");
-				if (soundResource == null){
-					log.err("The configured function requires the Sound parameter to be specified.");
+				if (speakers == null){
+					log.err("The configured function requires the 'Play Sound' parameters to be set and valid.");
 					return false;
 				}
-				String speakersScoName = sco.getStringParameter("speakers_sco_name");
-				if (speakersScoName.length() < 1){
-					log.err("The configured function requires the Speaker(s) SCO Name parameter to be specified.");
-					return false;
-				}
-				SceneObject[] speakerSCOS = sim.getSceneObjectsWithName(speakersScoName);
-				if (speakerSCOS.length < 1){
-					log.err("No SCO(s) with the instance name of \"" + speakersScoName + "\" could be found.");
-					return false;
-				}
-				speakers = new Speakers(speakerSCOS, soundResource);
 				break;
 		}
 
@@ -698,7 +702,6 @@ public abstract class PushButton extends Script implements InteractionActionList
 	private void doPlaySoundFunc(bool doAction){
 		if (doAction){
 			button.buttonPush();
-			speakers.play();
 			return;
 		}
 
@@ -710,7 +713,6 @@ public abstract class PushButton extends Script implements InteractionActionList
 			enableAction();
 			button.lightOff();
 		}
-		speakers.updateTranslation();
 	}
 
 	private void doResetCoasterFunc(bool doAction){
@@ -941,11 +943,18 @@ public abstract class PushButton extends Script implements InteractionActionList
 		// If iObj exists, update its translation if SCO moves
 		if (iObj != null)
 			iObj.setPosition(button.getAbsoluteTranslation());
+		
+		// If Speakers object exists, update its translation
+		if (speakers != null)
+			speakers.updateTranslation();
 	}
 
 	public final void onInteractionAction(InteractionObject obj){
 		if (enabled){
 			doFunc(true);
+			if (speakers != null){
+				speakers.play();
+			}
 		}
 		else{
 			switch (func){

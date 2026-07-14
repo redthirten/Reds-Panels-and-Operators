@@ -1,7 +1,7 @@
 /**
 	Speaker NL2 Script
 	David Wolfe (Red-Thirten)
-	06/01/2026
+	07/13/2026
 	Handles speaker audio during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -11,6 +11,7 @@ import com.nolimitscoaster.SceneObject;
 import com.nolimitscoaster.Block;
 import com.nolimitscoaster.Coaster;
 import com.nolimitscoaster.SpecialTrack;
+import com.nolimitscoaster.ResourcePath;
 
 import obj.Speakers;
 import util.Logger;
@@ -62,10 +63,15 @@ public class Speaker extends Script{
 		
 		// Get configured function and required parameters
 		func = getFuncFromScoParams(sco);
+		ResourcePath soundResource = sco.getResourcePathParameter("sound");
 		if (func > F_NONE){ // If active function
 			Block block = sco.getBlockParameter("block");
 			if (block == null){ // Check for un-configured block
 				log.err("Block Location must be set to use this Function.");
+				return false;
+			}
+			if (soundResource == null){ // Check for un-configured sound
+				log.err("Sound must be set and valid to use this Function.");
 				return false;
 			}
 			
@@ -91,7 +97,7 @@ public class Speaker extends Script{
 		// Create Speakers (sound) object
 		sound = new Speakers(
 			new SceneObject[] {sco},
-			sco.getResourcePathParameter("sound"),
+			soundResource,
 			sco.getBooleanParameter("loop_sound").boolValue()
 		);
 		
