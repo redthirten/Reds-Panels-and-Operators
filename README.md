@@ -3,7 +3,7 @@
 ___
 
 #### Description:
-"Red's Panels and Operators" is a No Limits 2 custom SCO package of various animated buttons, switches, lights, etc. to dress up your ride with custom-built control panels. Numerous different panel sizes and shapes, paired with 12 different types of highly detailed & scripted operators, each with countless configuration possibilities, means you can virtually build any panel you can think of. That, along with various extras like electrical panels, cable runners, etc; this pack is sure to add that extra level of realism to your park!
+"Red's Panels and Operators" is the ultimate control panel toolkit for NoLimits 2 Roller Coaster Simulator. Packed with a wide selection of SCO panels, animated controls, indicators, and accessories, it lets you design everything from simple operator stations to complex main control panels. Featuring 40 different styles of highly detailed, fully scripted operators modeled after real Allen-Bradley® and Siemens® hardware, each with extensive configuration options, the possibilities are virtually endless. Combined with functionality that goes beyond the stock NL2 operators and a variety of supporting scenery such as electrical panels and cable runners, this pack makes it easy to bring an unmatched level of realism to your rides and parks!
 
 ___
 
