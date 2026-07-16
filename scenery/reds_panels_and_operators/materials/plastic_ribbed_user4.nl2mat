@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Matte plastic that is recolorable using the User 4 custom defined color.</description>
+    <description>Matte plastic w/ ribbed height map that is recolorable using the User 4 custom defined color.</description>
+    <preview>textures/ribbed_height.png</preview>
     <renderpass>
-      <shadercore>Result = Mul(Entity4, 0.12);
-Specular = 0;
-Roughness = 1;</shadercore>
+      <shadercore>Result = Mul(Entity4, 0.12);</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0</metallic>
+        <roughness>0.75</roughness>
+      </pbrmetallicworkflow>
       <rgbgen mode="bumplighting"/>
       <texunit>
         <map>textures/ribbed_height.png</map>

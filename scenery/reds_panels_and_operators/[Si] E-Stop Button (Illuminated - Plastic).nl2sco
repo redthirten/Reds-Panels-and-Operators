@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <sceneobject>
+    <model path="models/si/estop_button_illuminated.dae">
+      <clip distance="30"/>
+      <clip mesh="housing" distance="10"/>
+      <clip mesh="estop_button" distance="20"/>
+    </model>
+    <description>Siemens® 3SU1 illuminated E-Stop button w/ plastic housing. Recolorable - Scripted - Customizable Placard</description>
+    <preview>materials/previews/si/E-Stop Button (Illuminated - Plastic).png</preview>
+    <param baserotx="-90"/>
+    <param basescalex="2"/>
+    <param basescaley="2"/>
+    <param basescalez="2"/>
+    <usercolor>
+      <label>Placard Background</label>
+      <index>0</index>
+      <defaultcolor r="1" g="0.823529" b="0"/>
+    </usercolor>
+    <usercolor>
+      <label>Placard Text</label>
+      <index>1</index>
+      <defaultcolor r="0" g="0" b="0"/>
+    </usercolor>
+    <usercolor>
+      <label>Button</label>
+      <index>2</index>
+      <lightsources>light</lightsources>
+      <defaultcolor r="0.894118" g="0.141176" b="0.113725"/>
+    </usercolor>
+    <usertexture>
+      <label>Placard:</label>
+      <description>Placard text image to use. Can be custom, but must be black text with white background.</description>
+      <defaultpath>[ Placards ]/[Button] Emergency Stop (Circle).png</defaultpath>
+    </usertexture>
+    <script>
+      <classpath>scripts</classpath>
+      <class>EStopButtonSi</class>
+      <sharedvm>true</sharedvm>
+      <resource id="LICENSE">LICENSE</resource>
+      <resource id="sound_off">sounds/estop_out.ogg</resource>
+      <resource id="sound_on">sounds/estop_in.ogg</resource>
+    </script>
+    <scriptparameter>
+      <type>int</type>
+      <defaultvalue>0</defaultvalue>
+      <enums>None (Light Off),None (Light On),None (Light Blinking),E-Stop (Simple),E-Stop (Advanced)</enums>
+      <id>function</id>
+      <description>How this button will behave during Play Mode.</description>
+      <label>Function:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>blocksection</type>
+      <id>block</id>
+      <description>Specifies the block that active Functions will use for this operator.</description>
+      <label>Block Location:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>specialtrack</type>
+      <id>special_track_attach</id>
+      <description>Select the special track of a ride you want this operator to move with during simulation. Set to &lt;None&gt; to disable.</description>
+      <label>Special Track to Attach To (Optional):</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>bool</type>
+      <defaultvalue>true</defaultvalue>
+      <id>disable_light</id>
+      <description>Disables the &quot;real&quot; light during simulation, possibly leading to better performance. Pilot light will still have a basic &quot;glow&quot;.</description>
+      <label>Disable Volumetric Light</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>bool</type>
+      <defaultvalue>false</defaultvalue>
+      <id>show_collar</id>
+      <description>In Play Mode, a protective collar around the button will be visible instead of the placard. Its color will be the Placard Background color.</description>
+      <label>Show Protective Collar instead of Placard</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>bool</type>
+      <defaultvalue>false</defaultvalue>
+      <id>hide_placard</id>
+      <description>Hides the placard during Play Mode.</description>
+      <label>Hide Placard</label>
+    </scriptparameter>
+    <materialpath name="button">materials/si_button_opaque_user2.nl2mat</materialpath>
+    <materialpath name="button_top">materials/si_estop_top_user2.nl2mat</materialpath>
+    <materialpath name="collar">materials/plastic_user0_play_only.nl2mat</materialpath>
+    <materialpath name="housing">materials/plastic_black.nl2mat</materialpath>
+    <materialpath name="indicator">materials/si_ind_light_lens_user2.nl2mat</materialpath>
+    <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
+    <materialpath name="plastic_black">materials/plastic_black.nl2mat</materialpath>
+    <lightsource range="0.5" intensity="1" type="point">
+      <name>light</name>
+      <parent>estop_button</parent>
+      <position x="0.015" y="0.0147" z="0.05"/>
+      <color r="1" g="1" b="1"/>
+    </lightsource>
+  </sceneobject>
+</root>

@@ -1,0 +1,13 @@
+/**
+	Push Button [Allen-Bradley] NL2 Script
+	David Wolfe (Red-Thirten)
+	07/10/2026
+	Extends PushButton to define parameters specific to AB Push Buttons.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+public class PushButtonAB extends PushButton{
+	PushButtonAB(){
+		SCRIPT_NAME = "PushButtonAB";		// Script name for debugging
+	}
+}

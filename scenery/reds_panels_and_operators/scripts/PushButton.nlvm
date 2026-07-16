@@ -1,7 +1,7 @@
 /**
-	Push Button NL2 Script
+	Push Button NL2 Abstract Script
 	David Wolfe (Red-Thirten)
-	11/28/2024
+	07/13/2026
 	Animates the pilot light and button during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -25,7 +25,7 @@ import util.SceneObjectTools;
 import util.CoasterTools;
 import util.SpecialTrackModule;
 
-public class PushButton extends Script implements InteractionActionListener{
+public abstract class PushButton extends Script implements InteractionActionListener{
 	protected String SCRIPT_NAME = "PushButton";						// Script name for debugging
 	protected String BUTTON_ELEMENT_NAME = "button";					// Name of the button element in the SCO/model
 	protected String PLACARD_ELEMENT_NAME = "placard";					// Name of the placard element in the SCO/model
@@ -39,40 +39,52 @@ public class PushButton extends Script implements InteractionActionListener{
 	protected float BLINK_INTERVAL = 0.5f;								// Interval, in seconds, of the pilot light changing states when blinking
 	protected bool BUTTON_HAS_LIGHT = true;								// True if the button has a pilot light
 
-	// All Button Functions:
-	protected static final int F_STATIC_OFF = 0;
-	protected static final int F_STATIC_ON = 1;
-	protected static final int F_STATIC_BLINK = 2;
+	// [Enum] Button Functions:
+	protected static final int F_NONE_OFF = 0;
+	protected static final int F_NONE_ON = 1;
+	protected static final int F_NONE_BLINK = 2;
 	protected static final int F_BLOCK_FWD = 3;
 	protected static final int F_BLOCK_BWD = 4;
 	protected static final int F_DISPATCH = 5;
 	protected static final int F_RESTRAINTS_OPEN = 6;
 	protected static final int F_RESTRAINTS_LOCK = 7;
-	protected static final int F_PLATFORM_RAISE = 8;
-	protected static final int F_PLATFORM_LOWER = 9;
-	protected static final int F_PLATFORM_TOGGLE = 10;
-	protected static final int F_SEATS_UNLOCK = 11;
-	protected static final int F_SEATS_LOCK = 12;
-	protected static final int F_SEATS_TOGGLE = 13;
-	protected static final int F_SPECIAL_LEFT = 14;
-	protected static final int F_SPECIAL_RIGHT = 15;
-	protected static final int F_AUTO_DISPATCH = 16;
-	protected static final int F_MANUAL_DISPATCH = 17;
-	protected static final int F_AUTOMATIC_OP = 18;
-	protected static final int F_SEMI_MAN_OP = 19;
-	protected static final int F_FULL_MAN_OP = 20;
-	protected static final int F_ESTOP_RESET = 21;
-	protected static final int F_LIFT_JOG_NO_INT = 22;
-	protected static final int F_BRAKE_RELEASE_NO_INT = 23;
-	protected static final int F_PLAY_SOUND = 24;
-	protected static final int F_RESET_COASTER = 25;
-	// E-Stop Specific Functions at End
-	protected static final int F_ESTOP_SIMPLE = 26;
-	protected static final int F_ESTOP_ADVANCED = 27;
+	protected static final int F_RESTRAINTS_TOGGLE = 8;
+	protected static final int F_GATES_OPEN = 9;
+	protected static final int F_GATES_CLOSE = 10;
+	protected static final int F_GATES_TOGGLE = 11;
+	protected static final int F_PLATFORM_RAISE = 12;
+	protected static final int F_PLATFORM_LOWER = 13;
+	protected static final int F_PLATFORM_TOGGLE = 14;
+	protected static final int F_SEATS_UNLOCK = 15;
+	protected static final int F_SEATS_LOCK = 16;
+	protected static final int F_SEATS_TOGGLE = 17;
+	protected static final int F_SPECIAL_LEFT = 18;
+	protected static final int F_SPECIAL_RIGHT = 19;
+	protected static final int F_SPECIAL_TOGGLE = 20;
+	protected static final int F_AUTO_DISPATCH = 21;
+	protected static final int F_MANUAL_DISPATCH = 22;
+	protected static final int F_AUTOMATIC_OP = 23;
+	protected static final int F_SEMI_MAN_OP = 24;
+	protected static final int F_FULL_MAN_OP = 25;
+	protected static final int F_ESTOP_RESET = 26;
+	protected static final int F_LIFT_JOG_NO_INT = 27;
+	protected static final int F_BRAKE_RELEASE_NO_INT = 28;
+	protected static final int F_PLAY_SOUND = 29;
+	protected static final int F_RESET_COASTER = 30;
+	// E-Stop specific functions must be at end
+	protected static final int F_ESTOP_SIMPLE = 31;
+	protected static final int F_ESTOP_ADVANCED = 32;
+
+	// List of Non-Interactable Functions:
 	private static final int[] NON_INTERACT_FUNCS = {
 		F_LIFT_JOG_NO_INT,
 		F_BRAKE_RELEASE_NO_INT
 	};
+
+	// [Enum] Station Device Actions:
+	private static final int A_SECURE = 0;
+	private static final int A_UNSECURE = 1;
+	private static final int A_TOGGLE = 2;
 
 	private Coaster coaster;
 	private Block block;
@@ -84,9 +96,9 @@ public class PushButton extends Script implements InteractionActionListener{
 	private OperatorButton button;
 	private SpecialTrackModule specialTrackModule;
 	private IndicatorLight plcIndicatorLight;
-	private Speakers speakers;
+	private Speakers speakers = null;
 	
-	private int func = F_STATIC_OFF;
+	private int func = F_NONE_OFF;
 	private int frameCounter = 5; // Stupid workaround for Dispatch Function where NL2 bug can sometimes report moving train speed as 0
 	private float binaryState = 0.f; // Helps determine if a "binary" state starts to change to the other value (ie. restraints start to close, vice-versa, etc)
 	private bool enabled = false;
@@ -114,10 +126,10 @@ public class PushButton extends Script implements InteractionActionListener{
 		
 		// Get configured function and required parameters
 		func = getFuncFromScoParams(sco);
-		if (func > F_STATIC_BLINK && func != F_PLAY_SOUND){ // If not static or Play Sound functions
+		if (func > F_NONE_BLINK && func != F_PLAY_SOUND){ // If not none or Play Sound functions
 			block = sco.getBlockParameter("block");
 			if (block == null){ // Check for un-configured block
-				log.err("Block parameter required for any non-static functions.");
+				log.err("Block Location must be set to use this Function.");
 				return false;
 			}
 			
@@ -146,23 +158,43 @@ public class PushButton extends Script implements InteractionActionListener{
 			!disableLight
 		);
 
+		// Create Speakers object if 'Play Sound on Action' is configured
+		ResourcePath soundResource = sco.getResourcePathParameter("play_sound");
+		if (soundResource != null){
+			String speakersScoName = sco.getStringParameter("speakers_sco_name");
+			if (speakersScoName.length() < 1){
+				log.err("'Play Sound on Action' requires 'Name of SCO(s) to Play Sound On' to be configured.");
+				return false;
+			}
+			SceneObject[] speakerSCOS = sim.getSceneObjectsWithName(speakersScoName);
+			if (speakerSCOS.length < 1){
+				log.err("No SCO(s) with the instance name of \"" + speakersScoName + "\" could be found.");
+				return false;
+			}
+			speakers = new Speakers(speakerSCOS, soundResource);
+		}
+
 		// Function-specific checks and setup
 		SceneObject plc = null;
 		switch (func){
-			// Static functions
-			case F_STATIC_OFF:
+			// None functions
+			case F_NONE_OFF:
 				button.lightOff();
 				break;
-			case F_STATIC_ON:
+			case F_NONE_ON:
 				button.lightOn();
 				break;
-			case F_STATIC_BLINK:
+			case F_NONE_BLINK:
 				button.lightBlink();
 				break;
 			// Functions that require station section
 			case F_DISPATCH:
 			case F_RESTRAINTS_OPEN:
 			case F_RESTRAINTS_LOCK:
+			case F_RESTRAINTS_TOGGLE:
+			case F_GATES_OPEN:
+			case F_GATES_CLOSE:
+			case F_GATES_TOGGLE:
 			case F_PLATFORM_RAISE:
 			case F_PLATFORM_LOWER:
 			case F_PLATFORM_TOGGLE:
@@ -179,9 +211,14 @@ public class PushButton extends Script implements InteractionActionListener{
 			// Functions that require Special Track
 			case F_SPECIAL_LEFT:
 			case F_SPECIAL_RIGHT:
+			case F_SPECIAL_TOGGLE:
 				specialTrack = sco.getSpecialTrackParameter("special_track");
 				if (specialTrack == null){
 					log.err("The configured function requires the Special Track parameter to be specified.");
+					return false;
+				}
+				if (func == F_SPECIAL_TOGGLE && specialTrack.getNumberOfSwitchDirections() != 2){
+					log.err("The Special Track Toggle function requires a Special Track with only 2 positions.");
 					return false;
 				}
 				break;
@@ -211,24 +248,12 @@ public class PushButton extends Script implements InteractionActionListener{
 					return false;
 				}
 				break;
-			// Functions that require a speaker
+			// Functions that require a sound
 			case F_PLAY_SOUND:
-				ResourcePath soundResource = sco.getResourcePathParameter("play_sound");
-				if (soundResource == null){
-					log.err("The configured function requires the Sound parameter to be specified.");
+				if (speakers == null){
+					log.err("The configured function requires the 'Play Sound' parameters to be set and valid.");
 					return false;
 				}
-				String speakersScoName = sco.getStringParameter("speakers_sco_name");
-				if (speakersScoName.length() < 1){
-					log.err("The configured function requires the Speaker(s) SCO Name parameter to be specified.");
-					return false;
-				}
-				SceneObject[] speakerSCOS = sim.getSceneObjectsWithName(speakersScoName);
-				if (speakerSCOS.length < 1){
-					log.err("No SCO(s) with the instance name of \"" + speakersScoName + "\" could be found.");
-					return false;
-				}
-				speakers = new Speakers(speakerSCOS, soundResource);
 				break;
 		}
 
@@ -295,7 +320,7 @@ public class PushButton extends Script implements InteractionActionListener{
 			iObj.setRadius(BUTTON_INTERACTION_RADIUS);
 			iObj.setProcessActionEventsWhenDisabled(true);
 			iObj.addActionListener(this);
-			if (func <= F_STATIC_BLINK) iObj.setEnabled(false);
+			if (func <= F_NONE_BLINK) iObj.setEnabled(false);
 		}
 		
 		return true; // Everything's just dandy
@@ -310,7 +335,7 @@ public class PushButton extends Script implements InteractionActionListener{
 		return sco.getIntegerParameter("function").intValue();
 	}
 
-	private bool isInteractableFunc(int func){
+	private static bool isInteractableFunc(int func){
 		for (int i = 0; i < NON_INTERACT_FUNCS.length; i++){
 			if (func == NON_INTERACT_FUNCS[i])
 				return false;
@@ -339,14 +364,14 @@ public class PushButton extends Script implements InteractionActionListener{
 
 	// Interactable Functions //
 	
-	private void handleStaticFunc(bool action){
-		if (action){
+	private void doNoneFunc(bool doAction){
+		if (doAction){
 			button.buttonPush();
 		}
 	}
 	
-	private void handleManualMoveFunc(bool action){
-		if (action){
+	private void doManualMoveFunc(bool doAction){
+		if (doAction){
 			button.buttonPush();
 			if (func == F_BLOCK_FWD){
 				block.doSemiManualMoveForward();
@@ -374,8 +399,8 @@ public class PushButton extends Script implements InteractionActionListener{
 		}
 	}
 	
-	private void handleDispatchFunc(bool action){
-		if (action){
+	private void doDispatchFunc(bool doAction){
+		if (doAction){
 			button.buttonIn();
 			section.doStationManualDispatch();
 			if (block.canSemiManualMoveForward())
@@ -411,10 +436,48 @@ public class PushButton extends Script implements InteractionActionListener{
 			button.buttonOut();
 		}
 	}
+
+	private void doStationDeviceFunc(
+		int action,
+		bool interruptible,
+		bool isSecured,
+		bool isUnsecured,
+		bool canSecure,
+		bool canUnsecure
+	){
+		// E-Stopped
+		if (coaster.isEmergencyStop()){
+			disableAction();
+			button.lightOff();
+		}
+		// Device moving
+		else if (!interruptible && !isSecured && !isUnsecured){
+			disableAction();
+			button.lightOn();
+		}
+		// Device ready to move
+		else if ( (action == A_SECURE && canSecure)
+				|| (action == A_UNSECURE && canUnsecure)
+				|| (action == A_TOGGLE && (canSecure || canUnsecure)) ){
+			enableActionIf(section.isStationManualDispatchMode());
+			button.lightBlink();
+		}
+		// Device not ready to move
+		else{
+			disableAction();
+			button.lightOff();
+		}
+	}
 	
-	private void handleRestraintsFunc(bool action){
-		if (action){
-			if (func == F_RESTRAINTS_OPEN){
+	private void doRestraintsFunc(bool doAction, int action){
+		bool interruptible = true;
+		bool isSecured = section.isStationManualClosedHarness();
+		bool isUnsecured = section.isStationManualOpenedHarness();
+		bool canSecure = section.canStationManualCloseHarness();
+		bool canUnsecure = section.canStationManualOpenHarness();
+
+		if (doAction){
+			if (isSecured){
 				section.doStationManualOpenHarness();
 			}
 			else{
@@ -423,55 +486,82 @@ public class PushButton extends Script implements InteractionActionListener{
 			button.buttonPush();
 			return;
 		}
-
-		if ( (func == F_RESTRAINTS_OPEN && section.canStationManualOpenHarness())
-				|| (func == F_RESTRAINTS_LOCK && section.canStationManualCloseHarness()) ){
-			enableActionIf(section.isStationManualDispatchMode());
-			button.lightBlink();
-		}
-		else{
-			disableAction();
-			button.lightOff();
-		}
+		
+		doStationDeviceFunc(
+			action,
+			interruptible,
+			isSecured,
+			isUnsecured,
+			canSecure,
+			canUnsecure
+		);
 	}
 	
-	private void handlePlatformFunc(bool action){
-		if (action){
-			if (section.getStationPlatformState() == 1.f){
-				section.doStationManualDisengagePlatform();
+	private void doGatesFunc(bool doAction, int action){
+		bool interruptible = true;
+		bool isSecured = section.isStationManualClosedGates();
+		bool isUnsecured = section.isStationManualOpenedGates();
+		bool canSecure = section.canStationManualCloseGates();
+		bool canUnsecure = section.canStationManualOpenGates();
+
+		if (doAction){
+			if (isSecured){
+				section.doStationManualOpenGates();
 			}
 			else{
-				section.doStationManualEngagePlatform();
+				section.doStationManualCloseGates();
 			}
 			button.buttonPush();
 			return;
 		}
-
-		// Platform moving
-		if (section.getStationPlatformState() != 0.f
-				&& section.getStationPlatformState() != 1.f){
-			disableAction();
-			button.lightOn();
-			return;
-		}
-		// Platform ready to move
-		bool canDisengage = section.canStationManualDisengagePlatform();
-		bool canEngage = section.canStationManualEngagePlatform();
-		if ( (func == F_PLATFORM_RAISE && canEngage)
-				|| (func == F_PLATFORM_LOWER && canDisengage)
-				|| (func == F_PLATFORM_TOGGLE && (canEngage || canDisengage)) ){
-			enableActionIf(section.isStationManualDispatchMode());
-			button.lightBlink();
-			return;
-		}
-		// Platform not ready to move
-		disableAction();
-		button.lightOff();
+		
+		doStationDeviceFunc(
+			action,
+			interruptible,
+			isSecured,
+			isUnsecured,
+			canSecure,
+			canUnsecure
+		);
 	}
 	
-	private void handleSeatsFunc(bool action){
-		if (action){
-			if (section.isStationManualLockedSeats()){
+	private void doPlatformFunc(bool doAction, int action){
+		bool interruptible = false;
+		bool isSecured = section.isStationManualDisengagedPlatform();
+		bool isUnsecured = section.isStationManualEngagedPlatform();
+		bool canSecure = section.canStationManualDisengagePlatform();
+		bool canUnsecure = section.canStationManualEngagePlatform();
+
+		if (doAction){
+			if (isSecured){
+				section.doStationManualEngagePlatform();
+			}
+			else{
+				section.doStationManualDisengagePlatform();
+			}
+			button.buttonPush();
+			return;
+		}
+		
+		doStationDeviceFunc(
+			action,
+			interruptible,
+			isSecured,
+			isUnsecured,
+			canSecure,
+			canUnsecure
+		);
+	}
+	
+	private void doSeatsFunc(bool doAction, int action){
+		bool interruptible = true;
+		bool isSecured = section.isStationManualLockedSeats();
+		bool isUnsecured = section.isStationManualUnlockedSeats();
+		bool canSecure = section.canStationManualLockSeats();
+		bool canUnsecure = section.canStationManualUnlockSeats();
+
+		if (doAction){
+			if (isSecured){
 				section.doStationManualUnlockSeats();
 			}
 			else{
@@ -481,46 +571,29 @@ public class PushButton extends Script implements InteractionActionListener{
 			return;
 		}
 		
-		// E-Stopped
-		if (coaster.isEmergencyStop()){
-			disableAction();
-			button.lightOff();
-			return;
-		}
-		// Seats moving
-		if (!section.isStationManualLockedSeats()
-				&& !section.isStationManualUnlockedSeats()){
-			disableAction();
-			button.lightOn();
-			return;
-		}
-		// Seats ready to move
-		bool canUnlock = section.canStationManualUnlockSeats();
-		bool canLock = section.canStationManualLockSeats();
-		if ( (func == F_SEATS_UNLOCK && canUnlock)
-				|| (func == F_SEATS_LOCK && canLock)
-				|| (func == F_SEATS_TOGGLE && (canUnlock || canLock)) ){
-			enableActionIf(section.isStationManualDispatchMode());
-			button.lightBlink();
-			return;
-		}
-		// Seats not ready to move
-		disableAction();
-		button.lightOff();
+		doStationDeviceFunc(
+			action,
+			interruptible,
+			isSecured,
+			isUnsecured,
+			canSecure,
+			canUnsecure
+		);
 	}
 
-	private void handleSpecialTrackFunc(bool action){
-		if (action){
+	private void doSpecialTrackFunc(bool doAction){
+		if (doAction){
 			int curSetPos = specialTrack.getSetSwitchDirection();
-			if (func == F_SPECIAL_LEFT){
-				specialTrack.setManualSwitchDirection(
-					specialTrack.getSetSwitchDirection() - 1
-				);
-			}
-			else{
-				specialTrack.setManualSwitchDirection(
-					specialTrack.getSetSwitchDirection() + 1
-				);
+			switch (func){
+				case F_SPECIAL_LEFT:
+					specialTrack.setManualSwitchDirection(curSetPos - 1);
+					break;
+				case F_SPECIAL_RIGHT:
+					specialTrack.setManualSwitchDirection(curSetPos + 1);
+					break;
+				case F_SPECIAL_TOGGLE:
+					specialTrack.setManualSwitchDirection(curSetPos ^ 1);
+					break;
 			}
 			button.buttonPush();
 			return;
@@ -538,8 +611,12 @@ public class PushButton extends Script implements InteractionActionListener{
 		}
 		// Track ready to move to new position
 		else if ( specialTrack.canChangeManualSwitchDirection() 
-				&& ( (func == F_SPECIAL_LEFT && specialTrack.getSetSwitchDirection() > 0) 
-					|| (func == F_SPECIAL_RIGHT && specialTrack.getSetSwitchDirection() < specialTrack.getNumberOfSwitchDirections()-1) ) ){
+			&& (
+				(func == F_SPECIAL_LEFT && specialTrack.getSetSwitchDirection() > 0) 
+				|| (func == F_SPECIAL_RIGHT && specialTrack.getSetSwitchDirection() < specialTrack.getNumberOfSwitchDirections()-1)
+				|| (func == F_SPECIAL_TOGGLE)
+			)
+		){
 			enableAction();
 			button.lightBlink();
 		}
@@ -549,8 +626,8 @@ public class PushButton extends Script implements InteractionActionListener{
 		}
 	}
 
-	private void handleDispatchModeFunc(bool action){
-		if (action){
+	private void doDispatchModeFunc(bool doAction){
+		if (doAction){
 			section.setStationManualDispatchMode(
 				!section.isStationManualDispatchMode()
 			);
@@ -573,8 +650,8 @@ public class PushButton extends Script implements InteractionActionListener{
 		}
 	}
 	
-	private void handleBlockSystemModeFunc(bool action){
-		if (action){
+	private void doBlockSystemModeFunc(bool doAction){
+		if (doAction){
 			switch (func){
 				case F_AUTOMATIC_OP:
 					coaster.setBlockSystemMode(Coaster.E_BLOCK_SYSTEM_MODE_AUTOMATIC);
@@ -622,10 +699,9 @@ public class PushButton extends Script implements InteractionActionListener{
 		}
 	}
 
-	private void handlePlaySoundFunc(bool action){
-		if (action){
+	private void doPlaySoundFunc(bool doAction){
+		if (doAction){
 			button.buttonPush();
-			speakers.play();
 			return;
 		}
 
@@ -637,11 +713,10 @@ public class PushButton extends Script implements InteractionActionListener{
 			enableAction();
 			button.lightOff();
 		}
-		speakers.updateTranslation();
 	}
 
-	private void handleResetCoasterFunc(bool action){
-		if (action){
+	private void doResetCoasterFunc(bool doAction){
+		if (doAction){
 			coaster.requestReset();
 			button.buttonPush();
 			return;
@@ -659,8 +734,8 @@ public class PushButton extends Script implements InteractionActionListener{
 	
 	// E-Stop Functions //
 	
-	private void handleEStopSimpleFunc(bool action){
-		if (action){
+	private void doEStopSimpleFunc(bool doAction){
+		if (doAction){
 			coaster.setEmergencyStop(!coaster.isEmergencyStop());
 			return;
 		}
@@ -676,14 +751,16 @@ public class PushButton extends Script implements InteractionActionListener{
 		}
 	}
 	
-	private void handleEStopAdvancedFunc(bool action){
-		if (action){
-			if (button.isPushedIn()){	// Pull out
+	private void doEStopAdvancedFunc(bool doAction){
+		if (doAction){
+			// Pull out
+			if (button.isPushedIn()){
 				button.buttonOut();
 				button.lightOff();
 				plcIndicatorLight.lightOff();
 			}
-			else{						// Push in
+			// Push in
+			else{
 				button.buttonIn();
 				button.lightOn();
 				plcIndicatorLight.lightOn();
@@ -703,8 +780,8 @@ public class PushButton extends Script implements InteractionActionListener{
 		}
 	}
 	
-	private void handleEStopResetFunc(bool action){
-		if (action){
+	private void doEStopResetFunc(bool doAction){
+		if (doAction){
 			button.buttonPush();
 			button.lightOff();
 			iObj.setEnabled(false);
@@ -725,7 +802,7 @@ public class PushButton extends Script implements InteractionActionListener{
 	
 	// Non-Interactable Functions //
 	
-	private void handleLiftJogFunc(){
+	private void doLiftJogFunc(){
 		if (coaster.getBlockSystemMode() != Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL || coaster.isEmergencyStop()){
 			button.lightOff();
 			button.buttonOut();
@@ -745,7 +822,7 @@ public class PushButton extends Script implements InteractionActionListener{
 		}
 	}
 	
-	private void handleManualBrakeReleaseFunc(){
+	private void doManualBrakeReleaseFunc(){
 		if (coaster.getBlockSystemMode() != Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL || coaster.isEmergencyStop()){
 			button.lightOff();
 			button.buttonOut();
@@ -760,76 +837,101 @@ public class PushButton extends Script implements InteractionActionListener{
 		}
 	}
 
-	private void handleFunc(bool action){
+	private void doFunc(bool doAction){
 		switch (func){
 			case F_BLOCK_FWD:
 			case F_BLOCK_BWD:
-				handleManualMoveFunc(action);
+				doManualMoveFunc(doAction);
 				break;
 			case F_DISPATCH:
-				handleDispatchFunc(action);
+				doDispatchFunc(doAction);
 				break;
 			case F_RESTRAINTS_OPEN:
+				doRestraintsFunc(doAction, A_UNSECURE);
+				break;
 			case F_RESTRAINTS_LOCK:
-				handleRestraintsFunc(action);
+				doRestraintsFunc(doAction, A_SECURE);
+				break;
+			case F_RESTRAINTS_TOGGLE:
+				doRestraintsFunc(doAction, A_TOGGLE);
+				break;
+			case F_GATES_OPEN:
+				doGatesFunc(doAction, A_UNSECURE);
+				break;
+			case F_GATES_CLOSE:
+				doGatesFunc(doAction, A_SECURE);
+				break;
+			case F_GATES_TOGGLE:
+				doGatesFunc(doAction, A_TOGGLE);
 				break;
 			case F_PLATFORM_RAISE:
+				doPlatformFunc(doAction, A_UNSECURE);
+				break;
 			case F_PLATFORM_LOWER:
+				doPlatformFunc(doAction, A_SECURE);
+				break;
 			case F_PLATFORM_TOGGLE:
-				handlePlatformFunc(action);
+				doPlatformFunc(doAction, A_TOGGLE);
 				break;
 			case F_SEATS_UNLOCK:
+				doSeatsFunc(doAction, A_UNSECURE);
+				break;
 			case F_SEATS_LOCK:
+				doSeatsFunc(doAction, A_SECURE);
+				break;
 			case F_SEATS_TOGGLE:
-				handleSeatsFunc(action);
+				doSeatsFunc(doAction, A_TOGGLE);
 				break;
 			case F_SPECIAL_LEFT:
 			case F_SPECIAL_RIGHT:
-				handleSpecialTrackFunc(action);
+			case F_SPECIAL_TOGGLE:
+				doSpecialTrackFunc(doAction);
 				break;
 			case F_AUTO_DISPATCH:
 			case F_MANUAL_DISPATCH:
-				handleDispatchModeFunc(action);
+				doDispatchModeFunc(doAction);
 				break;
 			case F_AUTOMATIC_OP:
 			case F_SEMI_MAN_OP:
 			case F_FULL_MAN_OP:
-				handleBlockSystemModeFunc(action);
+				doBlockSystemModeFunc(doAction);
 				break;
 			case F_ESTOP_SIMPLE:
-				handleEStopSimpleFunc(action);
+				doEStopSimpleFunc(doAction);
 				break;
 			case F_ESTOP_ADVANCED:
-				handleEStopAdvancedFunc(action);
+				doEStopAdvancedFunc(doAction);
 				break;
 			case F_ESTOP_RESET:
-				handleEStopResetFunc(action);
+				doEStopResetFunc(doAction);
 				break;
 			case F_LIFT_JOG_NO_INT:
-				handleLiftJogFunc();
+				doLiftJogFunc();
 				break;
 			case F_BRAKE_RELEASE_NO_INT:
-				handleManualBrakeReleaseFunc();
+				doManualBrakeReleaseFunc();
 				break;
 			case F_PLAY_SOUND:
-				handlePlaySoundFunc(action);
+				doPlaySoundFunc(doAction);
 				break;
 			case F_RESET_COASTER:
-				handleResetCoasterFunc(action);
+				doResetCoasterFunc(doAction);
 				break;
 			default:
-				handleStaticFunc(action);
+				doNoneFunc(doAction);
 		}
 	}
+	
+	// Frame & Interaction Functions //
 
-	public void onNextFrame(float tick){
+	public final void onNextFrame(float tick){
 		/*if (Button.isPressed(Button.ACTION)){ //DEBUGGING
 			button.buttonIn();
 		}
 		if (Button.isPressed(Button.FLY_SLOWER)){ //DEBUGGING
 			button.buttonOut();
 		}*/
-		handleFunc(false);
+		doFunc(false);
 		
 		// Run button object's onNextFrame() as well to animate
 		button.onNextFrame(tick);
@@ -841,11 +943,18 @@ public class PushButton extends Script implements InteractionActionListener{
 		// If iObj exists, update its translation if SCO moves
 		if (iObj != null)
 			iObj.setPosition(button.getAbsoluteTranslation());
+		
+		// If Speakers object exists, update its translation
+		if (speakers != null)
+			speakers.updateTranslation();
 	}
 
-	public void onInteractionAction(InteractionObject obj){
+	public final void onInteractionAction(InteractionObject obj){
 		if (enabled){
-			handleFunc(true);
+			doFunc(true);
+			if (speakers != null){
+				speakers.play();
+			}
 		}
 		else{
 			switch (func){

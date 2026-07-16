@@ -1,0 +1,78 @@
+/**
+	Textured Scene Object NL2 Abstract Script
+	David Wolfe (Red-Thirten)
+	07/10/2026
+	Sets main element texture index and attaches to special track, based on available entity parameters.
+		Also includes method to hide elements based on available entity parameters.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+import com.nolimitscoaster.Script;
+import com.nolimitscoaster.SceneObject;
+import com.nolimitscoaster.SceneObjectElement;
+
+import util.SceneObjectTools;
+import util.SpecialTrackModule;
+
+public abstract class TexturedSceneObject extends Script{
+	protected String SCRIPT_NAME;			// Script name for debugging
+	protected String MAIN_ELEMENT_NAME;		// Name of the main element in the SCO/model
+
+	private SceneObject sco;
+	private SpecialTrackModule specialTrackModule;
+	
+	public bool onInit(){ // On initialization of Play simulation
+		// Get and assign local sco
+		sco = SceneObjectTools.getSceneObjectForEntityId(
+			sim,
+			getParentEntityId(),
+			SCRIPT_NAME
+		);
+		
+		// Set the texture chosen by the SCO parameter to the main element
+		setTextureFromScoParam(
+			sco,
+			SceneObjectTools.getElementForName(sco, MAIN_ELEMENT_NAME, SCRIPT_NAME)
+		);
+		
+		// If set to attach to special track, set up the module object for it
+		if (sco.getSpecialTrackParameter("special_track_attach") != null){
+			specialTrackModule = new SpecialTrackModule(sco);
+			return true;
+		}
+		else{
+			return false; // Prevent unused onNextFrame() from running
+		}
+	}
+
+	protected final SceneObject getSco(){
+		return sco;
+	}
+	
+	protected static final void setTextureFromScoParam(SceneObject sco, SceneObjectElement element){
+		/* Set Texture from SCO Parameter
+			Sets the texture based on "texture" parameter enumeration choice.
+			Returns early if parameter doesn't exist.
+		*/
+		Integer texIndex = sco.getIntegerParameter("texture");
+		if (texIndex == null) return;
+		element.setTextureAnimationIndex(texIndex.intValue());
+	}
+
+	protected static final bool doElemHideIfTrue(SceneObject sco, SceneObjectElement element, String paramId){
+		/* Do Element Hide if True
+			Hides element if SCO boolean parameter is present in SCO and true.
+			Returns true if element was hidden.
+		*/
+		Boolean param = sco.getBooleanParameter(paramId);
+		if (param == null || !param.boolValue()) return false;
+		element.setVisible(false);
+		return true;
+	}
+	
+	public final void onNextFrame(float tick){
+		// If set to attach to special track, update translation of SCO
+		if (specialTrackModule != null)
+			specialTrackModule.updateTranslation();
+	}
+}

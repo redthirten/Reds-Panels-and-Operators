@@ -1,0 +1,45 @@
+/**
+	Emergency Stop Button [Siemens] NL2 Script
+	David Wolfe (Red-Thirten)
+	07/10/2026
+	Extends EStopButton to define parameters specific to Siemens E-Stop Buttons,
+		and handles the protective collar element.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+import com.nolimitscoaster.SceneObject;
+import com.nolimitscoaster.SceneObjectElement;
+
+import util.SceneObjectTools;
+
+public class EStopButtonSi extends EStopButton{
+	private static final String COLLAR_ELEMENT_NAME = "collar";	// Name of the protective collar element in the SCO/model
+
+	EStopButtonSi(){
+		SCRIPT_NAME = "EStopButtonSi";			// Script name for debugging
+		BUTTON_TRAVEL_DIST = 0.00396f;	    	// Distance, in meters, the button will travel to be fully "pressed"
+	}
+
+	public final bool onInit(){
+		if (!super.onInit()) return false;
+
+		SceneObject sco = SceneObjectTools.getSceneObjectForEntityId(
+			sim,
+			getParentEntityId(),
+			SCRIPT_NAME
+		);
+		
+		// Handle protective collar
+		SceneObjectElement collar = SceneObjectTools.getElementForName(sco, COLLAR_ELEMENT_NAME, SCRIPT_NAME);
+		SceneObjectElement placard = SceneObjectTools.getElementForName(sco, PLACARD_ELEMENT_NAME, SCRIPT_NAME);
+		if (sco.getBooleanParameter("show_collar").boolValue()){
+			collar.setVisible(true);
+			placard.setVisible(false);
+		}
+		else{
+			collar.setVisible(false);
+		}
+
+		return true;
+	}
+}

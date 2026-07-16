@@ -1,43 +1,14 @@
 /**
 	Electrical Panel Label NL2 Script
 	David Wolfe (Red-Thirten)
-	03/12/2024
-	Attaches the label to special track if configured.
+	07/10/2026
+	Extends Textured Scene Object.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
 
-import com.nolimitscoaster.Script;
-import com.nolimitscoaster.SceneObject;
-
-import util.SceneObjectTools;
-import util.SpecialTrackModule;
-
-public class ElectricalPanelLabel extends Script{
-	private static final String SCRIPT_NAME = "ElectricalPanelLabel";	// Script name for debugging
-	
-	private SpecialTrackModule specialTrackModule;
-	
-	public bool onInit(){ // On initialization of Play simulation
-		// Get and assign local sco
-		SceneObject sco = SceneObjectTools.getSceneObjectForEntityId(
-			sim,
-			getParentEntityId(),
-			SCRIPT_NAME
-		);
-		
-		// If set to attach to special track, set up the module object for it
-		if (sco.getSpecialTrackParameter("special_track_attach") != null){
-			specialTrackModule = new SpecialTrackModule(sco);
-			return true;
-		}
-		else{
-			return false; // Prevent unused onNextFrame() from running
-		}
-	}
-	
-	public void onNextFrame(float tick){
-		// If set to attach to special track, update translation of SCO
-		if (specialTrackModule != null)
-			specialTrackModule.updateTranslation();
+public final class ElectricalPanelLabel extends TexturedSceneObject{
+	ElectricalPanelLabel(){
+		SCRIPT_NAME = "ElectricalPanelLabel";	// Script name for debugging
+		MAIN_ELEMENT_NAME = "label";			// Name of the main element in the SCO/model
 	}
 }

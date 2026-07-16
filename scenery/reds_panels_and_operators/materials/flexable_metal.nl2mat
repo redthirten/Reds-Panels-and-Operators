@@ -2,26 +2,31 @@
 <root>
   <material>
     <description>A ribbed metal texture, with normal map and roughness.</description>
-    <preview>textures/factory_wall_ao_1k.jpg</preview>
+    <preview>textures/factory_wall/factory_wall_ao_1k.jpg</preview>
     <renderpass>
-      <shadercore>Metallic = tex0;
-Roughness = Mul(0.4,tex2);
-Result = tex0;</shadercore>
+      <shadercore>Result = tex0;
+Metallic = tex0;
+Roughness = Mul(0.4,tex2);</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
-      <reflection bump="true" affectedbyspecular="true" fresnelconst="0.2" fresnelvar="0.7"/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>1</metallic>
+        <roughness>1</roughness>
+      </pbrmetallicworkflow>
+      <reflection bump="true" fresnelconst="0" fresnelvar="0"/>
       <rgbgen mode="bumplighting"/>
       <texunit>
-        <map>textures/factory_wall_ao_1k.jpg</map>
+        <map>textures/factory_wall/factory_wall_ao_1k.jpg</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/factory_wall_nor_1k.jpg</map>
+        <map>textures/factory_wall/factory_wall_nor_1k.jpg</map>
         <bump mode="normalgloss"/>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/factory_wall_rough_1k.jpg</map>
+        <map>textures/factory_wall/factory_wall_rough_1k.jpg</map>
         <tcgen mode="base"/>
       </texunit>
     </renderpass>

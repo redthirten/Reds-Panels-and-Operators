@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <material>
+    <description>Siemens LOGO! text display face plate w/ sparkly specular map.</description>
+    <preview>textures/si_text_display/display_face.jpg</preview>
+    <renderpass>
+      <shadercore>Result = Mul(Tex0, Color);
+Specular = Tex1;</shadercore>
+      <transparency mode="opaque"/>
+      <linearshading/>
+      <custommaterial>
+        <diffuse r="0.819608" g="0.819608" b="0.819608"/>
+        <ambient r="0.819608" g="0.819608" b="0.819608"/>
+      </custommaterial>
+      <rgbgen mode="lighting"/>
+      <texunit>
+        <map>textures/si_text_display/display_face.jpg</map>
+        <tcgen mode="base"/>
+      </texunit>
+      <texunit>
+        <map>intern:data/textures/terrain/SandDetail.jpg</map>
+        <tcgen mode="base"/>
+      </texunit>
+    </renderpass>
+  </material>
+</root>

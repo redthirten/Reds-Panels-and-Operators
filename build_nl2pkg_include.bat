@@ -1,9 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
-rem build_nl2pkg_include.bat "scenery\reds_panels_and_operators\[ Placards ]" "scenery\reds_panels_and_operators\[ Labels ]"
+rem build_nl2pkg_include.bat "scenery\reds_panels_and_operators\[ Placards ]" "scenery\reds_panels_and_operators\[ Labels ]" "scenery\reds_panels_and_operators\[ Sounds ]"
 
-set "EXTENSIONS=png psd xcf"
+set "EXTENSIONS=jpg png psd xcf ogg"
 set OUTPUT_FILE=%~dp0.nl2pkg_include.nl2script
 
 (
@@ -13,7 +13,7 @@ set OUTPUT_FILE=%~dp0.nl2pkg_include.nl2script
   echo     ^<classpath^>Copy the folder in scenery to your park to use^</classpath^>
   echo     ^<class^>WelcomeScript^</class^>
   echo     ^<sharedvm^>true^</sharedvm^>
-  echo     ^<resource id="README"^>scenery/reds_panels_and_operators/README.html^</resource^>
+  echo     ^<resource id="README"^>scenery/reds_panels_and_operators/^^!README.html^</resource^>
 ) > "%OUTPUT_FILE%"
 
 set COUNT=1

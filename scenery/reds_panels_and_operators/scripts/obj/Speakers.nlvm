@@ -1,7 +1,7 @@
 /**
 	Speakers Object NL2 Script
 	David Wolfe (Red-Thirten)
-	02/17/2026
+	06/01/2026
 	A Java object representing one or more speakers that can be easily initialized given
 		a list of SCOs and a sound resource path to play on all speakers when called.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
@@ -11,6 +11,8 @@
 
 	Methods:
 		void play() - Plays sound (configured during construction) on all speakers.
+						Stops sound first if already playing.
+		void stop() - Stops sound on all speakers.
 		void updateTranslation() - Should be called every frame to set the translation of the sounds to the speaker SCOs' current position.
 */
 
@@ -32,12 +34,18 @@ public class Speakers{
 	private SceneObject[] scos;
 	private StaticSound[] speakers;
 
-	public Speakers(SceneObject[] scos, ResourcePath soundResource){ // Default object constructor
+	private bool loop = false;
+
+	// Default object constructor
+	public Speakers(SceneObject[] scos, ResourcePath soundResource){
 		this.scos = scos;
 		speakers = new StaticSound[scos.length];
 
 		for (int i = 0; i < scos.length; i++){
-			speakers[i] = StaticSound.loadFromResource(soundResource, StaticSound.FLAG_MIXDOWN_MONO);
+			speakers[i] = StaticSound.loadFromResource(
+				soundResource,
+				StaticSound.FLAG_MIXDOWN_MONO
+			);
 			if (speakers[i] == null){
 				System.throwRuntimeException("[Speaker Error]: Unable to load " + soundResource.toString());
 			}
@@ -55,8 +63,14 @@ public class Speakers{
 			speakers[i].setPosition(getElementTransOrScoTrans(scos[i], SPEAKER_ELEMENT_NAME));
 		}
 	}
+	
+	// Alternate object constructor, to support looping
+	public Speakers(SceneObject[] scos, ResourcePath soundResource, bool loop){
+		this(scos, soundResource);
+		this.loop = loop;
+	}
 
-    private float getFloatParameterOrDefault(SceneObject sco, String parameterName, float defaultValue){
+    private static float getFloatParameterOrDefault(SceneObject sco, String parameterName, float defaultValue){
         Double parameter = sco.getDoubleParameter(parameterName);
         if (parameter != null){
             return parameter.floatValue();
@@ -66,7 +80,7 @@ public class Speakers{
         }
     }
 
-	private Vector3f getElementTransOrScoTrans(SceneObject sco, String elementName){
+	private static Vector3f getElementTransOrScoTrans(SceneObject sco, String elementName){
 		SceneObjectElement element = sco.getElementForName(elementName);
 		if (element != null){
 			return element.getAbsoluteTranslation();
@@ -77,9 +91,18 @@ public class Speakers{
 	}
 	
 	public void play(){
-		for (int i = 0; i < speakers.length; i++){
+		for (int i = speakers.length - 1; i >= 0; --i){
 			speakers[i].stop();
-			speakers[i].play();
+			if (loop)
+				speakers[i].playLoop();
+			else
+				speakers[i].play();
+		}
+	}
+	
+	public void stop(){
+		for (int i = speakers.length - 1; i >= 0; --i){
+			speakers[i].stop();
 		}
 	}
 

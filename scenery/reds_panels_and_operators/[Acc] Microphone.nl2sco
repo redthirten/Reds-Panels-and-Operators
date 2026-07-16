@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <sceneobject>
+    <model path="models/acc/microphone.dae">
+      <clip distance="35"/>
+    </model>
+    <description>A standalone microphone.</description>
+    <preview>materials/previews/acc/microphone.png</preview>
+    <param basescalex="2"/>
+    <param basescaley="2"/>
+    <param basescalez="2"/>
+    <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
+    <materialpath name="flexable_metal">materials/flexable_metal.nl2mat</materialpath>
+    <materialpath name="flexable_metal_0">materials/flexable_metal.nl2mat</materialpath>
+    <materialpath name="metal_small">materials/main_panel_texture_user0.nl2mat</materialpath>
+    <materialpath name="mic_opening">materials/mic_opening.nl2mat</materialpath>
+    <materialpath name="silver">intern:data/materials/Chrome.nl2mat</materialpath>
+  </sceneobject>
+</root>

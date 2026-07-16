@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <sceneobject>
+    <model path="models/panel/label.dae">
+      <clip distance="15"/>
+    </model>
+    <description>A small label to add detail to an existing operator or electrical panel.</description>
+    <preview>materials/previews/panel/label.png</preview>
+    <param baserotx="-90"/>
+    <param basescalex="2"/>
+    <param basescaley="2"/>
+    <param basescalez="2"/>
+    <usercolor>
+      <label>Label Background</label>
+      <index>0</index>
+      <defaultcolor r="0.117647" g="0.117647" b="0.117647"/>
+    </usercolor>
+    <usercolor>
+      <label>Label Text</label>
+      <index>1</index>
+      <defaultcolor r="1" g="1" b="1"/>
+    </usercolor>
+    <usertexture>
+      <label>Label:</label>
+      <description>Label text image to use. Can be custom, but must be black text with white background.</description>
+      <defaultpath>[ Labels ]/Operator 1.png</defaultpath>
+    </usertexture>
+    <script>
+      <classpath>scripts</classpath>
+      <class>ElectricalPanelLabel</class>
+      <sharedvm>true</sharedvm>
+      <resource id="LICENSE">LICENSE</resource>
+    </script>
+    <scriptparameter>
+      <type>specialtrack</type>
+      <id>special_track_attach</id>
+      <description>Select the special track of a ride you want this label to move with during simulation. Set to &lt;None&gt; to disable.</description>
+      <label>Special Track to Attach To (Optional):</label>
+    </scriptparameter>
+    <materialpath name="black">materials/plastic_black.nl2mat</materialpath>
+    <materialpath name="label">[ Labels ]/label.nl2mat</materialpath>
+    <materialpath name="rivet">materials/rivet.nl2mat</materialpath>
+    <materialpath name="rivet_0">materials/rivet.nl2mat</materialpath>
+  </sceneobject>
+</root>

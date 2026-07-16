@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <material>
-    <description>Matte, black colored, plastic</description>
+    <description>Matte, black colored plastic w/ ribbed height map.</description>
+    <preview>intern:data/textures/fx/black.png</preview>
     <renderpass>
-      <shadercore>Roughness = 1;
-Specular = 0;</shadercore>
+      <shadercore>Roughness = 0.75;</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
-      <custommaterial>
-        <diffuse r="0.117647" g="0.109804" b="0.113725"/>
-        <ambient r="0.117647" g="0.109804" b="0.113725"/>
-        <specular r="0.117647" g="0.109804" b="0.113725"/>
-      </custommaterial>
+      <pbrmetallicworkflow>
+        <basecolor r="0.117647" g="0.109804" b="0.113725"/>
+        <metallic>0</metallic>
+        <roughness>0.75</roughness>
+      </pbrmetallicworkflow>
       <rgbgen mode="bumplighting"/>
       <texunit>
         <map>textures/ribbed_height.png</map>

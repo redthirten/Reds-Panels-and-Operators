@@ -1,0 +1,15 @@
+/**
+	Push Button [Siemens] NL2 Script
+	David Wolfe (Red-Thirten)
+	07/10/2026
+	Extends PushButton to define parameters specific to Siemens Push Buttons.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+public class PushButtonSi extends PushButton{
+	PushButtonSi(){
+		SCRIPT_NAME = "PushButtonSi";			// Script name for debugging
+		BUTTON_TRAVEL_DIST = 0.0049591f;		// Distance, in meters, the button will travel to be fully "pressed"
+		BUTTON_INTERACTION_RADIUS = 0.03f;		// Radius, in meters, of the InteractionObject detection sphere
+	}
+}

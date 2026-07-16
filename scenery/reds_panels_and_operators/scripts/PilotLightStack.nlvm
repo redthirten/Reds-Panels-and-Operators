@@ -1,7 +1,7 @@
 /**
 	Pilot Light (Stack) NL2 Script
 	David Wolfe (Red-Thirten)
-	03/17/2024
+	07/09/2026
 	Initializes the light stack's lights and animates the pilot lights during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -10,8 +10,6 @@ import com.nolimitscoaster.SceneObject;
 import com.nolimitscoaster.Coaster;
 import com.nolimitscoaster.Train;
 import com.nolimitscoaster.Block;
-import com.nolimitscoaster.StaticSound;
-import nlvm.math3d.Vector3f;
 
 import obj.IndicatorLight;
 import util.SceneObjectTools;
@@ -20,63 +18,46 @@ import util.CoasterTools;
 public class PilotLightStack extends PilotLight{
 	private static final String LIGHT2_ELEMENT_NAME = "light2";		// Name of the right pilot light element in the SCO/model
 	private static final String LIGHT3_ELEMENT_NAME = "light3";		// Name of the bottom pilot light element in the SCO/model
-	private static final Vector3f SPEAKER_LOCATION = new Vector3f(0.f, 0.75f, 0.f);	// Speaker position in the model/SCO, relative to the origin
 		
-	// All Light Stack specific Functions:
-	private static final int F_STATIC = 0;
-
-	private StaticSound soundEmergency;
+	// [Enum] Light Stack SPECIFIC Functions:
+	private static final int F_NONE = 0;
 	
 	private IndicatorLight light2;
 	private IndicatorLight light3;
-	
-	private bool soundPlayed = false;
 	
 	public bool onInit(){
 		super.SCRIPT_NAME = "LightStack";		// Script name for debugging
 		super.LIGHT_ELEMENT_NAME = "light1";	// Name of the top pilot light element in the SCO/model
 		super.LIGHT_OBJECT_NAME = "light1";		// Name of the Scene Object Light
 		
-		// If PilotLight initialization succeeds, continue with self-initialization
-		if(super.onInit()){
-			// Create additional IndicatorLight objects
-			light2 = new IndicatorLight(
-				SceneObjectTools.getElementForName(sco, LIGHT2_ELEMENT_NAME, SCRIPT_NAME),
-				SceneObjectTools.getLightForName(sco, LIGHT2_ELEMENT_NAME, SCRIPT_NAME),
-				BLINK_INTERVAL,
-				!sco.getBooleanParameter("disable_light").boolValue()
-			);
-			light3 = new IndicatorLight(
-				SceneObjectTools.getElementForName(sco, LIGHT3_ELEMENT_NAME, SCRIPT_NAME),
-				SceneObjectTools.getLightForName(sco, LIGHT3_ELEMENT_NAME, SCRIPT_NAME),
-				BLINK_INTERVAL,
-				!sco.getBooleanParameter("disable_light").boolValue()
-			);
+		// Run PilotLight initialization
+		if(!super.onInit()) return false;
 
-			// Gets and setup E-Stop sound from the parameters, if it exists
-			soundEmergency = StaticSound.loadFromResource(
-				sco.getResourcePathParameter("estop_sound"),
-				StaticSound.FLAG_MIXDOWN_MONO
-			);
-			if (soundEmergency != null){
-				Vector3f speakerLocation = sco.getTranslation(); // Get SCO origin position
-				speakerLocation.add(SPEAKER_LOCATION); // Add the speaker location translation
-				soundEmergency.setPosition(speakerLocation); // Set the sound position to this new location
-				soundEmergency.setDopplerMode(false);
-			}
-			
-			// Additional Function-specific checks and setup
-			switch (func){
-				case F_STATIC_BLINK: // None/Static
-					return handleStaticFunc(
-						new IndicatorLight[]{light, light2, light3},
-						new String[]{"light1", "light2", "light3"}
-					);
-			}
-			
-			return true; // Everything's just dandy
+		// Continue with special self-initialization
+		// Create additional IndicatorLight objects
+		light2 = new IndicatorLight(
+			SceneObjectTools.getElementForName(sco, LIGHT2_ELEMENT_NAME, SCRIPT_NAME),
+			SceneObjectTools.getLightForName(sco, LIGHT2_ELEMENT_NAME, SCRIPT_NAME),
+			BLINK_INTERVAL,
+			!sco.getBooleanParameter("disable_light").boolValue()
+		);
+		light3 = new IndicatorLight(
+			SceneObjectTools.getElementForName(sco, LIGHT3_ELEMENT_NAME, SCRIPT_NAME),
+			SceneObjectTools.getLightForName(sco, LIGHT3_ELEMENT_NAME, SCRIPT_NAME),
+			BLINK_INTERVAL,
+			!sco.getBooleanParameter("disable_light").boolValue()
+		);
+		
+		// Additional Function-specific checks and setup
+		switch (func){
+			case F_NONE_BLINK: // None function
+				return doNoneFunc(
+					new IndicatorLight[]{light, light2, light3},
+					new String[]{"light1", "light2", "light3"}
+				);
 		}
-		else return false; // Oh noes! Everything's not dandy!
+		
+		return true; // Everything's just dandy
 	}
 
 	protected int getFuncFromScoParams(SceneObject sco){
@@ -87,8 +68,8 @@ public class PilotLightStack extends PilotLight{
 
 		int funcVal = sco.getIntegerParameter("function").intValue();
 		switch (funcVal){
-			case F_STATIC:
-				return F_STATIC_BLINK; // Set to F_STATIC_BLINK to let init return true
+			case F_NONE:
+				return F_NONE_BLINK; // Set to F_NONE_BLINK to let init return true
 			case 1: // Dispatch
 				return F_DISPATCH;
 			case 2: // Block Indicator
@@ -99,9 +80,9 @@ public class PilotLightStack extends PilotLight{
 		return funcVal; // Default
 	}
 	
-	private bool handleStaticFunc(IndicatorLight[] lights, String[] paramNames){
-		/* Handle Static Function
-			Sets the lights' states, based on given static parameter names.
+	private bool doNoneFunc(IndicatorLight[] lights, String[] paramNames){
+		/* Handle None Function
+			Sets the lights' states, based on given parameter names.
 			Returns true if any of the lights were set to blink
 			(so onNextFrame can be called).
 		*/
@@ -122,18 +103,13 @@ public class PilotLightStack extends PilotLight{
 		return anyLightBlink;
 	}
 	
-	private void handleDispatchFunc(){
+	private void doDispatchFunc(){
 		Train train = section.getTrainOnSection();
 		// E-Stopped
 		if (coaster.isEmergencyStop()){
 			light.lightOff();
 			light2.lightOff();
 			light3.lightOn(); // Top light on
-			 // Play E-Stop sound once, if set
-			if (!soundPlayed && soundEmergency != null){
-				soundEmergency.play();
-				soundPlayed = true;
-			}
 		}
 		// Full manual operation mode
 		else if (coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL){
@@ -178,11 +154,6 @@ public class PilotLightStack extends PilotLight{
 					light2.lightOff();
 				}
 			}
-
-			// Reset E-Stop sound when not in E-Stop
-			if (soundPlayed){
-				soundPlayed = false;
-			}
 		}
 		// Train not on section
 		else{
@@ -193,17 +164,12 @@ public class PilotLightStack extends PilotLight{
 		}
 	}
 	
-	private void handleBlockIndicatorFunc(){
+	private void doBlockIndicatorFunc(){
 		// E-Stopped
 		if (coaster.isEmergencyStop()){
 			light.lightOff();
 			light2.lightOff();
 			light3.lightOn(); // Top light on
-			 // Play E-Stop sound once, if set
-			if (!soundPlayed && soundEmergency != null){
-				soundEmergency.play();
-				soundPlayed = true;
-			}
 		}
 		else{
 			// Handle block states
@@ -230,25 +196,15 @@ public class PilotLightStack extends PilotLight{
 					light2.lightOff();
 					light3.lightBlink();
 			}
-			
-			// Reset E-Stop sound when not in E-Stop
-			if (soundPlayed){
-				soundPlayed = false;
-			}
 		}
 	}
 	
-	private void handleSpecialTrackFunc(){
+	private void doSpecialTrackFunc(){
 		// E-Stopped
 		if (coaster.isEmergencyStop()){
 			light.lightOff();
 			light2.lightOff();
 			light3.lightOn(); // Top light on
-			 // Play E-Stop sound once, if set
-			if (!soundPlayed && soundEmergency != null){
-				soundEmergency.play();
-				soundPlayed = true;
-			}
 		}
 		else{
 			// Bottom Light (Special Track can be manually moved)
@@ -275,24 +231,19 @@ public class PilotLightStack extends PilotLight{
 			else{
 				light3.lightOff();
 			}
-			
-			// Reset E-Stop sound when not in E-Stop
-			if (soundPlayed){
-				soundPlayed = false;
-			}
 		}
 	}
 
 	public void onNextFrame(float tick){
 		switch (func){
 			case F_DISPATCH:
-				handleDispatchFunc();
+				doDispatchFunc();
 				break;
 			case F_BLOCK_IND:
-				handleBlockIndicatorFunc();
+				doBlockIndicatorFunc();
 				break;
 			case F_SPECIAL_TRACK:
-				handleSpecialTrackFunc();
+				doSpecialTrackFunc();
 				break;
 		}
 

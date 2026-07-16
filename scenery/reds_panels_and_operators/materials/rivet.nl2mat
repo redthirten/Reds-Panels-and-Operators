@@ -5,18 +5,18 @@
     <preview>textures/rivet_normal.jpg</preview>
     <renderpass>
       <shadercore>Result = tex0;
-Roughness = Mul(tex2,2);
-Metallic = 0.7;</shadercore>
+Roughness = Mul(tex2,2);</shadercore>
       <transparency mode="opaque"/>
       <linearshading/>
-      <custommaterial>
-        <specular r="0.623529" g="0.639216" b="0.654902"/>
-        <shininess exponent="42.3385"/>
-      </custommaterial>
-      <reflection bump="true" fresnelconst="0.3" fresnelvar="0.7"/>
+      <pbrmetallicworkflow>
+        <basecolor r="1" g="1" b="1"/>
+        <metallic>0.7</metallic>
+        <roughness>0</roughness>
+      </pbrmetallicworkflow>
+      <reflection bump="true" fresnelconst="0" fresnelvar="0"/>
       <rgbgen mode="bumplighting"/>
       <texunit>
-        <map>textures/Metal011_2K_Color.jpg</map>
+        <map>textures/metal_11/Metal011_2K_Color.jpg</map>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
@@ -25,7 +25,7 @@ Metallic = 0.7;</shadercore>
         <tcgen mode="base"/>
       </texunit>
       <texunit>
-        <map>textures/Metal011_2K_Roughness.jpg</map>
+        <map>textures/metal_11/Metal011_2K_Roughness.jpg</map>
         <tcgen mode="base"/>
       </texunit>
     </renderpass>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <sceneobject>
+    <model path="models/si/speaker.dae">
+      <clip distance="30"/>
+      <clip mesh="speaker" distance="15"/>
+    </model>
+    <description>Siemens® 3SU1 acoustic signaling device. Scripted - Customizable Placard</description>
+    <preview>materials/previews/si/Speaker.png</preview>
+    <param baserotx="-90"/>
+    <param basescalex="2"/>
+    <param basescaley="2"/>
+    <param basescalez="2"/>
+    <usercolor>
+      <label>Placard Background</label>
+      <index>0</index>
+      <defaultcolor r="1" g="1" b="0.94902"/>
+    </usercolor>
+    <usercolor>
+      <label>Placard Text</label>
+      <index>1</index>
+      <defaultcolor r="0" g="0" b="0"/>
+    </usercolor>
+    <usertexture>
+      <label>Placard:</label>
+      <description>Placard text image to use. Can be custom, but must be black text with white background.</description>
+      <defaultpath>[ Placards ]/Default.png</defaultpath>
+    </usertexture>
+    <script>
+      <classpath>scripts</classpath>
+      <class>Speaker</class>
+      <sharedvm>true</sharedvm>
+      <resource id="LICENSE">LICENSE</resource>
+    </script>
+    <scriptparameter>
+      <type>int</type>
+      <defaultvalue>0</defaultvalue>
+      <enums>None,E-Stop,Special Track (Moving)</enums>
+      <id>speaker_function</id>
+      <description>How the speaker will behave during Play Mode.</description>
+      <label>Function:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>blocksection</type>
+      <id>block</id>
+      <description>Specifies the block that active Functions will use for this speaker.</description>
+      <label>Block Location:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>specialtrack</type>
+      <id>special_track</id>
+      <description>This is the Special Track that this speaker is associated with. Required for Special Track Function.</description>
+      <label>Special Track (for Special Track Function):</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>specialtrack</type>
+      <id>special_track_attach</id>
+      <description>Select the special track of a ride you want this speaker to move with during simulation. Set to &lt;None&gt; to disable.</description>
+      <label>Special Track to Attach To (Optional):</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type filetype="audio">resourcepath</type>
+      <defaultvalue>sounds/alarm.ogg</defaultvalue>
+      <id>sound</id>
+      <description>Sound that plays under the condition of the Function chosen above.</description>
+      <label>Sound:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>double</type>
+      <defaultvalue>1</defaultvalue>
+      <id>gain</id>
+      <description>The &quot;volume multiplier&quot; for the Speaker Sound (eg. 0.5 = 50% loud).</description>
+      <label>Sound Gain:</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>bool</type>
+      <defaultvalue>false</defaultvalue>
+      <id>loop_sound</id>
+      <description>If enabled, Function will play sound repeatedly when active.</description>
+      <label>Loop Sound</label>
+    </scriptparameter>
+    <scriptparameter>
+      <type>bool</type>
+      <defaultvalue>false</defaultvalue>
+      <id>hide_placard</id>
+      <description>Hides the placard during Play Mode.</description>
+      <label>Hide Placard</label>
+    </scriptparameter>
+    <materialpath name="housing">materials/metal.nl2mat</materialpath>
+    <materialpath name="placard">[ Placards ]/placard.nl2mat</materialpath>
+    <materialpath name="plastic_black">materials/plastic_black_shiny.nl2mat</materialpath>
+    <materialpath name="plastic_black_textured">materials/plastic_black_textured.nl2mat</materialpath>
+    <materialpath name="plastic_glass">materials/glass_dirty_transparent.nl2mat</materialpath>
+    <materialpath name="speaker">materials/si_speaker_grill.nl2mat</materialpath>
+  </sceneobject>
+</root>

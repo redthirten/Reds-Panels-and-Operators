@@ -1,7 +1,7 @@
 /**
 	Switch NL2 Script
 	David Wolfe (Red-Thirten)
-	02/15/2026
+	07/09/2026
 	Animates the switch during run time, based on user settings.
 	Licensed under GNU GPLv3 - See LICENSE for more details.
 */
@@ -34,8 +34,8 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	protected float SWITCH_INTERACTION_RADIUS = 0.04f;				// Radius, in meters, of the InteractionObject detection sphere
 	private static final float SUN_ELEVATION_LIMIT = 0.4f;			// 0.4 radians is the default sun angle limit for lights to turn on and off
 	
-	// All Switch Functions:
-	protected static final int F_STATIC = 0;
+	// [Enum] Switch Functions:
+	protected static final int F_NONE = 0;
 	protected static final int F_RESTRAINTS = 1;
 	protected static final int F_GATES = 2;
 	protected static final int F_PLATFORM = 3;
@@ -48,13 +48,15 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	protected static final int F_SPECIAL_TRACK_MOMENT = 10;
 	protected static final int F_COASTER_LIGHTS_NO_INT = 11;
 	protected static final int F_RESET_COASTER = 12;
+
+	// List of Non-Interactable Functions:
 	private static final int[] NON_INTERACT_FUNCS = {
 		F_NUM_TRAINS_NO_INT,
 		F_LIFT_JOG_NO_INT,
 		F_TRANSPORTS_NO_INT,
 		F_COASTER_LIGHTS_NO_INT
 	};
-	
+
 	private Coaster coaster;
 	private Block block;
 	private Section section;
@@ -70,7 +72,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	private int trainsLashedToTrack;
 	private float binaryState = 0.f; // Helps determine if a "binary" state starts to change to the other value (ie. gates start to close, vice-versa, etc)
 	
-	public bool onInit(){ // On initialization of Play simulation
+	public final bool onInit(){ // On initialization of Play simulation
 		// Get and assign local sco
 		SceneObject sco = SceneObjectTools.getSceneObjectForEntityId(
 			sim,
@@ -97,10 +99,10 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		
 		// Get configured function and required parameters
 		func = getFuncFromScoParams(sco);
-		if (func > F_STATIC){ // If not static function
+		if (func > F_NONE){ // If active function
 			block = sco.getBlockParameter("block");
 			if (block == null){ // Check for un-configured block
-				log.err("Block parameter required for any non-static functions.");
+				log.err("Block Location must be set to use this Function.");
 				return false;
 			}
 			
@@ -220,13 +222,14 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		/* Get Function from SCO Parameters
 			Returns the proper function number based on the "function" parameter enumeration.
 		*/
-		if (sco.getIntegerParameter("function") == null) return 0;
+		Integer funcVal = sco.getIntegerParameter("function");
+		if (funcVal == null) return 0;
 		
-		return sco.getIntegerParameter("function").intValue();
+		return funcVal.intValue();
 	}
 
 	private bool isInteractableFunc(int func){
-		if (func == F_STATIC && operatorSwitch.isStatic()) // None function w/o rotation
+		if (func == F_NONE && operatorSwitch.isStatic()) // None function w/o rotation
 			return false;
 		for (int i = 0; i < NON_INTERACT_FUNCS.length; i++){
 			if (func == NON_INTERACT_FUNCS[i])
@@ -237,14 +240,14 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 
 	// Interactable Functions //
 
-	private void handleStaticFunc(bool action){
-		if (action){
+	private void doNoneFunc(bool doAction){
+		if (doAction){
 			operatorSwitch.toggleSwitch();
 		}
 	}
 	
-	private void handleRestraintsFunc(bool action){
-		if (action){
+	private void doRestraintsFunc(bool doAction){
+		if (doAction){
 			if (section.isStationManualClosedHarness()){
 				section.doStationManualOpenHarness();
 			}
@@ -270,8 +273,8 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		);
 	}
 	
-	private void handleGatesFunc(bool action){
-		if (action){
+	private void doGatesFunc(bool doAction){
+		if (doAction){
 			if (section.isStationManualClosedGates()){
 				section.doStationManualOpenGates();
 			}
@@ -295,8 +298,8 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		);
 	}
 	
-	private void handlePlatformFunc(bool action){
-		if (action){
+	private void doPlatformFunc(bool doAction){
+		if (doAction){
 			if (section.isStationManualEngagedPlatform()){
 				section.doStationManualDisengagePlatform();
 			}
@@ -320,8 +323,8 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		);
 	}
 	
-	private void handleSpecialTrackFunc(bool action){
-		if (action){
+	private void doSpecialTrackFunc(bool doAction){
+		if (doAction){
 			int specialTrackSetDir = specialTrack.getSetSwitchDirection();
 			// Twist left (CTRL + Click)
 			if (Button.isPressed(Button.FLY_SLOWER)){
@@ -365,8 +368,8 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		}
 	}
 	
-	private void handleDispatchModeFunc(bool action){
-		if (action){
+	private void doDispatchModeFunc(bool doAction){
+		if (doAction){
 			section.setStationManualDispatchMode(
 				!section.isStationManualDispatchMode()
 			);
@@ -381,8 +384,8 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		}
 	}
 	
-	private void handleBlockSystemModeFunc(bool action){
-		if (action){
+	private void doBlockSystemModeFunc(bool doAction){
+		if (doAction){
 			// Twist left (CTRL + Click)
 			if (Button.isPressed(Button.FLY_SLOWER)){
 				if ( coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL
@@ -429,8 +432,8 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		}
 	}
 
-	private void handleResetCoasterFunc(bool action){
-		if (action){
+	private void doResetCoasterFunc(bool doAction){
+		if (doAction){
 			coaster.requestReset();
 			operatorSwitch.cycleSwitch();
 			return;
@@ -441,7 +444,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 	
 	// Non-Interactable Functions //
 	
-	private void handleNumTrainsFunc(){
+	private void doNumTrainsFunc(){
 		trainsLashedToTrack = 1; // Set to 1 to offset the result by one, because setSwitchState() starts from 0
 		for (int i = trainCount - 1; i >= 0; --i){ // Go through all trains
 			if (coaster.getTrainAt(i).isLashedToTrack()){ // If it's lashed to track, increase the counter
@@ -451,7 +454,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		operatorSwitch.setSwitchState(trainCount - trainsLashedToTrack); // Set the switch state to the number of trains in service, minus 1 (for the offset)
 	}
 	
-	public void handleLiftJogFunc(){
+	public void doLiftJogFunc(){
 		if (coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL){
 			float liftSpeed = (float) section.getLiftCurrentSpeed();
 			if (liftSpeed < 0.f && liftSpeed <= binaryState) operatorSwitch.setSwitchState(0);
@@ -464,7 +467,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		}
 	}
 	
-	private void handleTransportsFunc(){
+	private void doTransportsFunc(){
 		if (coaster.getBlockSystemMode() == Coaster.E_BLOCK_SYSTEM_MODE_FULL_MANUAL){
 			float transSpeed = (float) section.getTransportCurrentSpeed();
 			if (transSpeed < 0.f && transSpeed <= binaryState)
@@ -480,7 +483,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		}
 	}
 	
-	public void handleCoasterLightsFunc(){
+	public void doCoasterLightsFunc(){
 		if (coaster.isEmergencyStop()){
 			operatorSwitch.setSwitchState(2);
 		}
@@ -492,48 +495,48 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		}
 	}
 
-	private void handleFunc(bool action){
+	private void doFunc(bool doAction){
 		switch (func){
 			case F_RESTRAINTS:
-				handleRestraintsFunc(action);
+				doRestraintsFunc(doAction);
 				break;
 			case F_GATES:
-				handleGatesFunc(action);
+				doGatesFunc(doAction);
 				break;
 			case F_PLATFORM:
-				handlePlatformFunc(action);
+				doPlatformFunc(doAction);
 				break;
 			case F_SPECIAL_TRACK:
 			case F_SPECIAL_TRACK_MOMENT:
-				handleSpecialTrackFunc(action);
+				doSpecialTrackFunc(doAction);
 				break;
 			case F_DISPATCH_MODE:
-				handleDispatchModeFunc(action);
+				doDispatchModeFunc(doAction);
 				break;
 			case F_OP_MODE:
-				handleBlockSystemModeFunc(action);
+				doBlockSystemModeFunc(doAction);
 				break;
 			case F_NUM_TRAINS_NO_INT:
-				handleNumTrainsFunc();
+				doNumTrainsFunc();
 				break;
 			case F_LIFT_JOG_NO_INT:
-				handleLiftJogFunc();
+				doLiftJogFunc();
 				break;
 			case F_TRANSPORTS_NO_INT:
-				handleTransportsFunc();
+				doTransportsFunc();
 				break;
 			case F_COASTER_LIGHTS_NO_INT:
-				handleCoasterLightsFunc();
+				doCoasterLightsFunc();
 				break;
 			case F_RESET_COASTER:
-				handleResetCoasterFunc(action);
+				doResetCoasterFunc(doAction);
 				break;
 			default:
-				handleStaticFunc(action);
+				doNoneFunc(doAction);
 		}
 	}
 	
-	public void onNextFrame(float tick){
+	public final void onNextFrame(float tick){
 		/*if (Button.isPressed(Button.FLY_SLOWER)){ //DEBUGGING
 			operatorSwitch.setSwitchState(0);
 		}
@@ -543,7 +546,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 		if (Button.isPressed(Button.ACTION)){ //DEBUGGING
 			operatorSwitch.setSwitchState(2);
 		}*/
-		handleFunc(false);
+		doFunc(false);
 		
 		// Run switch object's onNextFrame() as well to animate
 		operatorSwitch.onNextFrame(tick);
@@ -557,7 +560,7 @@ public class SwitchOperator extends Script implements InteractionActionListener{
 			iObj.setPosition(operatorSwitch.getAbsoluteTranslation());
 	}
 
-	public void onInteractionAction(InteractionObject obj){
-		handleFunc(true);
+	public final void onInteractionAction(InteractionObject obj){
+		doFunc(true);
 	}
 }

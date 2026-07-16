@@ -1,0 +1,14 @@
+/**
+	Push Button [Allen-Bradley] (Mushroom) NL2 Script
+	David Wolfe (Red-Thirten)
+	07/10/2026
+	Extends PushButtonAB to define parameters specific to Mushroom Push Buttons.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+public final class PushButtonABMushroom extends PushButtonAB{
+	PushButtonABMushroom(){
+		SCRIPT_NAME = "PushButtonABMushroom";	// Script name for debugging
+		BUTTON_INTERACTION_RADIUS = 0.05f;		// Radius, in meters, of the InteractionObject detection sphere
+	}
+}

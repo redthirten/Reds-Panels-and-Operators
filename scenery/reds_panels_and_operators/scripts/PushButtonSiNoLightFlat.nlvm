@@ -1,0 +1,14 @@
+/**
+	Push Button [Siemens] (No Light - Flat) NL2 Script
+	David Wolfe (Red-Thirten)
+	07/10/2026
+	Extends PushButtonSiNoLight to define parameters specific to Flat Push Buttons.
+	Licensed under GNU GPLv3 - See LICENSE for more details.
+*/
+
+public final class PushButtonSiNoLightFlat extends PushButtonSiNoLight{
+	PushButtonSiNoLightFlat(){
+		SCRIPT_NAME = "PushButtonSiNoLightFlat";	// Script name for debugging
+		BUTTON_TRAVEL_DIST = 0.0033f;				// Distance, in meters, the button will travel to be fully "pressed"
+	}
+}
